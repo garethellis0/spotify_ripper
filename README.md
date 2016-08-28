@@ -1,2 +1,2 @@
 # Spotify Ripper
-A tool for downloading mp3's of youtube videos of spotify playlists.
+Downloads Spotify inspired playlists from youtube as MP3's
