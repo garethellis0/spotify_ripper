@@ -5,49 +5,60 @@ import re
 
 
 
-class Ripper:
+class MP3Downloader:
 
-    song1 = {
-        "Title": "Life Itself",
-        "Artist": "Glass Animals",
-        "Album": "Life Itself",
-        "Time": "04:40"
-    }
+    def __init__(self, dics):
+        self.songs = dics
 
-    song2 = {
-        "Title": "Get Right",
-        "Artist": "Jimmy Eat World",
-        "Album": "Get Right",
-        "Time": "02:49"
-    }
 
-    song3 = {
-        "Title": "Bang Bang",
-        "Artist": "Green Day",
-        "Album": "Bang Bang",
-        "Time": "03:25"
-    }
+    def get_downloads(self, songs):
+        searches = self.get_search_urls(songs)
+        urls = self.get_song_urls(self, searches)
+        self.download_songs(self, urls)
 
-    song4 = {
-        "Title": "Hardwired",
-        "Artist": "Metallica",
-        "Album": "Hardwired",
-        "Time": "03:11"
-    }
 
-    song5 = {
-        "Title": "Wake Up Call",
-        "Artist": "Nothing but Thieves",
-        "Album": "Nothing But Thieves (Deluze)",
-        "Time": "02:45"
-    }
-
-    songs = [song1, song2, song3, song4, song5]
+    #
+    # song1 = {
+    #     "Title": "Life Itself",
+    #     "Artist": "Glass Animals",
+    #     "Album": "Life Itself",
+    #     "Time": "04:40"
+    # }
+    #
+    # song2 = {
+    #     "Title": "Get Right",
+    #     "Artist": "Jimmy Eat World",
+    #     "Album": "Get Right",
+    #     "Time": "02:49"
+    # }
+    #
+    # song3 = {
+    #     "Title": "Bang Bang",
+    #     "Artist": "Green Day",
+    #     "Album": "Bang Bang",
+    #     "Time": "03:25"
+    # }
+    #
+    # song4 = {
+    #     "Title": "Hardwired",
+    #     "Artist": "Metallica",
+    #     "Album": "Hardwired",
+    #     "Time": "03:11"
+    # }
+    #
+    # song5 = {
+    #     "Title": "Wake Up Call",
+    #     "Artist": "Nothing but Thieves",
+    #     "Album": "Nothing But Thieves (Deluze)",
+    #     "Time": "02:45"
+    # }
+    #
+    # songs = [song1, song2, song3, song4, song5]
     #youtube url search template:  https://www.youtube.com/results?search_query=green+day+bang+bang
 
     #returns a list of urls corresponding to youtube searches for the songs listed in songs
     #songs - must be an array of dictionaries containing "Artist" and "Title"
-    def get_search_urls(songs):
+    def get_search_urls(self, songs):
         url_start = "https://www.youtube.com/results?search_query="
         urls = []
 
@@ -73,7 +84,7 @@ class Ripper:
 
 
     #testing dowloading page source from url
-    def get_song_urls(searches):
+    def get_song_urls(self, searches):
         song_urls = []
         url_beginning = "https://www.youtube.com"
 
@@ -95,7 +106,7 @@ class Ripper:
         return song_urls
 
 
-    def download_songs(urls):
+    def download_songs(self, urls):
         for url in urls:
             ydl_opts = {
                 'format': 'bestaudio/best',
@@ -108,9 +119,9 @@ class Ripper:
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
 
-    #test code
-    search_urls = get_search_urls(songs)
-    print(search_urls)
-    song_urls = get_song_urls(search_urls)
-    print (song_urls)
-    download_songs(song_urls)
+    # #test code
+    # search_urls = get_search_urls(songs)
+    # print(search_urls)
+    # song_urls = get_song_urls(search_urls)
+    # print (song_urls)
+    # download_songs(song_urls)
