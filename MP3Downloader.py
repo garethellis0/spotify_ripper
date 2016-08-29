@@ -7,14 +7,10 @@ import re
 
 class MP3Downloader:
 
-    def __init__(self, dics):
-        self.songs = dics
-
-
     def get_downloads(self, songs):
         searches = self.get_search_urls(songs)
-        urls = self.get_song_urls(self, searches)
-        self.download_songs(self, urls)
+        urls = self.get_song_urls(searches)
+        self.download_songs(urls)
 
 
     #
