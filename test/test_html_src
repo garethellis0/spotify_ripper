@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<!--[if lte IE 9 ]><html class="ie ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <!--<![endif]-->
+ <head>
+  <script src="https://bam.nr-data.net/1/74a85ac4f8?a=15427789&amp;v=963.8b1290f&amp;to=ZVZXNhFWDxFSVBZQDlwcYBAKGAASQ0RNUA9WVk1ME18R&amp;rst=1381&amp;ref=https://play.spotify.com/apps/playlist/0.6.0/&amp;ap=2&amp;be=272&amp;fe=991&amp;dc=202&amp;af=err,xhr,stn,ins&amp;perf=%7B%22timing%22:%7B%22of%22:1472518293897,%22n%22:0,%22f%22:0,%22dn%22:0,%22dne%22:0,%22c%22:0,%22ce%22:0,%22rq%22:0,%22rp%22:0,%22rpe%22:0,%22dl%22:71,%22di%22:458,%22ds%22:473,%22de%22:473,%22dc%22:1262,%22l%22:1262,%22le%22:1263%7D,%22navigation%22:%7B%22ty%22:1%7D%7D&amp;at=SRFUQFlMHB8%3D&amp;jsonp=NREUM.setToken" type="text/javascript">
+  </script>
+  <script src="https://js-agent.newrelic.com/nr-963.min.js">
+  </script>
+  <script type="text/javascript">
+   window.sp_appLogInit = new Date().getTime();
+  </script>
+  <meta content="0.6.0" name="sp-app-version"/>
+  <base href="https://play.spotify.edgekey.net/apps/playlist/0.6.0/"/>
+  <meta content="noindex, nofollow" name="robots"/>
+  <link href="https://play.spotify.edgekey.net/apps/api/1.36.1/css/main.css" rel="stylesheet"/>
+  <meta charset="utf-8"/>
+  <script type="text/javascript">
+   (window.NREUM||(NREUM={})).loader_config={xpid:"VQ8PU1FTGwIFUFNVAAkO"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o&lt;n.length;o++)r(n[o]);return r}({1:[function(t,e,n){function r(t){try{s.console&amp;&amp;console.log(t)}catch(e){}}var o,i=t("ee"),a=t(15),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&amp;&amp;"function"==typeof console.log&amp;&amp;(s.console=!0,o.indexOf("dev")!==-1&amp;&amp;(s.dev=!0),o.indexOf("nr_dev")!==-1&amp;&amp;(s.nrDev=!0))}catch(c){}s.nrDev&amp;&amp;i.on("internal-error",function(t){r(t.stack)}),s.dev&amp;&amp;i.on("fn-err",function(t,e,n){r(n.stack)}),s.dev&amp;&amp;(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,o){try{d?d-=1:i("err",[o||new UncaughtException(t,e,n)])}catch(s){try{i("ierr",[s,(new Date).getTime(),!0])}catch(c){}}return"function"==typeof f&amp;&amp;f.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function o(t){i("err",[t,(new Date).getTime()])}var i=t("handle"),a=t(16),s=t("ee"),c=t("loader"),f=window.onerror,u=!1,d=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(l){"stack"in l&amp;&amp;(t(8),t(7),"addEventListener"in window&amp;&amp;t(5),c.xhrWrappable&amp;&amp;t(9),u=!0)}s.on("fn-start",function(t,e,n){u&amp;&amp;(d+=1)}),s.on("fn-err",function(t,e,n){u&amp;&amp;(this.thrown=!0,o(n))}),s.on("fn-end",function(){u&amp;&amp;!this.thrown&amp;&amp;d&gt;0&amp;&amp;(d-=1)}),s.on("internal-error",function(t){i("ierr",[t,(new Date).getTime(),!0])})},{}],3:[function(t,e,n){t("loader").features.ins=!0},{}],4:[function(t,e,n){function r(t){}if(window.performance&amp;&amp;window.performance.timing&amp;&amp;window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(8),s=t(7),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",y="pushState";t("loader").features.stn=!0,t(6);var g=NREUM.o.EV;o.on(m,function(t,e){var n=t[0];n instanceof g&amp;&amp;(this.bstStart=Date.now())}),o.on(w,function(t,e){var n=t[0];n instanceof g&amp;&amp;i("bst",[n,e,this.bstStart,Date.now()])}),a.on(m,function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),a.on(w,function(t,e){i(v,[e,this.bstStart,Date.now(),this.bstType])}),s.on(m,function(){this.bstStart=Date.now()}),s.on(w,function(t,e){i(v,[e,this.bstStart,Date.now(),"requestAnimationFrame"])}),o.on(y+p,function(t){this.time=Date.now(),this.startPath=location.pathname+location.hash}),o.on(y+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&amp;&amp;(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,!1),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,e,n){function r(t){for(var e=t;e&amp;&amp;!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&amp;&amp;o(e)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,e){return t[1]}var a=t("ee").get("events"),s=t(17)(a),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&amp;&amp;(o(window),o(f.prototype)),a.on(u+"-start",function(t,e){if(t[1]){var n=t[1];if("function"==typeof n){var r=c(n,"nr@wrapped",function(){return s(n,"fn-",null,n.name||"anonymous")});this.wrapped=t[1]=r}else"function"==typeof n.handleEvent&amp;&amp;s.inPlace(n,["handleEvent"],"fn-")}}),a.on(d+"-start",function(t){var e=this.wrapped;e&amp;&amp;(t[1]=e)})},{}],6:[function(t,e,n){var r=t("ee").get("history"),o=t(17)(r);e.exports=r,o.inPlace(window.history,["pushState","replaceState"],"-")},{}],7:[function(t,e,n){var r=t("ee").get("raf"),o=t(17)(r),i="equestAnimationFrame";e.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],8:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function o(t,e,n){this.method=n,this.timerDuration="number"==typeof t[1]?t[1]:0,t[0]=a(t[0],"fn-",this,n)}var i=t("ee").get("timer"),a=t(17)(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";e.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],9:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",s)}function o(){var t=this,e=u.context(t);t.readyState&gt;3&amp;&amp;!e.resolved&amp;&amp;(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,w,"fn-",s)}function i(t){v.push(t),h&amp;&amp;(g=-g,b.data=g)}function a(){for(var t=0;t&lt;v.length;t++)r([],v[t]);v.length&amp;&amp;(v=[])}function s(t,e){return e}function c(t,e){for(var n in t)e[n]=t[n];return e}t(5);var f=t("ee"),u=f.get("xhr"),d=t(17)(u),l=NREUM.o,p=l.XHR,h=l.MO,m="readystatechange",w=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],v=[];e.exports=u;var y=window.XMLHttpRequest=function(t){var e=new p(t);try{u.emit("new-xhr",[e],e),e.addEventListener(m,o,!1)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(c(p,y),y.prototype=p.prototype,d.inPlace(y.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,e){r(t,e),i(e)}),u.on("open-xhr-start",r),h){var g=1,b=document.createTextNode(g);new h(a).observe(b,{characterData:!0})}else f.on("fn-end",function(t){t[0]&amp;&amp;t[0].type===m||a()})},{}],10:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r&lt;d;r++)t.removeEventListener(u[r],this.listener,!1);if(!e.aborted){if(n.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var i=o(t,this.lastSize);if(i&amp;&amp;(n.rxSize=i),this.sameOrigin){var a=t.getResponseHeader("X-NewRelic-App-Data");a&amp;&amp;(e.cat=a.split(", ").pop())}}else e.status=0;n.cbTime=this.cbTime,f.emit("xhr-done",[t],t),s("xhr",[e,n,this.startTime])}}}function o(t,e){var n=t.responseType;if("json"===n&amp;&amp;null!==e)return e;var r="arraybuffer"===n||"blob"===n||"json"===n?t.response:t.responseText;return h(r)}function i(t,e){var n=c(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}var a=t("loader");if(a.xhrWrappable){var s=t("handle"),c=t(11),f=t("ee"),u=["load","error","abort","timeout"],d=u.length,l=t("id"),p=t(14),h=t(13),m=window.XMLHttpRequest;a.features.xhr=!0,t(9),f.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,p&amp;&amp;(p&gt;34||p&lt;10)||window.opera||t.addEventListener("progress",function(t){e.lastSize=t.loaded},!1)}),f.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),f.on("open-xhr-end",function(t,e){"loader_config"in NREUM&amp;&amp;"xpid"in NREUM.loader_config&amp;&amp;this.sameOrigin&amp;&amp;e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),f.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],o=this;if(n&amp;&amp;r){var i=h(r);i&amp;&amp;(n.txSize=i)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&amp;&amp;(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&amp;&amp;(o.onloadCalled||"function"!=typeof e.onload))&amp;&amp;o.end(e)}catch(n){try{f.emit("internal-error",[n])}catch(r){}}};for(var a=0;a&lt;d;a++)e.addEventListener(u[a],this.listener,!1)}),f.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&amp;&amp;"function"==typeof n.onload||this.end(n)}),f.on("xhr-load-added",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&amp;&amp;!this.xhrGuids[n]&amp;&amp;(this.xhrGuids[n]=!0,this.totalCbs+=1)}),f.on("xhr-load-removed",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&amp;&amp;this.xhrGuids[n]&amp;&amp;(delete this.xhrGuids[n],this.totalCbs-=1)}),f.on("addEventListener-end",function(t,e){e instanceof m&amp;&amp;"load"===t[0]&amp;&amp;f.emit("xhr-load-added",[t[1],t[2]],e)}),f.on("removeEventListener-end",function(t,e){e instanceof m&amp;&amp;"load"===t[0]&amp;&amp;f.emit("xhr-load-removed",[t[1],t[2]],e)}),f.on("fn-start",function(t,e,n){e instanceof m&amp;&amp;("onload"===n&amp;&amp;(this.onload=!0),("load"===(t[0]&amp;&amp;t[0].type)||this.onload)&amp;&amp;(this.xhrCbStart=(new Date).getTime()))}),f.on("fn-end",function(t,e){this.xhrCbStart&amp;&amp;f.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{}],11:[function(t,e,n){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");!r.port&amp;&amp;o[1]&amp;&amp;(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&amp;&amp;"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&amp;&amp;(r.pathname="/"+r.pathname);var i=!e.protocol||":"===e.protocol||e.protocol===n.protocol,a=e.hostname===document.domain&amp;&amp;e.port===n.port;return r.sameOrigin=i&amp;&amp;(!e.hostname||a),r}},{}],12:[function(t,e,n){function r(){}function o(t,e,n){return function(){return i(t,[(new Date).getTime()].concat(s(arguments)),e?null:this,n),e?void 0:this}}var i=t("handle"),a=t(15),s=t(16),c=t("ee").get("tracer"),f=NREUM;"undefined"==typeof window.newrelic&amp;&amp;(newrelic=f);var u=["setPageViewName","setCustomAttribute","finished","addToTrace","inlineHit"],d="api-",l=d+"ixn-";a(u,function(t,e){f[e]=o(d+e,!0,"api")}),f.addPageAction=o(d+"addPageAction",!0),e.exports=newrelic,f.interaction=function(){return(new r).get()};var p=r.prototype={createTracer:function(t,e){var n={},r=this,o="function"==typeof e;return i(l+"tracer",[Date.now(),t,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[Date.now(),r,o],n),o)try{return e.apply(this,arguments)}finally{c.emit("fn-end",[Date.now()],n)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){p[e]=o(l+e)}),newrelic.noticeError=function(t){"string"==typeof t&amp;&amp;(t=new Error(t)),i("err",[t,(new Date).getTime()])}},{}],13:[function(t,e,n){e.exports=function(t){if("string"==typeof t&amp;&amp;t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&amp;&amp;t instanceof ArrayBuffer&amp;&amp;t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&amp;&amp;t instanceof Blob&amp;&amp;t.size)return t.size;if(!("undefined"!=typeof FormData&amp;&amp;t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],14:[function(t,e,n){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&amp;&amp;(r=+o[1]),e.exports=r},{}],15:[function(t,e,n){function r(t,e){var n=[],r="",i=0;for(r in t)o.call(t,r)&amp;&amp;(n[i]=e(r,t[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],16:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&amp;&amp;(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(o&lt;0?0:o);++r&lt;o;)i[r]=t[e+r];return i}e.exports=r},{}],17:[function(t,e,n){function r(t){return!(t&amp;&amp;"function"==typeof t&amp;&amp;t.apply&amp;&amp;!t[a])}var o=t("ee"),i=t(16),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;e.exports=function(t){function e(t,e,n,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof n?n(r,a):n||{}}catch(u){d([u,"",[r,a,o],s])}f(e+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(l){throw f(e+"err",[r,a,l],s),l}finally{f(e+"end",[r,a,c],s)}}return r(t)?t:(e||(e=""),nrWrapper[a]=t,u(t,nrWrapper),nrWrapper)}function n(t,n,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c&lt;n.length;c++)s=n[c],a=t[s],r(a)||(t[s]=e(a,f?s+o:o,i,s))}function f(e,n,r){if(!c){c=!0;try{t.emit(e,n,r)}catch(o){d([o,e,n,r])}c=!1}}function u(t,e){if(Object.defineProperty&amp;&amp;Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){d([r])}for(var o in t)s.call(t,o)&amp;&amp;(e[o]=t[o]);return e}function d(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=o),e.inPlace=n,e.flag=a,e}},{}],ee:[function(t,e,n){function r(){}function o(t){function e(t){return t&amp;&amp;t instanceof r?t:t?s(t,a,i):i()}function n(n,r,o){t&amp;&amp;t(n,r,o);for(var i=e(o),a=l(n),s=a.length,c=0;c&lt;s;c++)a[c].apply(i,r);var u=f[w[n]];return u&amp;&amp;u.push([v,n,r,i]),i}function d(t,e){m[t]=l(t).concat(e)}function l(t){return m[t]||[]}function p(t){return u[t]=u[t]||o(n)}function h(t,e){c(t,function(t,n){e=e||"feature",w[n]=e,e in f||(f[e]=[])})}var m={},w={},v={on:d,emit:n,get:p,listeners:l,context:e,buffer:h};return v}function i(){return new r}var a="nr@context",s=t("gos"),c=t(15),f={},u={},d=e.exports=o();d.backlog=f},{}],gos:[function(t,e,n){function r(t,e,n){if(o.call(t,e))return t[e];var r=n();if(Object.defineProperty&amp;&amp;Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[e]=r,r}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){o.buffer([t],r),o.emit(t,e,n)}var o=t("ee").get("handle");e.exports=r,r.ee=o},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&amp;&amp;"function"!==e?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!g++){var t=y.info=NREUM.info,e=u.getElementsByTagName("script")[0];if(t&amp;&amp;t.licenseKey&amp;&amp;t.applicationID&amp;&amp;e){c(w,function(e,n){t[e]||(t[e]=n)});var n="https"===m.split(":")[0]||t.sslForHttp;y.proto=n?"https://":"http://",s("mark",["onload",a()],null,"api");var r=u.createElement("script");r.src=y.proto+t.agent,e.parentNode.insertBefore(r,e)}}}function o(){"complete"===u.readyState&amp;&amp;i()}function i(){s("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var s=t("handle"),c=t(15),f=window,u=f.document,d="addEventListener",l="attachEvent",p=f.XMLHttpRequest,h=p&amp;&amp;p.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:p,REQ:f.Request,EV:f.Event,PR:f.Promise,MO:f.MutationObserver},t(12);var m=""+location,w={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-963.min.js"},v=p&amp;&amp;h&amp;&amp;h[d]&amp;&amp;!/CriOS/.test(navigator.userAgent),y=e.exports={offset:a(),origin:m,features:{},xhrWrappable:v};u[d]?(u[d]("DOMContentLoaded",i,!1),f[d]("load",r,!1)):(u[l]("onreadystatechange",o),f[l]("onload",r)),s("mark",["firstbyte",a()],null,"api");var g=0},{}]},{},["loader",2,10,4,3]);
+  </script>
+  <link href="https://play.spotify.edgekey.net/apps/playlist/0.6.0/all.css" rel="stylesheet"/>
+ </head>
+ <body class="non-mobile container no-nav" data-bind="css: { 'no-nav': !shouldShowNavigation() }">
+  <script type="text/javascript">
+   var dependencies = {"api":"https:\/\/play.spotify.edgekey.net\/apps\/api\/1.36.1","static":"https:\/\/play.spotify.edgekey.net\/apps\/playlist\/0.6.0","locale":[]};
+  </script>
+  <script type="text/javascript">
+   var manifest = {"AppName":{"arb":"Playlist","bn":"Playlist","de":"Playlist","el":"\u039b\u03af\u03c3\u03c4\u03b1","en":"Playlist","es-419":"Playlist","es":"Playlist","fi":"Soittolista","fr":"Playlist","hi":"Playlist","hu":"Lej\u00e1tsz\u00e1si lista","id":"Daftar putar","it":"Playlist","ja":"\u30d7\u30ec\u30a4\u30ea\u30b9\u30c8","ko":"Playlist","nl":"Afspeellijst","pl":"Playlista","pt-BR":"Playlist","ro":"Playlist","ru":"\u041f\u043b\u0435\u0439\u043b\u0438\u0441\u0442","sv":"Spellista","ta":"Playlist","th":"\u0e40\u0e1e\u0e25\u0e22\u0e4c\u0e25\u0e34\u0e2a\u0e15\u0e4c","tr":"\u00c7alma Listesi","zh-Hant":"\u64ad\u653e\u6e05\u55ae","zsm":"Senarai main","es-LA":"AppName","fr-CA":"AppName"},"AppDescription":{"arb":"Playlist","bn":"Playlist","de":"Playlist","el":"\u039b\u03af\u03c3\u03c4\u03b1","en":"Playlist","es-419":"Playlist","es":"Playlist","fi":"Soittolista","fr":"Playlist","hi":"Playlist","hu":"Lej\u00e1tsz\u00e1si lista","id":"Daftar putar","it":"Playlist","ja":"\u30d7\u30ec\u30a4\u30ea\u30b9\u30c8","ko":"Playlist","nl":"Afspeellijst","pl":"Playlista","pt-BR":"Playlist","ro":"Playlist","ru":"\u041f\u043b\u0435\u0439\u043b\u0438\u0441\u0442","sv":"Spellista","ta":"Playlist","th":"\u0e40\u0e1e\u0e25\u0e22\u0e4c\u0e25\u0e34\u0e2a\u0e15\u0e4c","tr":"\u00c7alma Listesi","zh-Hant":"\u64ad\u653e\u6e05\u55ae","zsm":"Senarai main","es-LA":"AppDescription","fr-CA":"AppDescription"},"ApiPermissions":{"core":["private"],"playlist":["private"]},"BundleType":"Application","VendorIdentifier":"com.spotify","SupportedLanguages":["arb","bn","de","el","en","es-419","es","fi","fr","hi","hu","id","it","ja","ko","nl","pl","pt-BR","ro","ru","sv","ta","th","tr","zh-Hant","zsm","es-LA","fr-CA"],"UserInstallable":false,"BundleIdentifier":"playlist","BundleVersion":"0.6.0","BridgeDependencies":{"bridge-desktop":"0.25.0","bridge-web":"2.50.0","bridge-zelda":"1.0.0"},"SupportedDeviceClasses":["Desktop","Web"],"AppSupportedLanguages":["arb","bn","de","el","en","es-419","es","fi","fr","hi","hu","id","it","ja","ko","nl","pl","pt-BR","ro","ru","sv","ta","th","tr","zh-Hant","zsm"],"Dependencies":{"api":"1.0.0"},"InjectScripts":false,"InjectStylesheets":false,"SkipLanguageValidation":true,"SkipUnrequireValidation":true,"SpmApp":true,"SpmDependencies":{"playlist-framework":"0.7.53","spotify-cosmos-api":"1.1.2","spotify-live":"1.5.0","spotify-events":"1.9.3","api":"1.44.0","logging-utils":"0.1.4","knockout":"3.0.0","spotify-glue-cat":"12.0.4","spotify-handlebars":"1.1.3","spotify-ko-handlebars":"1.1.0","spotify-live-models":"1.13.0","spotify-ko-i18n":"0.2.0","handlebars":"1.3.0","prime":"0.4.2","elements":"0.4.3","spotify-sentry":"1.1.2","grunt":"0.4.5","grunt-contrib-clean":"0.4.1","grunt-contrib-copy":"0.4.1","grunt-contrib-cssmin":"0.7.0","grunt-contrib-less":"0.7.0","grunt-contrib-uglify":"0.2.7","grunt-contrib-watch":"0.5.3","grunt-exec":"0.4.6","grunt-usemin":"2.0.2","quickstart":"0.9.1","quickstart-handlebars":"0.4.2","quickstart-spotify":"0.4.3","source-map":"0.1.40","spotify-deferred":"0.1.5","spotify-inheritance":"1.0.0","spotify-liburi":"1.2.0","spotify-player":"0.10.1","stitch-manifest-gen":"0.3.5","wordwrap":"0.0.2","playlist":"0.6.0"}};
+  </script>
+  <script crossorigin="anonymous" src="https://play.spotify.edgekey.net/apps/bootstrap-1.2.0.js" type="text/javascript">
+  </script>
+  <!-- ko playlistApp: playlistApp -->
+  <div class="pf-app" data-bind="css: { 'show-error-screen': isErrorScreenVisible }" data-play-source="playlist">
+   <div class="main-throbber throbber-large" data-bind="visible: !loadedOnce()" style="display: none;">
+    <div>
+    </div>
+   </div>
+   <nav class="pf-nav col-lg-3 col-md-4 col-sm-4 col-xs-6" data-bind="playlistNavigation: navigation">
+    <div class="list-group" data-bind="
+  event: { dblclick: handlers.dblclick, keydown: handlers.keydown }
+" data-play-source="playlist" tabindex="1">
+     <!-- ko ifnot: dragDropIsEnabled -->
+     <div class="list-group-item list-group-item-media large" data-bind="click: playlistNameInput.show" data-ta-id="list-new-playlist" tabindex="-1">
+      <div>
+       <div class="media simple spoticon spoticon-plus-32">
+       </div>
+       <div class="item-data">
+        <span data-bind="text: i18n('NewPlaylist')">
+         New Playlist
+        </span>
+       </div>
+      </div>
+     </div>
+     <!-- /ko -->
+     <!-- ko if: dragDropIsEnabled -->
+     <!-- /ko -->
+     <!-- ko with: starred -->
+     <div class="list-group-item list-group-item-media playable large" data-bind="
+        scrollToWhen: isSelected,
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging
+        },
+        attr: {
+          'data-uri': uri
+        }
+      " data-context="" data-ta-id="list-starred" data-uri="spotify:user:garethellis0:starred" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/garethellis0/starred" tabindex="-1">
+       <div class="media simple spoticon spoticon-star-32">
+       </div>
+       <div class="item-data">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Starred
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+       <!-- ko if: $root.dragDropIsEnabled -->
+       <!-- /ko -->
+      </a>
+     </div>
+     <!-- /ko -->
+     <!-- ko with: playlistNameInput -->
+     <div class="list-group-item list-group-item-media large" data-bind="visible: isVisible" style="display: none;" tabindex="-1">
+      <form class="form-inline playlist-name-input-wrapper" data-bind="submit: onsubmit, whenClickOutside: hide" role="form">
+       <div class="form-group col-sm-6">
+        <input class="form-control" data-bind="
+            value: value,
+            event: { keydown: onkeydown },
+            keydownBubble: false,
+            focusAndSelectWhen: isVisible
+          " data-ta-id="list-name-input" type="text"/>
+       </div>
+       <div class="form-group col-sm-6">
+        <button class="btn btn-primary" data-bind="
+            text: $root.i18n('CreatePlaylist')
+          " data-ta-id="list-create-button" type="submit">
+         Create
+        </button>
+       </div>
+      </form>
+     </div>
+     <!-- /ko -->
+     <div class="list-group-item list-group-item-media large is-creating-playlist" data-bind="visible: isCreatingPlaylist" style="display: none;" tabindex="-1">
+      <div class="throbber-wrapper">
+       <div class="throbber">
+        <div>
+        </div>
+       </div>
+      </div>
+      <div class="item-data ">
+       <span data-bind="text: i18n('Loading')">
+        Loading
+       </span>
+      </div>
+     </div>
+     <!-- ko foreach: { data: playlists, afterRender: afterPlaylistsRender } -->
+     <div class="list-group-item list-group-item-media multiline playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:spotifydiscover:playlist:7e2zp4UNpc5Mx0PsC9Xyek" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/spotifydiscover/playlist/7e2zp4UNpc5Mx0PsC9Xyek" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Discover Weekly
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner">
+          by Spotify
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:garethellis0:playlist:556uxb5han0LKL0I7s9Tgn" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/garethellis0/playlist/556uxb5han0LKL0I7s9Tgn" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Stuff
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner" style="display: none;">
+          by garethellis0
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:garethellis0:playlist:7b4kX8Mes07I3G9lVGunuu" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/garethellis0/playlist/7b4kX8Mes07I3G9lVGunuu" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Chill Techo/Electro
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner" style="display: none;">
+          by garethellis0
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media multiline playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:spotify:playlist:2yQuxmP152cS0MFKgnDP2U" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/spotify/playlist/2yQuxmP152cS0MFKgnDP2U" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Evening Acoustic
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner">
+          by Spotify
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media multiline playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:spotify:playlist:6nIJS5m3ZyG9nNghjQNAug" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/spotify/playlist/6nIJS5m3ZyG9nNghjQNAug" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Folk Rock »» Chill
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner">
+          by Spotify
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media multiline playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:spotify:playlist:0lBxkSj5VzRfcy8gxFUB5E" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/spotify/playlist/0lBxkSj5VzRfcy8gxFUB5E" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Peaceful Indie Ambient
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner">
+          by Spotify
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media multiline playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:spotify:playlist:7b9XqnXw5J47tmn0Y0IZeW" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/spotify/playlist/7b9XqnXw5J47tmn0Y0IZeW" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Chill Hits
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner">
+          by Spotify
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media multiline playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:spotify:playlist:4jCr1WuRoFiUbcqlja4dWR" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/spotify/playlist/4jCr1WuRoFiUbcqlja4dWR" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Electro Workout
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner">
+          by Spotify
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media multiline playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:spotify:playlist:6wJ5YGQ6LDLNQqW1QhSDGX" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/spotify/playlist/6wJ5YGQ6LDLNQqW1QhSDGX" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         INTENSITY
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner">
+          by Spotify
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:garethellis0:playlist:24xFTWjWAKpv7LLDpTM48s" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/garethellis0/playlist/24xFTWjWAKpv7LLDpTM48s" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Ludovico Einaudi
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner" style="display: none;">
+          by garethellis0
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <div class="list-group-item list-group-item-media playable large" data-bind="
+        css: {
+          active: isSelected,
+          hover: isHoveringWhileDragging,
+          multiline: isMultiline
+        },
+        visible: shouldBeVisible,
+        attr: {
+          'data-uri': uri
+        },
+        pfinViewport: { observable: isInViewport, subscribeTo: $root.playlists },
+        scrollToWhen: isSelected
+      " data-context="" data-ta-id="list-playlist" data-uri="spotify:user:garethellis0:playlist:0EcbxviZEaFxKKNHqguXcR" tabindex="-1">
+      <a data-bind="attr: { href: href }" href="https://play.spotify.com/user/garethellis0/playlist/0EcbxviZEaFxKKNHqguXcR" tabindex="-1">
+       <div class="media simple playlist placeholder-visible" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+        <div class="media-image">
+         <div class="media-placeholder">
+          <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+           <text class="playlist-placeholder" x="5" y="9.8">
+            
+           </text>
+          </svg>
+         </div>
+         <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style="background-image: none;">
+          <span class="verified-badge">
+           <span class="spoticon-check-16">
+           </span>
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="item-data ">
+        <span data-bind="text: heading" data-ta-id="list-name">
+         Windows Media Player
+        </span>
+        <span class="text-secondary">
+         <span class="spoticon-collaborative-playlist-16" data-bind="visible: shouldShowCollaborativeIcon" style="display: none;">
+         </span>
+         <span data-bind="visible: shouldShowByOwner, text: byOwner" style="display: none;">
+          by garethellis0
+         </span>
+        </span>
+       </div>
+       <button class="btn btn-icon btn-large btn-play list-group-item-media-play" data-button="play" data-ta-id="list-play-button">
+       </button>
+      </a>
+     </div>
+     <!-- /ko -->
+    </div>
+   </nav>
+   <section class="pf-playlist-view col-lg-9 col-md-8 col-sm-8 col-xs-6" data-bind="scrollCache: activeURI" id="pf-playlist-view">
+    <div class="content-wrapper">
+     <div class="header-wrapper" data-bind="playlistHeader: header">
+      <header class="header playlist" data-play-source="playlist" data-ta-id="header">
+       <section class="container">
+        <div class="header-container">
+         <div class="header-interior header-media">
+          <div class="media simple playlist" data-bind="css: { 'placeholder-visible': placeholderVisible }">
+           <div class="media-image" data-bind="click: uploadImage">
+            <div class="media-image-edit" data-bind="visible: isMediaImageEditable(), i18n: 'EditHeaderImage'" style="display: none;">
+             Edit
+            </div>
+            <a data-bind="attr: { href: href, 'data-uri': uri, title: heading }" data-uri="spotify:user:spotify:playlist:0lbtgFu3JNKX77J5YOpW7n" draggable="true" href="https://play.spotify.com/user/spotify/playlist/0lbtgFu3JNKX77J5YOpW7n" title="Rock This">
+             <div class="media-placeholder">
+              <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+               <text class="playlist-placeholder" x="5" y="9.8">
+                
+               </text>
+               <text class="album-placeholder" x="5" y="9.8">
+                
+               </text>
+               <text class="artist-placeholder" x="5" y="9.8">
+                
+               </text>
+               <text class="user-placeholder" x="5" y="9.8">
+                
+               </text>
+              </svg>
+             </div>
+             <div class="media-image-internal" data-bind="style: { backgroundImage: mediaBackgroundImage }" style='background-image: url("https://d3rt1990lpmkn.cloudfront.net/unbranded/fbba0bc9bf8d9359438b8e451244e14fc07a1d6b");'>
+             </div>
+            </a>
+           </div>
+          </div>
+         </div>
+         <!-- div.header-interior -->
+         <div class="header-interior header-data">
+          <!-- ko ifnot: isCollaborative -->
+          <span class="header-label" data-bind="i18n: 'Playlist'">
+           Playlist
+          </span>
+          <!-- /ko -->
+          <!-- ko if: isCollaborative -->
+          <!-- /ko -->
+          <h1 class="main">
+           <span>
+            <a data-bind="text: heading, attr: { href: href, 'data-uri': uri }" data-ta-id="header-name" data-uri="spotify:user:spotify:playlist:0lbtgFu3JNKX77J5YOpW7n" draggable="true" href="https://play.spotify.com/user/spotify/playlist/0lbtgFu3JNKX77J5YOpW7n">
+             Rock This
+            </a>
+            <span class="ellipsis">
+            </span>
+           </span>
+          </h1>
+          <div class="description" data-bind="html: description, click: vmDescription.editDescription, visible: !vmDescription.editingDescription(), css: { 'description-editable': vmDescription.descriptionCanBeEdited()}, attr: {title: vmDescription.descriptionCanBeEdited() ? i18n('EditPlaylistDescriptionPlaceholder') : null}">
+           These are the bands you need to know right now. Period. #RockThis / Cover: Glass Animals
+          </div>
+          <div class="description description-editor" data-bind="html: vmDescription.descriptionPlaceholder, click: vmDescription.editDescription, visible: vmDescription.isDescriptionEditorVisible()" style="display: none;">
+          </div>
+          <div class="header-controllers">
+           <button class="btn btn-small btn-icon btn-primary btn-play" data-bind="attr: { 'data-uri': uri }" data-button="play" data-context="" data-ta-id="header-play-button" data-uri="spotify:user:spotify:playlist:0lbtgFu3JNKX77J5YOpW7n">
+            <!-- FIXME: templateify -->
+            <div class="btn-play-text" data-bind="i18n: 'Play'">
+             Play
+            </div>
+            <div class="btn-radio-text" data-bind="i18n: 'StartRadio'">
+             Start Radio
+            </div>
+            <div class="btn-pause-text btn-alt-text" data-bind="i18n: 'Pause'">
+             Pause
+            </div>
+           </button>
+           <button class="btn btn-small btn-invite" data-bind="visible: shouldShowInviteButton,
+                           click: inviteButtonClicked" style="display: none;">
+            <div class="btn-invite-text" data-bind="i18n: 'Invite friends'">
+             Invite friends
+            </div>
+           </button>
+           <button class="btn btn-small btn-import" data-bind="visible: shouldShowImportButton,
+                           click: importButtonClicked,
+                           css: { 'imported': shouldShowAsImported },
+                           attr: {
+                            'data-tooltip': i18n('ImportStarredSongsToYourMusic')
+                           }" data-tooltip="Import Starred songs to Your Music" style="display: none;">
+            <div class="btn-import-text" data-bind="i18n: 'Import'">
+             Import
+            </div>
+            <div class="btn-imported-text" data-bind="i18n: 'Imported'">
+             Imported
+            </div>
+           </button>
+           <button class="btn btn-small btn-add" data-bind="attr: { 'data-uri': uri, 'data-tooltip-add': '', 'data-tooltip-remove': '' }, visible: shouldShowSubscribeButton" data-button="add" data-ta-id="header-follow-button" data-tooltip-add="" data-tooltip-remove="" data-uri="spotify:user:spotify:playlist:0lbtgFu3JNKX77J5YOpW7n" style="">
+            <div class="btn-add-text" data-bind="i18n: 'Follow'">
+             Follow
+            </div>
+            <div class="btn-added-text btn-alt-text" data-bind="i18n: 'Following'">
+             Following
+            </div>
+            <div class="btn-remove-text btn-alt-text" data-bind="i18n: 'Unfollow'">
+             Unfollow
+            </div>
+           </button>
+           <button class="btn btn-small btn-icon spoticon-more-16" data-bind="attr: { 'data-uri': uri }" data-button="contextmenu" data-ta-id="header-context-button" data-uri="spotify:user:spotify:playlist:0lbtgFu3JNKX77J5YOpW7n">
+           </button>
+          </div>
+         </div>
+         <!-- div.header-interior -->
+         <div class="header-interior">
+          <div class="aside">
+           <dl data-bind="i18n: 'Followers'">
+            Followers
+           </dl>
+           <dt data-bind="text: numFollowersFormatted">
+            1,953,094
+           </dt>
+          </div>
+         </div>
+         <!-- div.header-interior -->
+        </div>
+       </section>
+       <!-- div.header-container section.container -->
+       <div class="header-bar">
+        <div class="container">
+         <div class="pull-left">
+          <span data-bind="i18n: { key: 'CreatedByUserLink', values: [ownerName(), ownerHref(), {}], html: true }, visible: ownerIsVisible" style="">
+           Created by:
+           <a draggable="true" href="https://play.spotify.com/user/spotify">
+            Spotify
+           </a>
+          </span>
+          <!-- FIXME: This data is not yet available • <span data-bind="text: dateCreatedFormatted"></span> -->
+          <span data-bind="visible: ownerIsVisible() &amp;&amp; (numTracksIsVisble() || durationIsVisible())" style="">
+           •
+          </span>
+          <span data-bind="i18n: { key: 'NumSongs', values: [numTracksFormatted(), {}] }, visible: numTracksIsVisble" style="">
+           50 songs
+          </span>
+          <span data-bind="visible: durationIsVisible" style="">
+           ,
+          </span>
+          <span data-bind="visible: durationIsVisible, text: durationFormatted" style="">
+           3 hr 8 min
+          </span>
+         </div>
+         <span>
+         </span>
+         <div class="offline-sync pull-right" data-bind="visible: displayOfflineSyncButton, click: clickToggleOfflineSync" style="display: none;">
+          <span data-bind="i18n: 'AvailableOffline'">
+           Available Offline
+          </span>
+          <div class="slider" data-bind="css: { enabled: isOfflineSyncEnabled }">
+           <div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </header>
+     </div>
+     <div class="tracklist-wrapper" data-bind="tracklist: tracklist">
+      <div class="throbber" data-bind="visible: $data.throbberIsVisible || false" data-play-source="playlist" style="display: none;">
+       <div>
+       </div>
+      </div>
+      <table class="tracklist-playlist" data-bind="attr: {
+        'data-uri': uri,
+        'data-modifiable': $data.modifiable,
+        visible: $data.tracklistIsVisible || false
+      }" data-context="" data-list="true" data-uri="spotify:user:spotify:playlist:0lbtgFu3JNKX77J5YOpW7n" visible="true">
+       <thead class="tl-header">
+        <tr>
+         <th class="tl-play">
+         </th>
+         <th class="tl-save">
+         </th>
+         <th class="tl-name" data-bind="i18n: 'Song'">
+          Song
+         </th>
+         <th class="tl-explicit">
+         </th>
+         <th class="tl-artists" data-bind="i18n: 'Artist'">
+          Artist
+         </th>
+         <th class="tl-albums" data-bind="i18n: 'Album'">
+          Album
+         </th>
+         <th class="tl-more">
+         </th>
+         <th class="tl-time">
+         </th>
+        </tr>
+       </thead>
+       <tbody data-bind="foreach: tracks" data-list-items="true" data-scroll-container="">
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="0" data-index="0" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:2cKBRXAja8JIgF2gSmrMke" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-cell tl-play">
+          <button class="btn btn-small btn-icon btn-play" data-button="play" data-ta-id="track-play-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-save">
+          <button class="btn btn-icon btn-link btn-add" data-bind="attr: { 'data-tooltip-add': '', 'data-tooltip-remove': '' }" data-button="add" data-ta-id="track-add-button" data-tooltip-add="" data-tooltip-remove="" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-name" colspan="2" data-bind="attr: {
+          colspan: ($data.explicit() ? 1 : 2)
+        }">
+          <div class="tl-highlight" data-bind="
+        text: name,
+        css: {
+          'list-item-collection': $data.isInCollection,
+          'list-item-local': $data.local
+        }">
+           Life Itself
+          </div>
+         </td>
+         <!-- ko if: $data.explicit -->
+         <!-- /ko -->
+         <td class="tl-cell tl-artists">
+          <!-- ko foreach: $data.artists -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+            text: $data.name,
+            attr: {
+              href: $data.href,
+              'data-uri': $data.uri
+            }
+        " data-uri="spotify:artist:4yvcSjfu4PC0CYQyLy4wSq" href="https://play.spotify.com/artist/4yvcSjfu4PC0CYQyLy4wSq">
+           Glass Animals
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-albums">
+          <!-- ko if: $data.album && $data.album() -->
+          <!-- ko with: $data.album -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+              text: $data.name,
+              attr: {
+                href: $data.href,
+                'data-uri': $data.uri
+              }
+          " data-uri="spotify:album:3YXqLvGQKBu2gCqx8WaUas" href="https://play.spotify.com/album/3YXqLvGQKBu2gCqx8WaUas">
+           Life Itself
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-more">
+          <button class="btn btn-icon btn-link spoticon-more-24" data-button="contextmenu" data-ta-id="track-context-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-time" data-bind="text: duration">
+          04:40
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="1" data-index="1" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:2lWZXa1M5apVWmllXc0ACO" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-cell tl-play">
+          <button class="btn btn-small btn-icon btn-play" data-button="play" data-ta-id="track-play-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-save">
+          <button class="btn btn-icon btn-link btn-add" data-bind="attr: { 'data-tooltip-add': '', 'data-tooltip-remove': '' }" data-button="add" data-ta-id="track-add-button" data-tooltip-add="" data-tooltip-remove="" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-name" colspan="2" data-bind="attr: {
+          colspan: ($data.explicit() ? 1 : 2)
+        }">
+          <div class="tl-highlight" data-bind="
+        text: name,
+        css: {
+          'list-item-collection': $data.isInCollection,
+          'list-item-local': $data.local
+        }">
+           Get Right
+          </div>
+         </td>
+         <!-- ko if: $data.explicit -->
+         <!-- /ko -->
+         <td class="tl-cell tl-artists">
+          <!-- ko foreach: $data.artists -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+            text: $data.name,
+            attr: {
+              href: $data.href,
+              'data-uri': $data.uri
+            }
+        " data-uri="spotify:artist:3Ayl7mCk0nScecqOzvNp6s" href="https://play.spotify.com/artist/3Ayl7mCk0nScecqOzvNp6s">
+           Jimmy Eat World
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-albums">
+          <!-- ko if: $data.album && $data.album() -->
+          <!-- ko with: $data.album -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+              text: $data.name,
+              attr: {
+                href: $data.href,
+                'data-uri': $data.uri
+              }
+          " data-uri="spotify:album:71M7OqjwhnkLK4qvpLDC9T" href="https://play.spotify.com/album/71M7OqjwhnkLK4qvpLDC9T">
+           Get Right
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-more">
+          <button class="btn btn-icon btn-link spoticon-more-24" data-button="contextmenu" data-ta-id="track-context-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-time" data-bind="text: duration">
+          02:49
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="2" data-index="2" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:0Z2wvNROelCrTqUM28RLYt" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-cell tl-play">
+          <button class="btn btn-small btn-icon btn-play" data-button="play" data-ta-id="track-play-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-save">
+          <button class="btn btn-icon btn-link btn-add" data-bind="attr: { 'data-tooltip-add': '', 'data-tooltip-remove': '' }" data-button="add" data-ta-id="track-add-button" data-tooltip-add="" data-tooltip-remove="" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-name" colspan="2" data-bind="attr: {
+          colspan: ($data.explicit() ? 1 : 2)
+        }">
+          <div class="tl-highlight" data-bind="
+        text: name,
+        css: {
+          'list-item-collection': $data.isInCollection,
+          'list-item-local': $data.local
+        }">
+           Bang Bang
+          </div>
+         </td>
+         <!-- ko if: $data.explicit -->
+         <!-- /ko -->
+         <td class="tl-cell tl-artists">
+          <!-- ko foreach: $data.artists -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+            text: $data.name,
+            attr: {
+              href: $data.href,
+              'data-uri': $data.uri
+            }
+        " data-uri="spotify:artist:7oPftvlwr6VrsViSDV7fJY" href="https://play.spotify.com/artist/7oPftvlwr6VrsViSDV7fJY">
+           Green Day
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-albums">
+          <!-- ko if: $data.album && $data.album() -->
+          <!-- ko with: $data.album -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+              text: $data.name,
+              attr: {
+                href: $data.href,
+                'data-uri': $data.uri
+              }
+          " data-uri="spotify:album:2OtrW7q4kpPy7d3zPDeQqg" href="https://play.spotify.com/album/2OtrW7q4kpPy7d3zPDeQqg">
+           Bang Bang
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-more">
+          <button class="btn btn-icon btn-link spoticon-more-24" data-button="contextmenu" data-ta-id="track-context-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-time" data-bind="text: duration">
+          03:25
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="added tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="3" data-index="3" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:01JszWYuKqRjddPQ4creVF" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-cell tl-play">
+          <button class="btn btn-small btn-icon btn-play" data-button="play" data-ta-id="track-play-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-save">
+          <button class="btn btn-icon btn-link btn-add" data-bind="attr: { 'data-tooltip-add': '', 'data-tooltip-remove': '' }" data-button="add" data-ta-id="track-add-button" data-tooltip-add="" data-tooltip-remove="" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-name" colspan="2" data-bind="attr: {
+          colspan: ($data.explicit() ? 1 : 2)
+        }">
+          <div class="tl-highlight" data-bind="
+        text: name,
+        css: {
+          'list-item-collection': $data.isInCollection,
+          'list-item-local': $data.local
+        }">
+           Hardwired
+          </div>
+         </td>
+         <!-- ko if: $data.explicit -->
+         <!-- /ko -->
+         <td class="tl-cell tl-artists">
+          <!-- ko foreach: $data.artists -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+            text: $data.name,
+            attr: {
+              href: $data.href,
+              'data-uri': $data.uri
+            }
+        " data-uri="spotify:artist:2ye2Wgw4gimLv2eAKyk1NB" href="https://play.spotify.com/artist/2ye2Wgw4gimLv2eAKyk1NB">
+           Metallica
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-albums">
+          <!-- ko if: $data.album && $data.album() -->
+          <!-- ko with: $data.album -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+              text: $data.name,
+              attr: {
+                href: $data.href,
+                'data-uri': $data.uri
+              }
+          " data-uri="spotify:album:4MQxwNLnVePt7CYmLE50kC" href="https://play.spotify.com/album/4MQxwNLnVePt7CYmLE50kC">
+           Hardwired
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-more">
+          <button class="btn btn-icon btn-link spoticon-more-24" data-button="contextmenu" data-ta-id="track-context-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-time" data-bind="text: duration">
+          03:11
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="4" data-index="4" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:55pU8utrZ0WxtvWKW1FjXY" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-cell tl-play">
+          <button class="btn btn-small btn-icon btn-play" data-button="play" data-ta-id="track-play-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-save">
+          <button class="btn btn-icon btn-link btn-add" data-bind="attr: { 'data-tooltip-add': '', 'data-tooltip-remove': '' }" data-button="add" data-ta-id="track-add-button" data-tooltip-add="" data-tooltip-remove="" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-name" colspan="2" data-bind="attr: {
+          colspan: ($data.explicit() ? 1 : 2)
+        }">
+          <div class="tl-highlight" data-bind="
+        text: name,
+        css: {
+          'list-item-collection': $data.isInCollection,
+          'list-item-local': $data.local
+        }">
+           Wake Up Call
+          </div>
+         </td>
+         <!-- ko if: $data.explicit -->
+         <!-- /ko -->
+         <td class="tl-cell tl-artists">
+          <!-- ko foreach: $data.artists -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+            text: $data.name,
+            attr: {
+              href: $data.href,
+              'data-uri': $data.uri
+            }
+        " data-uri="spotify:artist:1kDGbuxWknIKx4FlgWxiSp" href="https://play.spotify.com/artist/1kDGbuxWknIKx4FlgWxiSp">
+           Nothing but Thieves
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-albums">
+          <!-- ko if: $data.album && $data.album() -->
+          <!-- ko with: $data.album -->
+          <!-- ko if: $data.href -->
+          <a data-bind="
+              text: $data.name,
+              attr: {
+                href: $data.href,
+                'data-uri': $data.uri
+              }
+          " data-uri="spotify:album:3q4BkDV5B7sczFcfrIl2a2" href="https://play.spotify.com/album/3q4BkDV5B7sczFcfrIl2a2">
+           Nothing But Thieves (Deluxe)
+          </a>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.href -->
+          <!-- /ko -->
+          <!-- /ko -->
+          <!-- /ko -->
+         </td>
+         <td class="tl-cell tl-more">
+          <button class="btn btn-icon btn-link spoticon-more-24" data-button="contextmenu" data-ta-id="track-context-button" type="button">
+          </button>
+         </td>
+         <td class="tl-cell tl-time" data-bind="text: duration">
+          02:45
+         </td>
+         <!-- /ko -->
+        </tr>
+
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="45" data-index="45" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:7oaBv3Bx1ySw1QOY0yUxzQ" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-play">
+         </td>
+         <td class="tl-save">
+         </td>
+         <td class="tl-name">
+         </td>
+         <td class="tl-explicit">
+         </td>
+         <td class="tl-artists">
+         </td>
+         <td class="tl-albums">
+         </td>
+         <td class="tl-more">
+         </td>
+         <td class="tl-time">
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="46" data-index="46" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:6lFUdRItQEsEuD7dSINL47" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-play">
+         </td>
+         <td class="tl-save">
+         </td>
+         <td class="tl-name">
+         </td>
+         <td class="tl-explicit">
+         </td>
+         <td class="tl-artists">
+         </td>
+         <td class="tl-albums">
+         </td>
+         <td class="tl-more">
+         </td>
+         <td class="tl-time">
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="47" data-index="47" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:7tKnaB8gsXxyPScxEwzQ9N" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-play">
+         </td>
+         <td class="tl-save">
+         </td>
+         <td class="tl-name">
+         </td>
+         <td class="tl-explicit">
+         </td>
+         <td class="tl-artists">
+         </td>
+         <td class="tl-albums">
+         </td>
+         <td class="tl-more">
+         </td>
+         <td class="tl-time">
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="48" data-index="48" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:6K4t31amVTZDgR3sKmwUJJ" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-play">
+         </td>
+         <td class="tl-save">
+         </td>
+         <td class="tl-name">
+         </td>
+         <td class="tl-explicit">
+         </td>
+         <td class="tl-artists">
+         </td>
+         <td class="tl-albums">
+         </td>
+         <td class="tl-more">
+         </td>
+         <td class="tl-time">
+         </td>
+         <!-- /ko -->
+        </tr>
+        <tr class="tl-row" data-bind="
+        attr: {
+          'data-uri': $data.uri,
+          'data-context-index': $data.contextIndex || $index,
+          'data-index': $index,
+          'data-ta-id': $data.dataTaId
+        },
+        css: {
+          unavailable: $data.unavailable
+        },
+        pfinViewport: { observable: $data.isInViewport, subscribeTo: $parent.triggerViewportRefresh, scrollParentId: 'pf-playlist-view', viewportLoadPadding: 500, deleted: $data.deleted, if: $parent.tracklistIsVisible },
+      " data-context-index="49" data-index="49" data-list-item="true" data-ta-id="track-playable" data-uri="spotify:track:2fh3bZ8jZhMxOcfESE9nQY" draggable="true">
+         <!-- ko template: { name: $data.name && $data.name() ? 'complexcontent' : 'simplecontent', data: $data } -->
+         <td class="tl-play">
+         </td>
+         <td class="tl-save">
+         </td>
+         <td class="tl-name">
+         </td>
+         <td class="tl-explicit">
+         </td>
+         <td class="tl-artists">
+         </td>
+         <td class="tl-albums">
+         </td>
+         <td class="tl-more">
+         </td>
+         <td class="tl-time">
+         </td>
+         <!-- /ko -->
+        </tr>
+       </tbody>
+      </table>
+      <div class="no-tracks-message-wrapper" data-bind="visible: $data.noTracksMessageVisible" style="display: none;">
+       <div class="no-tracks-message-content-wrapper">
+        <div class="no-tracks-message-content lead " data-bind="text: i18n('NoTracks')" data-ta-id="nux-screen">
+         This playlist contains no tracks.
+        </div>
+       </div>
+      </div>
+      <script id="simplecontent" type="text/html">
+       &lt;td class="tl-play"&gt;&lt;/td&gt;
+  &lt;td class="tl-save"&gt;&lt;/td&gt;
+  &lt;td class="tl-name"&gt;&lt;/td&gt;
+  &lt;td class="tl-explicit"&gt;&lt;/td&gt;
+  &lt;td class="tl-artists"&gt;&lt;/td&gt;
+  &lt;td class="tl-albums"&gt;&lt;/td&gt;
+  &lt;td class="tl-more"&gt;&lt;/td&gt;
+  &lt;td class="tl-time"&gt;&lt;/td&gt;
+      </script>
+      <script id="complexcontent" type="text/html">
+       &lt;td class="tl-cell tl-play"&gt;
+    &lt;button
+      type="button"
+      data-button="play"
+      data-ta-id="track-play-button"
+      class="btn btn-small btn-icon btn-play"&gt;&lt;/button&gt;
+  &lt;/td&gt;
+  &lt;td class="tl-cell tl-save"&gt;
+    &lt;button type="button" data-button="add" data-bind="attr: { 'data-tooltip-add': '', 'data-tooltip-remove': '' }" class="btn btn-icon btn-link btn-add" data-ta-id="track-add-button"&gt;&lt;/button&gt;
+
+
+  &lt;/td&gt;
+  &lt;td class="tl-cell tl-name" data-bind="attr: {
+          colspan: ($data.explicit() ? 1 : 2)
+        }"&gt;
+    &lt;div class="tl-highlight" data-bind="
+        text: name,
+        css: {
+          'list-item-collection': $data.isInCollection,
+          'list-item-local': $data.local
+        }"&gt;&lt;/div&gt;
+  &lt;/td&gt;
+  &lt;!-- ko if: $data.explicit --&gt;
+    &lt;td class="tl-cell tl-explicit"&gt;
+      &lt;span class="label"&gt;EXPLICIT&lt;/span&gt;
+    &lt;/td&gt;
+  &lt;!-- /ko --&gt;
+  &lt;td class="tl-cell tl-artists"&gt;
+    &lt;!-- ko foreach: $data.artists --&gt;
+      &lt;!-- ko if: $data.href --&gt;
+        &lt;a
+          data-bind="
+            text: $data.name,
+            attr: {
+              href: $data.href,
+              'data-uri': $data.uri
+            }
+        "&gt;&lt;/a&gt;
+      &lt;!-- /ko --&gt;
+      &lt;!-- ko ifnot: $data.href --&gt;
+        &lt;!-- ko text: $data.name --&gt;&lt;!-- /ko --&gt;
+      &lt;!-- /ko --&gt;
+    &lt;!-- /ko --&gt;
+  &lt;/td&gt;
+  &lt;td class="tl-cell tl-albums"&gt;
+    &lt;!-- ko if: $data.album &amp;&amp; $data.album() --&gt;
+      &lt;!-- ko with: $data.album --&gt;
+        &lt;!-- ko if: $data.href --&gt;
+          &lt;a
+            data-bind="
+              text: $data.name,
+              attr: {
+                href: $data.href,
+                'data-uri': $data.uri
+              }
+          "&gt;&lt;/a&gt;
+        &lt;!-- /ko --&gt;
+        &lt;!-- ko ifnot: $data.href --&gt;
+          &lt;!-- ko text: $data.name --&gt;&lt;!-- /ko --&gt;
+        &lt;!-- /ko --&gt;
+      &lt;!-- /ko --&gt;
+    &lt;!-- /ko --&gt;
+  &lt;/td&gt;
+  &lt;td class="tl-cell tl-more"&gt;
+    &lt;button type="button" data-button="contextmenu" class="btn btn-icon btn-link spoticon-more-24"
+      data-ta-id="track-context-button"&gt;&lt;/button&gt;
+
+  &lt;/td&gt;
+
+  &lt;td class="tl-cell tl-time"
+      data-bind="text: duration"&gt;&lt;/td&gt;
+      </script>
+     </div>
+    </div>
+    <!--
+      ko handlebars: {
+        name: 'error-and-offline',
+        data: {
+          errorTitle: $data.errorTitle,
+          errorMessage: $data.errorMessage,
+          errorEscapeMessage: $data.errorEscapeMessage,
+          errorEscapeUrl: $data.errorEscapeUrl
+        }
+      }
+    -->
+    <div class="error-and-offline" data-log-context="error-and-offline">
+     <div class="container">
+      <div class="error-content">
+       <h1 class="hdr-l">
+        Error
+       </h1>
+       <div class="message">
+        The playlist failed to load.
+       </div>
+       <a class="btn btn-info" data-log-click="error-escape" href="javascript:location.reload()">
+        Reload
+       </a>
+      </div>
+      <div class="offline-content">
+       <h1 class="hdr-l">
+       </h1>
+       <div class="message">
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- /ko -->
+    <div class="pf-app-overlay" data-bind="visible: shouldShowNUX" style="display: none;">
+     <div class="nux-screen" data-ta-id="nux-screen">
+      <div class="nux-screen-inner-box">
+       <div class="nux-icon nux-playlist-icon">
+       </div>
+       <h3 data-bind="i18n: 'PlaylistNUXTitle'">
+        You don't have any playlists yet.
+       </h3>
+       <p class="lead" data-bind="i18n: { key: 'PlaylistNUXDescription', html: true }">
+        Create your own or follow one from our
+        <a href="spotify:app:browse">
+         Browse catalogue
+        </a>
+        .
+       </p>
+       <a class="btn" href="spotify:app:browse">
+        <span data-bind="i18n: 'GoToBrowse'">
+         Go to Browse
+        </span>
+       </a>
+      </div>
+     </div>
+    </div>
+   </section>
+  </div>
+  <!-- /ko -->
+  <script crossorigin="anonymous" src="https://play.spotify.edgekey.net/apps/playlist/0.6.0/all.js">
+  </script>
+  <script crossorigin="anonymous" src="https://cdn.ravenjs.com/1.1.15/native/raven.min.js">
+  </script>
+  <script type="text/javascript">
+   __apiRequest("log_application_loaded", [window.sp_appLogInit, new Date().getTime()]);
+  </script>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"74a85ac4f8","applicationID":"15427789","transactionName":"ZVZXNhFWDxFSVBZQDlwcYBAKGAASQ0RNUA9WVk1ME18R","queueTime":0,"applicationTime":2,"atts":"SRFUQFlMHB8=","errorBeacon":"bam.nr-data.net","agent":""}
+  </script>
+  <div id="tooltip">
+   <div class="tooltip-arrow-top">
+   </div>
+   <div class="tooltip-arrow-bottom">
+   </div>
+   <span>
+   </span>
+  </div>
+ </body>
+</html>

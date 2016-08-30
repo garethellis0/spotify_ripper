@@ -7,18 +7,12 @@ dl = youtube_dl.FileDownloader
 
 class TestSpotifyScraperAPI(unittest.TestCase):
 
-    def test_find_playlist_file_valid(self):
-        spotify_scraper_api = SpotifyScraperAPI("test/test_files")
-        expected_file_with_playlist = os.path.dirname(__file__) + "/test_files/saved_resource(3).html"
-        file_with_playlist = spotify_scraper_api.find_playlist_file()
-        self.assertEqual(expected_file_with_playlist, file_with_playlist)
-
-    def test_find_playlist_file_invalid(self):
-        with self.assertRaises(OSError):
-            SpotifyScraperAPI("non_existent_dir")
-
     def test_get_playlist(self):
-        spotify_scraper_api = SpotifyScraperAPI("test/test_files")
+        spotify_scraper_api = SpotifyScraperAPI()
+        with open('test_html_src') as html_src_file:
+            spotify_scraper_api.html_src = html_src_file.read()
+        playlist = spotify_scraper_api.get_playlist()
+
         expected_playlist = [
             {
                 "Title": "Life Itself",
@@ -48,13 +42,8 @@ class TestSpotifyScraperAPI(unittest.TestCase):
                 "Time": "03:11"
             },
 
-            {
-                "Title": "Wake Up Call",
-                "Artist": "Nothing but Thieves",
-                "Album": "Nothing But Thieves (Deluxe)",
-                "Time": "02:45"
-            },
         ]
+
         playlist = spotify_scraper_api.get_playlist()
         self.assertListEqual(expected_playlist, playlist)
 
