@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 import youtube_dl
 import urllib.request
 import re
+import os
+
 
 class MP3Downloader:
 
@@ -39,6 +41,7 @@ class MP3Downloader:
     #
     # Params:
     #     search_urls - A list of urls (strings) representing searches for songs
+    #should prefers songs from artist's channel, similar time to Time, does not contain "cover" or "mix"
     def _get_song_urls(self, search_urls):
         song_urls = []
         url_beginning = "https://www.youtube.com"
@@ -51,6 +54,8 @@ class MP3Downloader:
             source = html.decode("utf-8")
 
             #Youtube video urls have 11 character long unique id's
+            url_terminations = re.findall("data-context-item-id=\"(.*?)\"", source)
+
             pattern = re.compile("href=\"\/watch\?v=...........")
             url_termination = re.search(pattern, source)
             url_termination = url_termination.group(0)
@@ -63,13 +68,22 @@ class MP3Downloader:
     #Takes a list of urls of youtube videos (songs), and downloads the mp3 files
     #of those videos
     def _download_songs(self, urls):
+        py_dir = os.path.dirname(os.path.realpath(__file__))
+        path = py_dir + "/music"
+        try:
+            os.mkdir(path)
+        except FileExistsError:
+            print("path already exists")
+
+        os.chdir(path)
+
         for url in urls:
             ydl_opts = {
                 'format': 'bestaudio/best',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
-                    'preferredquality': '192',
+                    'preferredquality': '320',
                 }],
             }
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
