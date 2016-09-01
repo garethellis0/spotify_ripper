@@ -1,20 +1,23 @@
 import unittest
-import os
-from SpotifyScraperAPI import SpotifyScraperAPI
 from MP3Downloader import MP3Downloader
 import youtube_dl
 
 dl = youtube_dl.FileDownloader
-mdl = MP3Downloader()
+
 
 class TestMP3DownloaderAPI(unittest.TestCase):
 
     def test_get_urls_valid(self):
         test_dictionary = self.get_test_dictionary()
-        retrieved_urls = MP3Downloader._get_song_urls(self, MP3Downloader._get_search_urls(self, test_dictionary))
-        print (retrieved_urls)
-        expected_urls = self.get_expected_urls(test_dictionary)
-        self.assertListEqual(retrieved_urls, expected_urls)
+        mdl = MP3Downloader(test_dictionary)
+        mdl.get_downloads()
+
+    # def test_get_urls_valid(self):
+    #     test_dictionary = self.get_test_dictionary()
+    #     retrieved_urls = MP3Downloader._get_song_urls(self, MP3Downloader._get_search_urls(self, test_dictionary), test_dictionary)
+    #     print (retrieved_urls)
+    #     expected_urls = self.get_expected_urls(test_dictionary)
+    #     self.assertListEqual(retrieved_urls, expected_urls)
 
     def test_get_urls_invalid(self):
         pass
@@ -24,14 +27,23 @@ class TestMP3DownloaderAPI(unittest.TestCase):
     #Test dictionary includes URLs for testing
     def get_test_dictionary(self):
         songs = [
-            {
-                "Title": "Life Itself",
-                "Artist": "Glass Animals",
-                "Album": "Life Itself",
-                "Time": "04:40",
-                "URL": "https://www.youtube.com/watch?v=N3bklUMHepU"
-            },
-
+            # {
+            #     "Title": "Life Itself",
+            #     "Artist": "Glass Animals",
+            #     "Album": "Life Itself",
+            #     "Time": "04:40",
+            #     "URL": "https://www.youtube.com/watch?v=N3bklUMHepU"
+            # },
+            #
+            # {
+            #     "Title": "American Money",
+            #     "Artist": "BØRNS",
+            #     "Album": "Test",
+            #     "Time": "4:20",
+            #     "URL": "https://www.youtube.com/watch?v=ABFz2Qag6Dw"
+            # },
+            #
+            #
             # {
             #     "Title": "Get Right",
             #     "Artist": "Jimmy Eat World",
@@ -80,38 +92,38 @@ class TestMP3DownloaderAPI(unittest.TestCase):
             #     "Time": "3:25",
             #     "URL": "https://www.youtube.com/watch?v=34s_cIuHWB4"
             # },
-            #
-            # {
-            #     "Title": "Women",
-            #     "Artist": "Def Leppard",
-            #     "Album": "Hysteria",
-            #     "Time": "6:11",
-            #     "URL": "https://www.youtube.com/watch?v=dSZ2Q3cKepU"
-            # },
-            #
-            # {
-            #     "Title": "Camilla",
-            #     "Artist": "Basshunter",
-            #     "Album": "Bass Generation",
-            #     "Time": "3:23",
-            #     "URL": "https://www.youtube.com/watch?v=FZaUN-cYiKE"
-            # },
-            #
-            # {
-            #     "Title": "Goodbye Forever",
-            #     "Artist": "Volbeat",
-            #     "Album": "Seal The Deal & Let's Boogie",
-            #     "Time": "4:31",
-            #     "URL": "https://www.youtube.com/watch?v=WEElfat8H-I"
-            # },
-            #
-            # {
-            #     "Title": "Coffee Girl",
-            #     "Artist": "The Tragically Hip",
-            #     "Album": "We Are The Same",
-            #     "Time": "3:46",
-            #     "URL": "https://www.youtube.com/watch?v=A_7nPkjdLQY"
-            # }
+
+            {
+                "Title": "Women",
+                "Artist": "Def Leppard",
+                "Album": "Hysteria",
+                "Time": "6:11",
+                "URL": "https://www.youtube.com/watch?v=dSZ2Q3cKepU"
+            },
+
+            {
+                "Title": "Camilla",
+                "Artist": "Basshunter",
+                "Album": "Bass Generation",
+                "Time": "3:23",
+                "URL": "https://www.youtube.com/watch?v=4__Cq-DeB5U"
+            },
+
+            {
+                "Title": "Goodbye Forever",
+                "Artist": "Volbeat",
+                "Album": "Seal The Deal & Let's Boogie",
+                "Time": "4:31",
+                "URL": "https://www.youtube.com/watch?v=WEElfat8H-I"
+            },
+
+            {
+                "Title": "Coffee Girl",
+                "Artist": "The Tragically Hip",
+                "Album": "We Are The Same",
+                "Time": "3:46",
+                "URL": "https://www.youtube.com/watch?v=A_7nPkjdLQY"
+            }
 
 
         ]
