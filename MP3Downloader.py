@@ -39,6 +39,7 @@ class MP3Downloader:
 
         for song in self.songs:
             search = song["Artist"] + "+" + song["Title"] + "+" + "lyrics"
+            #encodes special chars to "url form"
             url = url_start + urllib.parse.quote_plus(search)
             url = url.replace(" ", "+")
             url = url.lower()
