@@ -27,71 +27,78 @@ class TestMP3DownloaderAPI(unittest.TestCase):
     #Test dictionary includes URLs for testing
     def get_test_dictionary(self):
         songs = [
-            # {
-            #     "Title": "Life Itself",
-            #     "Artist": "Glass Animals",
-            #     "Album": "Life Itself",
-            #     "Time": "04:40",
-            #     "URL": "https://www.youtube.com/watch?v=N3bklUMHepU"
-            # },
-            #
-            # {
-            #     "Title": "American Money",
-            #     "Artist": "BØRNS",
-            #     "Album": "Test",
-            #     "Time": "4:20",
-            #     "URL": "https://www.youtube.com/watch?v=ABFz2Qag6Dw"
-            # },
-            #
-            #
-            # {
-            #     "Title": "Get Right",
-            #     "Artist": "Jimmy Eat World",
-            #     "Album": "Get Right",
-            #     "Time": "02:49",
-            #     "URL": "https://www.youtube.com/watch?v=vMj7baqFV3M"
-            #
-            # },
-            #
-            # {
-            #     "Title": "Bang Bang",
-            #     "Artist": "Green Day",
-            #     "Album": "Bang Bang",
-            #     "Time": "03:25",
-            #     "URL": "https://www.youtube.com/watch?v=mg5Bp_Gzs0s"
-            # },
-            #
-            # {
-            #     "Title": "Hardwired",
-            #     "Artist": "Metallica",
-            #     "Album": "Hardwired",
-            #     "Time": "03:11",
-            #     "URL": "https://www.youtube.com/watch?v=Rqnl1Z9okE4"
-            # },
-            #
-            # {
-            #     "Title": "Wake Up Call",
-            #     "Artist": "Nothing but Thieves",
-            #     "Album": "Nothing But Thieves (Deluxe)",
-            #     "Time": "02:45",
-            #     "URL": "https://www.youtube.com/watch?v=8phg58HrQek"
-            # },
-            #
-            # {
-            #     "Title": "Rock Lobster",
-            #     "Artist": "The B-52's",
-            #     "Album": "The B-52's",
-            #     "Time": "6:49",
-            #     "URL": "https://www.youtube.com/watch?v=tG6Be3KtOZg"
-            # },
-            #
-            # {
-            #     "Title": "Just Can't Get Enough",
-            #     "Artist": "Depeche Mode",
-            #     "Album": "Catching Up With Depeche Mode",
-            #     "Time": "3:25",
-            #     "URL": "https://www.youtube.com/watch?v=34s_cIuHWB4"
-            # },
+            {
+                "Title": "Life Itself",
+                "Artist": "Glass Animals",
+                "Album": "Life Itself",
+                "Time": "04:40",
+                "URL": "https://www.youtube.com/watch?v=N3bklUMHepU"
+            },
+
+            {
+                "Title": "American Money",
+                "Artist": "BØRNS",
+                "Album": "Test",
+                "Time": "4:20",
+                "URL": "https://www.youtube.com/watch?v=ABFz2Qag6Dw"
+            },
+
+
+            {
+                "Title": "Get Right",
+                "Artist": "Jimmy Eat World",
+                "Album": "Get Right",
+                "Time": "02:49",
+                "URL": "https://www.youtube.com/watch?v=vMj7baqFV3M"
+
+            },
+
+            {
+                "Title": "Bang Bang",
+                "Artist": "Green Day",
+                "Album": "Bang Bang",
+                "Time": "03:25",
+                "URL": "https://www.youtube.com/watch?v=mg5Bp_Gzs0s"
+            },
+
+            {
+                "Title": "Hardwired",
+                "Artist": "Metallica",
+                "Album": "Hardwired",
+                "Time": "03:11",
+                "URL": "https://www.youtube.com/watch?v=Rqnl1Z9okE4"
+            },
+
+            {
+                "Title": "Wake Up Call",
+                "Artist": "Nothing but Thieves",
+                "Album": "Nothing But Thieves (Deluxe)",
+                "Time": "02:45",
+                "URL": "https://www.youtube.com/watch?v=8phg58HrQek"
+            },
+
+            {
+                "Title": "Rock Lobster",
+                "Artist": "The B-52's",
+                "Album": "The B-52's",
+                "Time": "6:49",
+                "URL": "https://www.youtube.com/watch?v=tG6Be3KtOZg"
+            },
+
+            {
+                "Title": "Just Can't Get Enough",
+                "Artist": "Depeche Mode",
+                "Album": "Catching Up With Depeche Mode",
+                "Time": "3:25",
+                "URL": "https://www.youtube.com/watch?v=34s_cIuHWB4"
+            },
+
+            {
+                "Title": "Red Flag",
+                "Artist": "The Moth & The Flame",
+                "Album": "test",
+                "Time": "4:20"
+            },
 
             {
                 "Title": "Women",
