@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 import youtube_dl
+import urllib.parse
 import urllib.request
 import re
 import os
@@ -37,10 +38,13 @@ class MP3Downloader:
         urls = []
 
         for song in self.songs:
-            url = url_start + song["Artist"] + "+" + song["Title"] + "+" + "lyrics"
+            search = song["Artist"] + "+" + song["Title"] + "+" + "lyrics"
+            #encodes special chars to "url form"
+            url = url_start + urllib.parse.quote_plus(search)
             url = url.replace(" ", "+")
             url = url.lower()
             urls.append(url)
+        print (urls)
         return urls
 
     # Takes a list of urls that correspond to searches for songs, and returns a list
@@ -55,18 +59,18 @@ class MP3Downloader:
 
         index = 0
         for url in search_urls:
-            # checks if the url has any non-ascii chars,
-            # since python needs to encode chars to send url read request
-            # char could potentially be substituted?
-            try:
-                tmp = url.encode("ascii")
-            except UnicodeEncodeError:
-                failed_song_title = self.songs[index]["Title"]
-                failed_song_artist = self.songs[index]["Artist"]
-                print("The url for the song \"%s\" by %s contains non-ASCII characters, so the "
-                      "song could not be downloaded" % (failed_song_title, failed_song_artist))
-                del self.songs[index]
-                continue
+            # # checks if the url has any non-ascii chars,
+            # # since python needs to encode chars to send url read request
+            # # char could potentially be substituted?
+            # try:
+            #     tmp = url.encode("ascii")
+            # except UnicodeEncodeError:
+            #     failed_song_title = self.songs[index]["Title"]
+            #     failed_song_artist = self.songs[index]["Artist"]
+            #     print("The url for the song \"%s\" by %s contains non-ASCII characters, so the "
+            #           "song could not be downloaded" % (failed_song_title, failed_song_artist))
+            #     del self.songs[index]
+            #     continue
 
             with urllib.request.urlopen(url) as response:
                 html = response.read()
@@ -127,5 +131,6 @@ class MP3Downloader:
 
                     if re.match(my_regex, filename):
                         os.rename(path + filename, path + proper_name)
+                        print ("Renaming song to: %s" %proper_name)
                         break
             index += 1
