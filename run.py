@@ -39,8 +39,8 @@ while True:
         spotify_scraper_api = SpotifyScraperAPI(playlist_url, cookie_val)
         songs = spotify_scraper_api.get_playlist()
         print("Successfully retrieved playlist, downloading songs from youtube")
-        mp3_downloader = MP3Downloader()
-        mp3_downloader.get_downloads(songs)
+        mp3_downloader = MP3Downloader(songs)
+        mp3_downloader.get_downloads()
         break
     except InvalidCookieException:
         # Ask the user to double check the url
