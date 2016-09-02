@@ -83,7 +83,7 @@ class MP3Downloader:
 
             #to be used to select songs later
             #url_terminations = re.findall("data-context-item-id=\"(.*?)\"", source)
-
+            print (url)
             pattern = re.compile("href=\"\/watch\?v=...........")
             url_termination = re.search(pattern, source)
             url_termination = url_termination.group(0)
