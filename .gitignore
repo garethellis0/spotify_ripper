@@ -1,6 +1,7 @@
 music/
 .cookie
 *.mp3
+*.pyc
 .idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
