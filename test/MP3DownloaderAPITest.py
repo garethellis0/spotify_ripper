@@ -7,22 +7,13 @@ dl = youtube_dl.FileDownloader
 
 class TestMP3DownloaderAPI(unittest.TestCase):
 
-    def test_get_urls_valid(self):
+    def test_get_downloads_valid(self):
         test_dictionary = self.get_test_dictionary()
         mdl = MP3Downloader(test_dictionary)
         mdl.get_downloads()
 
-    # def test_get_urls_valid(self):
-    #     test_dictionary = self.get_test_dictionary()
-    #     retrieved_urls = MP3Downloader._get_song_urls(self, MP3Downloader._get_search_urls(self, test_dictionary), test_dictionary)
-    #     print (retrieved_urls)
-    #     expected_urls = self.get_expected_urls(test_dictionary)
-    #     self.assertListEqual(retrieved_urls, expected_urls)
-
     def test_get_urls_invalid(self):
         pass
-        #with self.assertRaises(OSError):
-        #    MP3Downloader("non_existent_dir")
 
     #Test dictionary includes URLs for testing
     def get_test_dictionary(self):
@@ -97,7 +88,8 @@ class TestMP3DownloaderAPI(unittest.TestCase):
                 "Title": "Red Flag",
                 "Artist": "The Moth & The Flame",
                 "Album": "test",
-                "Time": "4:20"
+                "Time": "4:20",
+                "URL": "https://www.youtube.com/watch?v=bqDrftAxYpk"
             },
 
             {
