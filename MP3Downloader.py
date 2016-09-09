@@ -1,5 +1,3 @@
-# asdasdasd-*- coding: <utf-8> -*-
-
 from __future__ import unicode_literals
 from pytag import Audio
 import youtube_dl
@@ -46,7 +44,7 @@ class MP3Downloader:
     # gets the url for the top search result for that song and adds it to
     # the dictionary
     #
-    # Youtube video urls have 11 character long unique id"s
+    # Youtube video urls have 11 character long unique id's
     def _get_song_urls(self):
         url_beginning = "https://www.youtube.com/watch?v="
         print("Retrieving song urls...")
