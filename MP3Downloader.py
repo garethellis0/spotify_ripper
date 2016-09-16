@@ -101,7 +101,8 @@ class MP3Downloader:
                     print("Renaming song to: %s" % new_name)
                     break
 
-    # Writes title, artist, and album metadata for each downloaded song from the songs dictionary
+    # Writes title, artist, and album metadata for each downloaded song from the songs dictionary,
+    # and changes file permissions so everyone has access (access code 777)
     def _set_metadata(self):
         print("Writing metadata...")
         for song in self.songs:
@@ -112,4 +113,7 @@ class MP3Downloader:
                 "artist": song["Artist"],
                 "album": song["Album"]
             })
+
+            # access code preceded by 0o to represent octal number
+            os.chmod(path_to_song, 0o777);
 
