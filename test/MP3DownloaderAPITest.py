@@ -26,7 +26,7 @@ class TestMP3DownloaderAPI(unittest.TestCase):
         mdl = MP3Downloader(self.get_test_dictionary())
         test_result = mdl._get_best_song_url(self.get_test_song_2(), self.get_valid_test_vid_info_2())
         expected_result = "good"
-        print ("valid test - result: %s, Expected Results: %s" %(test_result, expected_result))
+        print ("valid test_2 - result: %s, Expected Results: %s" %(test_result, expected_result))
         self.assertEqual(test_result, expected_result)
 
     def test_vid_evaluation_invalid(self):
