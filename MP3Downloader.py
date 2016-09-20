@@ -22,7 +22,7 @@ class MP3Downloader:
         self._removeExistingSongs()
         self._get_search_urls()
         self._get_song_urls()
-        #self._download_songs()
+        self._download_songs()
         self._rename_songs()
         self._write_metadata()
 
@@ -30,7 +30,6 @@ class MP3Downloader:
     # Checks for songs that already exist in the download path, and removes them
     # from the list of songs to be downloaded
     def _removeExistingSongs(self):
-        print (self.songs)
         print ("Checking for existing songs...")
         songs_to_remove = []
 
