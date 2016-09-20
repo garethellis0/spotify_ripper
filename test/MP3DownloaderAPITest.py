@@ -7,13 +7,163 @@ dl = youtube_dl.FileDownloader
 
 class TestMP3DownloaderAPI(unittest.TestCase):
 
-    def test_get_downloads_valid(self):
-        test_dictionary = self.get_test_dictionary()
-        mdl = MP3Downloader(test_dictionary)
-        mdl.get_downloads()
+    # def test_get_downloads_valid(self):
+    #     test_dictionary = self.get_test_dictionary()
+    #     mdl = MP3Downloader(test_dictionary)
+    #     mdl.get_downloads()
 
     def test_get_urls_invalid(self):
         pass
+
+    def test_vid_evaluation_valid(self):
+        mdl = MP3Downloader(self.get_test_dictionary())
+        test_result = mdl._get_best_song_url(self.get_test_song_1(), self.get_valid_test_vid_info_1())
+        expected_result = "good"
+        print ("valid test - result: %s, Expected Results: %s" %(test_result, expected_result))
+        self.assertEqual(test_result[:-1], expected_result)
+
+    def test_vid_evaluation_valid_2(self):
+        mdl = MP3Downloader(self.get_test_dictionary())
+        test_result = mdl._get_best_song_url(self.get_test_song_2(), self.get_valid_test_vid_info_2())
+        expected_result = "good"
+        print ("valid test - result: %s, Expected Results: %s" %(test_result, expected_result))
+        self.assertEqual(test_result, expected_result)
+
+    def test_vid_evaluation_invalid(self):
+        mdl = MP3Downloader(self.get_test_dictionary())
+        test_result = mdl._get_best_song_url(self.get_test_song_1(), self.get_invalid_test_vid_info())
+        expected_result = ""
+        print("invalid Test - result: %s, Expected Results: %s" % (test_result, expected_result))
+        self.assertEqual(test_result, expected_result)
+
+    def get_test_song_2(self):
+        song = {
+            "Title": "Alive",
+            "Artist": "Pearl Jam"
+        }
+        return song
+
+    def get_valid_test_vid_info_2(self):
+        info = [
+
+            {
+                'title': "Pearl Jam - Alive Live Concert",
+                'url': "bad1"
+            },
+
+            {
+                'title': "Pearl Jam Alive Acoustic Cover",
+                'url': "bad2"
+            },
+
+            {
+                'title': "Pearl Jam Live at Sidney 2012",
+                'url': "bad3"
+            },
+
+            {
+                'title': "Pearl_Jam || Alive instrumental",
+                'url': "bad4"
+            },
+
+            {
+                'title': "Pearl Jam - Alive (Lyrics)",
+                'url': "good"
+            },
+        ]
+
+        return info
+
+
+    def get_test_song_1(self):
+        song = {
+            'Title': "Bang Bang",
+            'Artist': "Green Day"
+        }
+        return song
+
+    def get_valid_test_vid_info_1(self):
+        info = [
+            # {
+            #     'title': "Green Day - Bang Bang (Official Lyric Video)",
+            #     'url': "good1"
+            # },
+
+            {
+                'title': "Green Day - Bang Bang (Official Music Video)",
+                'url': "bad1"
+            },
+
+            {
+                'title': "Green Day - Bang Bang (Video Shoot Behind The Scenes)",
+                'url': "bad2"
+            },
+
+            {
+                'title': "Green Day Bang Bang (Full Band Cover by Minority 905)",
+                'url': "bad3"
+            },
+
+            {
+                'title': "Green Day - Bang Bang Drum cover",
+                'url': "bad4"
+            },
+
+            {
+                'title': "BANG BANG by Green Day (Acoustic Cover)",
+                'url': "bad5"
+            },
+
+            {
+                'title': "Reaction to \"Bang Bang\" NEW GREEN DAY!",
+                'url': "bad6"
+            },
+
+            {
+                'title': "Green Day - Bang Bang lyrics",
+                'url': "good2"
+            },
+        ]
+
+        return info
+
+    def get_invalid_test_vid_info(self):
+        info = [
+
+            {
+                'title': "Green Day - Bang Bang (Official Music Video)",
+                'url': "bad1"
+            },
+
+            {
+                'title': "Green Day - Bang Bang (Video Shoot Behind The Scenes)",
+                'url': "bad2"
+            },
+
+            {
+                'title': "Green Day Bang Bang (Full Band Cover by Minority 905)",
+                'url': "bad3"
+            },
+
+            {
+                'title': "Green Day - Bang Bang Drum cover",
+                'url': "bad4"
+            },
+
+            {
+                'title': "BANG BANG by Green Day (Acoustic Cover)",
+                'url': "bad5"
+            },
+
+            {
+                'title': "Reaction to \"Bang Bang\" NEW GREEN DAY!",
+                'url': "bad6"
+            },
+        ]
+
+        return info
+
+
 
     #Test dictionary includes URLs for testing
     def get_test_dictionary(self):

@@ -78,6 +78,7 @@ class MP3Downloader:
     # where "X" represents a random character part of the unique video id
     def _get_song_urls(self):
         url_beginning = "https://www.youtube.com/watch?v="
+        max_vids_to_eval = 10
         print("Retrieving song urls...")
 
         for song in self.songs:
@@ -88,7 +89,7 @@ class MP3Downloader:
             # decodes html source from binary bytes to string
             search_source = html.decode("utf-8", "ignore")
 
-            vid_info = self._get_vid_info(search_source)
+            vid_info = self._get_vid_info(search_source, max_vids_to_eval)
             best_song_url_termination = self._get_best_song_url(song, vid_info)
 
             if best_song_url_termination is "":
@@ -139,35 +140,42 @@ class MP3Downloader:
         return vids_to_eval
 
     # Given a list of vid info (video title and url termination) for a song, returns the first song in
-    # the list that is not a cover, music video, live performance, or instrumental
+    # the list that is not a cover, music video, live performance, reaction video, behind the scenes, or instrumental
     # @Param song the dictionary with the info for the song whose videos are being evaluated
     # @Param vid_info the list of dictionaries containing info (title, url termination) for the
     #        videos to be evaluated
     # @Returns the url termination of the first video in the list that meets all criteria
-    #          (not a music video, live performance, cover, or instrumental),
+    #          (not a music video, live performance, cover, reaction video, behind the scenes, or instrumental),
     #          or an empty string "" if no video meets the criteria
     def _get_best_song_url(self, song, vid_info):
         for vid in vid_info:
-            song_title = song['Title']
+            song_title_and_artist = song['Title'] + " " + song['Artist']
             vid_title = vid["title"]
             url = vid['url']
 
             # If the video a cover (not by the artist)
-            if re.search(r"(?<![a-z])cover(?![a-z])", vid_title, "i") is not None\
-                    or re.search(re.escape(song['Artist']), vid_title, "i") is None\
-                    and re.search(r" cover ", song_title, "i") is None:
+            if (re.search(r"(?<![a-z])cover(?![a-z])", vid_title, re.IGNORECASE) is not None\
+                    and re.search(r"(?<![a-z])cover(?![a-z])", song_title_and_artist, re.IGNORECASE) is None)\
+                    or re.search(re.escape(song['Artist']), vid_title, re.IGNORECASE) is None:
                 continue
             # if the video is a live performance
-            elif re.search(r"(?<![a-z])live(?![a-z])", vid_title, "i") is not None\
-                    and re.search(r" live ", song_title, "i") is None:
+            elif re.search(r"(?<![a-z])live(?![a-z])", vid_title, re.IGNORECASE) is not None\
+                    and re.search(r"(?<![a-z])live(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
                 continue
             # If the video is a music video
-            elif re.search(r"music video", vid_title, "i") is not None\
-                    or re.search(r"music([^a-z])video", vid_title, "i") is not None:
+            elif re.search(r"music([^a-z])video", vid_title, re.IGNORECASE) is not None\
+                    and re.search(r"music([^a-z])video", song_title_and_artist, re.IGNORECASE) is None:
                 continue
             # If the video is an instrumental
-            elif re.search(r"(?<![a-z])instrumental(?![a-z])", vid_title, "i") is not None\
-                    and re.search(" instrumental ", song_title, "i") is None:
+            elif re.search(r"(?<![a-z])instrumental(?![a-z])", vid_title, re.IGNORECASE) is not None\
+                    and re.search("(?<![a-z])instrumental(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
+                continue
+            # If the video is a reaction video
+            elif re.search(r"(?<![a-z])reaction(?![a-z])", vid_title, re.IGNORECASE) is not None\
+                    and re.search(r"(?<![a-z])reaction(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
+                continue
+            #If the video is a behind the scenes video
+            elif re.search(r"(?<![a-z])Behind(?![a-z]).(?<![a-z])The(?![a-z]).(?<![a-z])Scenes(?![a-z])", vid_title, re.IGNORECASE) is not None:
                 continue
             else:
                 return url
