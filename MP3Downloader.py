@@ -218,6 +218,7 @@ class MP3Downloader:
             for filename in os.listdir(self.path):
                 my_regex = r".*?-(" + re.escape(song["song_url"][-11:]) + r").*"
                 new_name = song["Artist"] + " - " + song["Title"] + ".mp3"
+                new_name = new_name.replace("&amp;", "&")
 
                 if re.match(my_regex, filename):
                     os.rename(self.path + filename, self.path + new_name)
