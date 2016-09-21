@@ -13,8 +13,15 @@ class MP3Downloader:
     # Album, and Time
     def __init__(self, songs):
         self.songs = songs
+
         #The path to the folder where the songs will be downloaded
         self.path = os.path.dirname(os.path.realpath(__file__)) + "/music/"
+
+        self.total_songs_requested = len(songs)
+        self.total_existing_songs = 0
+        self.total_downloaded_songs = 0
+        self.total_unfound_songs = 0
+        self.total_unfound_songs_info = []
 
     # Calls all functions to download mp3 files based on song information passed in
     # as a dictionary
@@ -25,6 +32,7 @@ class MP3Downloader:
         self._download_songs()
         self._rename_songs()
         self._write_metadata()
+        self._print_summary()
 
 
     # Checks for songs that already exist in the download path, and removes them
@@ -41,6 +49,7 @@ class MP3Downloader:
                 if re.match(song_name_regex, filename):
                     print("The song \"%s - %s\" already exists. Skipping this song." %(song["Artist"], song["Title"]))
                     songs_to_remove.append(song)
+                    self.total_existing_songs += 1
                     break
 
         # Remove the pre-existing songs from the songs dictionary
@@ -78,6 +87,7 @@ class MP3Downloader:
     def _get_song_urls(self):
         url_beginning = "https://www.youtube.com/watch?v="
         max_vids_to_eval = 10
+        songs_to_skip = []
         print("Retrieving song urls...")
 
         for song in self.songs:
@@ -93,11 +103,17 @@ class MP3Downloader:
 
             if best_song_url_termination is "":
                 print("Unable to find a suitable video for %s - %s, skipping this song." %(song['Artist'], song['Title']))
+                songs_to_skip.append(song)
+                self.total_unfound_songs += 1
+                self.total_unfound_songs_info.append(song["Artist"] + " - " + song["Title"])
             else:
                 #url_terminations = re.findall("href=\"\/watch\?v=(.*?)\"", search_source)[0]
                 #video_titles = re.findall("title=\"(.*?)\"", search_source)
                 song_url = url_beginning + best_song_url_termination
                 song["song_url"] = song_url
+
+        for song in songs_to_skip:
+            self.songs.remove(song)
 
 
     # Given a youtube search url extracts the title and url termination (the 11-character long unique
@@ -124,6 +140,7 @@ class MP3Downloader:
             if source_type == "video":
                 video_url = re.findall(r"href=\"\/watch\?v=(.*?)\"", source)[0]
                 video_title = re.findall(r"title=\"(.*?)\"", source)[2]
+                video_title = self._html_decode(video_title)
 
                 # print ("%i, %i" %(len(re.findall(r"title=\"(.*?)\" rel=\".*?\" aria-describedby=\".*?\"", source)), len(re.findall(r"href=\"\/watch\?v=(.*?)\"", source))))
                 # This regex performs inconsistently, don't know why.
@@ -154,8 +171,7 @@ class MP3Downloader:
 
             # If the video a cover (not by the artist)
             if (re.search(r"(?<![a-z])cover(?![a-z])", vid_title, re.IGNORECASE) is not None\
-                    and re.search(r"(?<![a-z])cover(?![a-z])", song_title_and_artist, re.IGNORECASE) is None)\
-                    or re.search(re.escape(song['Artist']), vid_title, re.IGNORECASE) is None:
+                    and re.search(r"(?<![a-z])cover(?![a-z])", song_title_and_artist, re.IGNORECASE) is None):
                 continue
             # if the video is a live performance
             elif re.search(r"(?<![a-z])live(?![a-z])", vid_title, re.IGNORECASE) is not None\
@@ -206,6 +222,7 @@ class MP3Downloader:
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 print ("Attemtping to download: %s" %url)
                 ydl.download([url])
+                self.total_downloaded_songs += 1
 
 
     # Renames each downloaded song from the songs dictionary to the form "Artist - Title"
@@ -217,7 +234,7 @@ class MP3Downloader:
             for filename in os.listdir(self.path):
                 my_regex = r".*?-(" + re.escape(song["song_url"][-11:]) + r").*"
                 new_name = song["Artist"] + " - " + song["Title"] + ".mp3"
-                new_name = new_name.replace("&amp;", "&")
+                new_name = self._html_decode(new_name)
 
                 if re.match(my_regex, filename):
                     os.rename(self.path + filename, self.path + new_name)
@@ -240,3 +257,28 @@ class MP3Downloader:
             # access code preceded by 0o to represent octal number
             os.chmod(path_to_song, 0o777);
 
+    # Returns the ASCII decoded version of given HTML string.
+    # Able to decode
+    def _html_decode(self, s):
+        htmlCodes = [
+                ["'", '&#39;'],
+                ['"', '&quot;'],
+                ['>', '&gt;'],
+                ['<', '&lt;'],
+                ['&', '&amp;']
+            ]
+        for code in htmlCodes:
+            s = s.replace(code[1], code[0])
+
+        return s
+
+    def _print_summary(self):
+        print("\n============== Summary ==============")
+        print("%d songs requested" %self.total_songs_requested)
+        print("%d songs were downloaded successfully. %d already existed and were skipped" %(self.total_downloaded_songs, self.total_existing_songs))
+        print("%d exceptions encountered" %self.total_unfound_songs)
+
+        for unfound_song in self.total_unfound_songs_info:
+            print("Could not find a good download for \"" + unfound_song + "\". This song was skipped.")
+
+        print("============== Process Complete ==============")
