@@ -7,10 +7,10 @@ dl = youtube_dl.FileDownloader
 
 class TestMP3DownloaderAPI(unittest.TestCase):
 
-    # def test_get_downloads_valid(self):
-    #     test_dictionary = self.get_test_dictionary()
-    #     mdl = MP3Downloader(test_dictionary)
-    #     mdl.get_downloads()
+    def test_get_downloads_valid(self):
+        test_dictionary = self.get_test_dictionary()
+        mdl = MP3Downloader(test_dictionary)
+        mdl.get_downloads()
 
     def test_invalid_chars(self):
         mdl = MP3Downloader([{"Title": "Dirty Deeds Done Dirt Cheap", "Artist": "AC/DC", "Album": "ACDC album:"}])

@@ -179,8 +179,12 @@ class MP3Downloader:
                     and re.search(r"(?<![a-z])live(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
                 continue
             # If the video is a music video
-            elif re.search(r"music([^a-z])video", vid_title, re.IGNORECASE) is not None\
-                    and re.search(r"music([^a-z])video", song_title_and_artist, re.IGNORECASE) is None:
+            elif (re.search(r"music([^a-z])video", vid_title, re.IGNORECASE) is not None\
+                    and re.search(r"music([^a-z])video", song_title_and_artist, re.IGNORECASE) is None)\
+                    or (re.search(r"(?<![a-z])official(?![a-z])", vid_title, re.IGNORECASE) is not None\
+                    and re.search(r"(?<![a-z])official(?![a-z])", song_title_and_artist, re.IGNORECASE) is None\
+                    and (re.search(r"(?<![a-z])lyric(?![a-z])", vid_title, re.IGNORECASE) is None\
+                        or re.search(r"(?<![a-z])lyrics(?![a-z])", vid_title, re.IGNORECASE) is None)):
                 continue
             # If the video is an instrumental
             elif re.search(r"(?<![a-z])instrumental(?![a-z])", vid_title, re.IGNORECASE) is not None\
