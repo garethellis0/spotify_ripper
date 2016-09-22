@@ -12,6 +12,11 @@ class TestMP3DownloaderAPI(unittest.TestCase):
     #     mdl = MP3Downloader(test_dictionary)
     #     mdl.get_downloads()
 
+    def test_invalid_chars(self):
+        mdl = MP3Downloader([{"Title": "Dirty Deeds Done Dirt Cheap", "Artist": "AC/DC", "Album": "ACDC album:"}])
+        print("testing invalid chars")
+        mdl.get_downloads()
+
     def test_downloads_valid(self):
         mdl = MP3Downloader(self.get_test_dictionary())
         mdl.get_downloads()

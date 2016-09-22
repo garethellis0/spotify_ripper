@@ -43,7 +43,8 @@ class MP3Downloader:
 
         # Identify songs that already exist
         for song in self.songs:
-            song_name_regex = r"" + re.escape(song["Artist"]) + r" - " + re.escape(song["Title"]) + r"\.mp3"
+            filename = self._remove_invalid_chars(song["Artist"] + " - " + song["Title"]) + ".mp3"
+            song_name_regex = re.escape(filename)
 
             for filename in os.listdir(self.path):
                 if re.match(song_name_regex, filename):
@@ -235,6 +236,7 @@ class MP3Downloader:
                 my_regex = r".*?-(" + re.escape(song["song_url"][-11:]) + r").*"
                 new_name = song["Artist"] + " - " + song["Title"] + ".mp3"
                 new_name = self._html_decode(new_name)
+                new_name = self._remove_invalid_chars(new_name)
 
                 if re.match(my_regex, filename):
                     os.rename(self.path + filename, self.path + new_name)
@@ -272,6 +274,13 @@ class MP3Downloader:
 
         return s
 
+
+    # Prints a summary of information about the download process
+    # Prints:
+    #   - How many songs were requested for download
+    #   - How many songs were successfully downloaded
+    #   - How many already existed and were skipped
+    #   - How many songs did not have a suitable video and were therefore skipped
     def _print_summary(self):
         print("\n============== Summary ==============")
         print("%d songs requested" %self.total_songs_requested)
@@ -282,3 +291,13 @@ class MP3Downloader:
             print("Could not find a good download for \"" + unfound_song + "\". This song was skipped.")
 
         print("============== Process Complete ==============")
+
+    # returns a new string with invalid chars ("/") replaced with underscores
+    # @Param s the string to remove chars from
+    # @Returns a string with the invalid chars removed
+    def _remove_invalid_chars(self, s):
+        invalid_chars = [["/", "_"]]
+        for char in invalid_chars:
+            s = s.replace(char[0], char[1])
+
+        return s
