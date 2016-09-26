@@ -252,6 +252,7 @@ class MP3Downloader:
     def _write_metadata(self):
         print("Writing metadata...")
         for song in self.songs:
+            print ("writing data for %s" %song["Title"])
             path_to_song = self.path + song["new_name"]
             audio = Audio(path_to_song)
             audio.write_tags({
