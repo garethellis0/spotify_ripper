@@ -186,6 +186,12 @@ class TestMP3DownloaderAPI(unittest.TestCase):
             },
 
             {
+                "Title": "Disarm",
+                "Artist": "The Smashing Pumpkins",
+                "Album": "test_album"
+            },
+
+            {
                 "Title": "American Money",
                 "Artist": "BØRNS",
                 "Album": "Test",

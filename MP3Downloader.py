@@ -143,13 +143,9 @@ class MP3Downloader:
                 video_title = re.findall(r"title=\"(.*?)\"", source)[2]
                 video_title = self._html_decode(video_title)
 
-                # print ("%i, %i" %(len(re.findall(r"title=\"(.*?)\" rel=\".*?\" aria-describedby=\".*?\"", source)), len(re.findall(r"href=\"\/watch\?v=(.*?)\"", source))))
-                # This regex performs inconsistently, don't know why.
-                #video_title = re.findall(r"title=\"(.*?)\" rel=\".*?\" aria-describedby=\".*?\"", source)[0]
-
                 vids_to_eval.append({
-                    "url" : video_url,
-                    "title" : video_title
+                    "url": video_url,
+                    "title": video_title
                 })
 
             index += 2
@@ -179,11 +175,11 @@ class MP3Downloader:
                     and re.search(r"(?<![a-z])live(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
                 continue
             # If the video is a music video
-            elif (re.search(r"music([^a-z])video", vid_title, re.IGNORECASE) is not None\
+            elif (re.search(r"music([^a-z])video", vid_title, re.IGNORECASE) is not None
                     and re.search(r"music([^a-z])video", song_title_and_artist, re.IGNORECASE) is None)\
-                    or (re.search(r"(?<![a-z])official(?![a-z])", vid_title, re.IGNORECASE) is not None\
-                    and re.search(r"(?<![a-z])official(?![a-z])", song_title_and_artist, re.IGNORECASE) is None\
-                    and (re.search(r"(?<![a-z])lyric(?![a-z])", vid_title, re.IGNORECASE) is None\
+                    or (re.search(r"(?<![a-z])official(?![a-z])", vid_title, re.IGNORECASE) is not None
+                        and re.search(r"(?<![a-z])official(?![a-z])", song_title_and_artist, re.IGNORECASE) is None
+                        and (re.search(r"(?<![a-z])lyric(?![a-z])", vid_title, re.IGNORECASE) is None
                         or re.search(r"(?<![a-z])lyrics(?![a-z])", vid_title, re.IGNORECASE) is None)):
                 continue
             # If the video is an instrumental
@@ -235,24 +231,25 @@ class MP3Downloader:
         print ("Renaming songs...")
 
         for song in self.songs:
+            new_name = song["Artist"] + " - " + song["Title"] + ".mp3"
+            new_name = self._html_decode(new_name)
+            new_name = self._remove_invalid_chars(new_name)
+            song["new_name"] = new_name
+
+            song_regex = r".*?-(" + re.escape(song["song_url"][-11:]) + r").*"
             # find the downloaded file in the path and rename it to the proper name
             for filename in os.listdir(self.path):
-                my_regex = r".*?-(" + re.escape(song["song_url"][-11:]) + r").*"
-                new_name = song["Artist"] + " - " + song["Title"] + ".mp3"
-                new_name = self._html_decode(new_name)
-                new_name = self._remove_invalid_chars(new_name)
-
-                if re.match(my_regex, filename):
+                if re.match(song_regex, filename):
                     os.rename(self.path + filename, self.path + new_name)
-                    song["new_name"] = new_name
                     break
+
 
     # Writes title, artist, and album metadata for each downloaded song from the songs dictionary,
     # and changes file permissions so everyone has access (access code 777)
     def _write_metadata(self):
         print("Writing metadata...")
         for song in self.songs:
-            print ("writing data for %s" %song["Title"])
+            print ("writing data for %s - %s" %(song["Artist"], song["Title"]))
             path_to_song = self.path + song["new_name"]
             audio = Audio(path_to_song)
             audio.write_tags({
