@@ -200,6 +200,7 @@ class MP3Downloader:
     # For each song url in the songs dictionary, downloads the corresponding song as an mp3 file
     def _download_songs(self):
         print ("Attempting to download songs...")
+        songs_to_remove = []
 
         # make a folder to download the songs to
         try:
@@ -233,7 +234,10 @@ class MP3Downloader:
                     print("Error downloading song. Skipping this song.")
                     self.total_failed_downloads += 1
                     self.total_failed_downloads_info.append(self._get_filename(song))
+                    songs_to_remove.append(song)
 
+        for song in songs_to_remove:
+            self.songs.remove(song)
 
 
     # Renames each downloaded song from the songs dictionary to the form "Artist - Title"
