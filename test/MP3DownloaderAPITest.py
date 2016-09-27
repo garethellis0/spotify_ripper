@@ -1,9 +1,5 @@
 import unittest
 from MP3Downloader import MP3Downloader
-import youtube_dl
-
-dl = youtube_dl.FileDownloader
-
 
 class TestMP3DownloaderAPI(unittest.TestCase):
 

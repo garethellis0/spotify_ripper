@@ -7,6 +7,7 @@ import re
 import os
 
 class MP3Downloader:
+
     # Takes in a list of dictionaries, with each dictionary containing the info for one song
     # Dictionaries must contain keys for "Title", "Artist", "Album", and "Time"
     # All values in the dictionaries must be of type String
