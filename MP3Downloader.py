@@ -151,7 +151,7 @@ class MP3Downloader:
         return vids_to_eval
 
     # Given a list of vid info (video title and url) for a song, returns the first song in
-    # the list that is not a cover, music video, live performance, reaction video, behind the scenes, or instrumental.
+    # the list that is not a cover, music video, live performance, reaction video, behind the scenes, acoustic version, or instrumental.
     # Returns the url of the best video, and returns and empty string if no video meets the criteria
     def _get_best_song_url(self, song, vid_info):
         for vid in vid_info:
@@ -177,6 +177,10 @@ class MP3Downloader:
             # If the video is an instrumental
             elif re.search(r"(?<![a-z])instrumental(?![a-z])", vid_title, re.IGNORECASE) is not None \
                     and re.search("(?<![a-z])instrumental(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
+                continue
+            # If the video is an acoustic version
+            elif re.search(r"(?<![a-z])acoustic(?![a-z])", vid_title, re.IGNORECASE) is not None \
+                    and re.search("(?<![a-z])acoustic(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
                 continue
             # If the video is a reaction video
             elif re.search(r"(?<![a-z])reaction(?![a-z])", vid_title, re.IGNORECASE) is not None \
