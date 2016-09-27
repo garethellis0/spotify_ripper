@@ -21,6 +21,8 @@ class MP3Downloader:
         self.total_existing_songs = 0
         self.total_downloaded_songs = 0
         self.total_unfound_songs = 0
+        self.total_failed_downloads = 0
+        self.total_failed_downloads_info = []
         self.total_unfound_songs_info = []
 
     # Attempts to download, rename, and write metadata for all songs
@@ -202,28 +204,37 @@ class MP3Downloader:
         # make a folder to download the songs to
         try:
             os.mkdir(self.download_path)
+            print("Creating download directory...")
         except FileExistsError:
             print("Download folder already exists")
 
         os.chdir(self.download_path)
 
+        ydl_opts = {
+            "format": "bestaudio/best",
+            "postprocessors": [{
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "320",
+            }],
+        }
+
         for song in self.songs:
             url = song["song_url"]
-            ydl_opts = {
-                "format": "bestaudio/best",
-                "postprocessors": [{
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": "mp3",
-                    "preferredquality": "320",
-                }],
-            }
 
             # download the song
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 print("Attempting to download: %s\n"
                       "Video url: %s" % (self._get_filename(song), url))
-                ydl.download([url])
-                self.total_downloaded_songs += 1
+                try:
+                    ydl.download([url])
+                    self.total_downloaded_songs += 1
+                except Exception:
+                    print("Error downloading song. Skipping this song.")
+                    self.total_failed_downloads += 1
+                    self.total_failed_downloads_info.append(self._get_filename(song))
+
+
 
     # Renames each downloaded song from the songs dictionary to the form "Artist - Title"
     def _rename_songs(self):
@@ -269,9 +280,14 @@ class MP3Downloader:
     def _print_summary(self):
         print("\n================= Summary =================")
         print("%d songs requested for download" % self.total_songs_requested)
-        print("%d songs were downloaded successfully" % self.total_downloaded_songs)
         print("%d songs already existed and were skipped" % self.total_existing_songs)
-        print("%d exceptions encountered" % self.total_unfound_songs)
+        print("%d songs were downloaded successfully" % self.total_downloaded_songs)
+        print("%d songs failed to download" % self.total_failed_downloads)
+
+        for song in self.total_failed_downloads_info:
+            print("The download for %s failed" % self._get_filename(song))
+
+        print("%d songs had no suitable video to download and were skipped" % self.total_unfound_songs)
 
         for unfound_song in self.total_unfound_songs_info:
             print("Could not find a good download for \"%s\". This song was skipped." % unfound_song)
