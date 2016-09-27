@@ -41,21 +41,27 @@ class MP3Downloader:
         print("Checking for existing songs...")
         songs_to_remove = []
 
-        # Identify songs that already exist
-        for song in self.songs:
-            filename = self._remove_invalid_chars(self._get_filename(song))
-            song_name_regex = re.escape(filename)
+        try:
+            os.chdir(self.download_path)
 
-            for filename in os.listdir(self.download_path):
-                if re.match(song_name_regex, filename):
-                    print("The song \"%s\" already exists. Skipping this song." % self._get_filename(song))
-                    songs_to_remove.append(song)
-                    self.total_existing_songs += 1
-                    break
+            # Identify songs that already exist
+            for song in self.songs:
+                filename = self._remove_invalid_chars(self._get_filename(song))
+                song_name_regex = re.escape(filename)
 
-        # Must be done outside song loop, otherwise indexing gets mixed up
-        for song in songs_to_remove:
-            self.songs.remove(song)
+                for filename in os.listdir(self.download_path):
+                    if re.match(song_name_regex, filename):
+                        print("The song \"%s\" already exists. Skipping this song." % self._get_filename(song))
+                        songs_to_remove.append(song)
+                        self.total_existing_songs += 1
+                        break
+
+            # Must be done outside song loop, otherwise indexing gets mixed up
+            for song in songs_to_remove:
+                self.songs.remove(song)
+
+        except OSError:
+            print("The download directory does not exist. Nothing to remove.")
 
     # Gets the youtube search url for each song in the list of songs
     # and adds it to the songs dictionary under a new key called "search_url"
