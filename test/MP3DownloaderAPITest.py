@@ -8,52 +8,96 @@ dl = youtube_dl.FileDownloader
 class TestMP3DownloaderAPI(unittest.TestCase):
 
     def test_get_downloads_valid(self):
-        test_dictionary = self.get_test_dictionary()
-        mdl = MP3Downloader(test_dictionary)
+        print("\n===== Testing get_downloads() =====")
+        mdl = MP3Downloader(self.get_test_downloads_dictionary())
         mdl.get_downloads()
 
-    def test_invalid_chars(self):
-        mdl = MP3Downloader([{"Title": "Dirty Deeds Done Dirt Cheap", "Artist": "AC/DC", "Album": "ACDC album:"}])
-        print("testing invalid chars")
-        mdl.get_downloads()
+    def test_remove_invalid_chars(self):
+        print("\n===== Testing remove_invalid_chars() =====")
+        song = {
+            "Title": "Dirty Deeds Done Dirt Cheap",
+            "Artist": "AC/DC",
+            "Album": "Blow Up Your Video"
+        }
 
-    def test_downloads_valid(self):
-        mdl = MP3Downloader(self.get_test_dictionary())
+        mdl = MP3Downloader([song])
+        new_name = mdl._remove_invalid_chars(song["Title"])
+        new_artist = mdl._remove_invalid_chars(song["Artist"])
+        expected_new_name = "Dirty Deeds Done Dirt Cheap"
+        expected_new_artist = "AC_DC"
+        print("Test result: %s    Expected result %s" % (new_name, expected_new_name))
+        print("Test result: %s    Expected result %s" % (new_artist, expected_new_artist))
+        self.assertEqual(new_name, expected_new_name)
+        self.assertEqual(new_artist, expected_new_artist)
         mdl.get_downloads()
-
-    def test_get_urls_invalid(self):
-        pass
 
     def test_vid_evaluation_valid(self):
-        mdl = MP3Downloader(self.get_test_dictionary())
-        test_result = mdl._get_best_song_url(self.get_test_song_1(), self.get_valid_test_vid_info_1())
-        expected_result = "good"
-        print ("valid test - result: %s, Expected Results: %s" %(test_result, expected_result))
-        self.assertEqual(test_result[:-1], expected_result)
+        print("\n===== Testing vid_eval =====")
+        mdl = MP3Downloader(self.get_test_downloads_dictionary())
+        song = {
+            'Title': "Bang Bang",
+            'Artist': "Green Day",
+            'Album': "test_album"
+        }
+
+        vid_list = [
+
+            {
+                'title': "Green Day - Bang Bang (Official Music Video)",
+                'url': "bad1"
+            },
+
+            {
+                'title': "Green Day - Bang Bang (Video Shoot Behind The Scenes)",
+                'url': "bad2"
+            },
+
+            {
+                'title': "Green Day Bang Bang (Full Band Cover by Minority 905)",
+                'url': "bad3"
+            },
+
+            {
+                'title': "Green Day - Bang Bang Drum cover",
+                'url': "bad4"
+            },
+
+            {
+                'title': "BANG BANG by Green Day (Acoustic Cover)",
+                'url': "bad5"
+            },
+
+            {
+                'title': "Reaction to \"Bang Bang\" NEW GREEN DAY!",
+                'url': "bad6"
+            },
+
+            {
+                'title': "Green Day - Bang Bang (Official Lyric Video)",
+                'url': "good1"
+            },
+
+            {
+                'title': "Green Day - Bang Bang lyrics",
+                'url': "good2"
+            },
+        ]
+
+        test_result = mdl._get_best_song_url(song, vid_list)
+        expected_result = "good1"
+        print ("Test result: %s    Expected result: %s" %(test_result, expected_result))
+        self.assertEqual(test_result, expected_result)
 
     def test_vid_evaluation_valid_2(self):
-        mdl = MP3Downloader(self.get_test_dictionary())
-        test_result = mdl._get_best_song_url(self.get_test_song_2(), self.get_valid_test_vid_info_2())
-        expected_result = "good"
-        print ("valid test_2 - result: %s, Expected Results: %s" %(test_result, expected_result))
-        self.assertEqual(test_result, expected_result)
-
-    def test_vid_evaluation_invalid(self):
-        mdl = MP3Downloader(self.get_test_dictionary())
-        test_result = mdl._get_best_song_url(self.get_test_song_1(), self.get_invalid_test_vid_info())
-        expected_result = ""
-        print("invalid Test - result: %s, Expected Results: %s" % (test_result, expected_result))
-        self.assertEqual(test_result, expected_result)
-
-    def get_test_song_2(self):
+        print("\n===== Testing vid_eval_2 =====")
+        mdl = MP3Downloader(self.get_test_downloads_dictionary())
         song = {
             "Title": "Alive",
-            "Artist": "Pearl Jam"
+            "Artist": "Pearl Jam",
+            "Album": "test album"
         }
-        return song
 
-    def get_valid_test_vid_info_2(self):
-        info = [
+        vid_list = [
 
             {
                 'title': "Pearl Jam - Alive Live Concert",
@@ -81,63 +125,21 @@ class TestMP3DownloaderAPI(unittest.TestCase):
             },
         ]
 
-        return info
+        test_result = mdl._get_best_song_url(song, vid_list)
+        expected_result = "good"
+        print("Test result: %s    Expected result: %s" % (test_result, expected_result))
+        self.assertEqual(test_result, expected_result)
 
-
-    def get_test_song_1(self):
+    def test_vid_evaluation_invalid(self):
+        print("\n===== Testing vid_eval_invalid =====")
+        mdl = MP3Downloader(self.get_test_downloads_dictionary())
         song = {
             'Title': "Bang Bang",
-            'Artist': "Green Day"
+            'Artist': "Green Day",
+            'Album': "test album"
         }
-        return song
 
-    def get_valid_test_vid_info_1(self):
-        info = [
-            # {
-            #     'title': "Green Day - Bang Bang (Official Lyric Video)",
-            #     'url': "good1"
-            # },
-
-            {
-                'title': "Green Day - Bang Bang (Official Music Video)",
-                'url': "bad1"
-            },
-
-            {
-                'title': "Green Day - Bang Bang (Video Shoot Behind The Scenes)",
-                'url': "bad2"
-            },
-
-            {
-                'title': "Green Day Bang Bang (Full Band Cover by Minority 905)",
-                'url': "bad3"
-            },
-
-            {
-                'title': "Green Day - Bang Bang Drum cover",
-                'url': "bad4"
-            },
-
-            {
-                'title': "BANG BANG by Green Day (Acoustic Cover)",
-                'url': "bad5"
-            },
-
-            {
-                'title': "Reaction to \"Bang Bang\" NEW GREEN DAY!",
-                'url': "bad6"
-            },
-
-            {
-                'title': "Green Day - Bang Bang lyrics",
-                'url': "good2"
-            },
-        ]
-
-        return info
-
-    def get_invalid_test_vid_info(self):
-        info = [
+        vid_list = [
 
             {
                 'title': "Green Day - Bang Bang (Official Music Video)",
@@ -170,12 +172,12 @@ class TestMP3DownloaderAPI(unittest.TestCase):
             },
         ]
 
-        return info
+        test_result = mdl._get_best_song_url(song, vid_list)
+        expected_result = ""
+        print("Test result: \"%s\"    Expected result: \"%s\" (emtpy string)" % (test_result, expected_result))
+        self.assertEqual(test_result, expected_result)
 
-
-
-    #Test dictionary includes URLs for testing
-    def get_test_dictionary(self):
+    def get_test_downloads_dictionary(self):
         songs = [
             {
                 "Title": "Life Itself",
@@ -306,19 +308,9 @@ class TestMP3DownloaderAPI(unittest.TestCase):
                 'Artist': 'Jane\'s Addiction',
                 'Album': 'Test'
             }
-
-
         ]
 
         return songs
-
-    def get_expected_urls(self, test_dict):
-        expected_urls = []
-        for song in test_dict:
-            expected_urls.append(song["URL"])
-
-        return expected_urls
-
 
 if __name__ == '__main__':
     unittest.main()
