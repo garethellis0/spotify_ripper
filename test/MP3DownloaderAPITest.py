@@ -1,5 +1,5 @@
 import unittest
-from MP3Downloader import MP3Downloader
+from src.MP3Downloader import MP3Downloader
 
 class TestMP3DownloaderAPI(unittest.TestCase):
 
