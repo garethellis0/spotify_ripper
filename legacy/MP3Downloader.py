@@ -6,16 +6,19 @@ import urllib.request
 import re
 import os
 
+# This should be an object that handles its own things
+    # since if we get multiple playlists at a time they should be sepearate (for diff names etc.)
 class MP3Downloader:
 
     # Takes in a list of dictionaries, with each dictionary containing the info for one song
     # Dictionaries must contain keys for "Title", "Artist", "Album", and "Time"
     # All values in the dictionaries must be of type String
     def __init__(self, songs):
-        self.songs = songs
+        self.requested_songs = songs
 
         # The path to the folder where the songs will be downloaded
-        self.download_path = os.path.dirname(os.path.realpath(__file__)) + "/music/"
+        # TODO: change this path to one folder higher
+        self.download_path = os.path.dirname(os.path.realpath(__file__)) + "../downloaded_music/"
 
         self.total_songs_requested = len(songs)
         self.total_existing_songs = 0
@@ -47,7 +50,7 @@ class MP3Downloader:
             os.chdir(self.download_path)
 
             # Identify songs that already exist
-            for song in self.songs:
+            for song in self.requested_songs:
                 filename = self._remove_invalid_chars(self._get_filename(song))
                 song_name_regex = re.escape(filename)
 
@@ -60,7 +63,7 @@ class MP3Downloader:
 
             # Must be done outside song loop, otherwise indexing gets mixed up
             for song in songs_to_remove:
-                self.songs.remove(song)
+                self.requested_songs.remove(song)
 
         except OSError:
             print("The download directory does not exist. Nothing to remove.")
@@ -72,7 +75,7 @@ class MP3Downloader:
         url_start = "https://www.youtube.com/results?search_query="
         print("Retrieving search urls...")
 
-        for song in self.songs:
+        for song in self.requested_songs:
             search = song["Artist"] + "+" + song["Title"] + "+" + "lyrics"
             # encodes special chars to "url form"
             search_url = url_start + urllib.parse.quote_plus(search)
@@ -94,7 +97,7 @@ class MP3Downloader:
         max_vids_to_eval = 10
         songs_to_skip = []
 
-        for song in self.songs:
+        for song in self.requested_songs:
             search_url = song["search_url"]
             with urllib.request.urlopen(search_url) as response:
                 html = response.read()
@@ -115,7 +118,7 @@ class MP3Downloader:
 
         # Must be done outside the song loop to avoid indexing issues
         for song in songs_to_skip:
-            self.songs.remove(song)
+            self.requested_songs.remove(song)
 
     # Takes the page source of a list of youtube search results for a song, and a positive integer
     # representing the size of the list of info return. Returns a list of dictionaries, with each dictionary
@@ -197,6 +200,7 @@ class MP3Downloader:
 
         return ""
 
+    # TODO: also download from soundcloud?
     # For each song url in the songs dictionary, downloads the corresponding song as an mp3 file
     def _download_songs(self):
         print ("Attempting to download songs...")
@@ -220,7 +224,7 @@ class MP3Downloader:
             }],
         }
 
-        for song in self.songs:
+        for song in self.requested_songs:
             url = song["song_url"]
 
             # download the song
@@ -237,14 +241,14 @@ class MP3Downloader:
                     songs_to_remove.append(song)
 
         for song in songs_to_remove:
-            self.songs.remove(song)
+            self.requested_songs.remove(song)
 
 
     # Renames each downloaded song from the songs dictionary to the form "Artist - Title"
     def _rename_songs(self):
         print("Renaming songs...")
 
-        for song in self.songs:
+        for song in self.requested_songs:
             new_name = self._get_filename(song)
             new_name = self._html_decode(new_name)
             new_name = self._remove_invalid_chars(new_name)
@@ -262,7 +266,7 @@ class MP3Downloader:
     def _write_metadata(self):
         print("Writing metadata...")
 
-        for song in self.songs:
+        for song in self.requested_songs:
             print("writing data for %s" % self._get_filename(song))
             path_to_song = self.download_path + song["new_name"]
             audio = Audio(path_to_song)

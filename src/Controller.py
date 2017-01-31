@@ -1,9 +1,10 @@
 import os
+
+from legacy.SpotifyScraperAPI import SpotifyScraperAPI, InvalidCookieException
 from .MP3Downloader import MP3Downloader
-from .SpotifyScraperAPI import SpotifyScraperAPI, InvalidCookieException
+
 
 class Controller:
-
     def download_playlists(self):
         # Gareht's code
         # TODO: make handle multiple playlists at a time

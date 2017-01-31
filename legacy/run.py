@@ -1,4 +1,5 @@
-from src.Controller import Controller
+from Controller import Controller
+
 
 print("=== Welcome to Spotify Ripper ===\n")
 

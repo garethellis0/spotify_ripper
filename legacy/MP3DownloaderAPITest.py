@@ -1,8 +1,9 @@
 import unittest
-from src.MP3Downloader import MP3Downloader
+
+from legacy.MP3Downloader import MP3Downloader
+
 
 class TestMP3DownloaderAPI(unittest.TestCase):
-
     def test_get_downloads_valid(self):
         print("\n===== Testing get_downloads() =====")
         mdl = MP3Downloader(self.get_test_downloads_dictionary())
@@ -81,7 +82,7 @@ class TestMP3DownloaderAPI(unittest.TestCase):
 
         test_result = mdl._get_best_song_url(song, vid_list)
         expected_result = "good1"
-        print ("Test result: %s    Expected result: %s" %(test_result, expected_result))
+        print("Test result: %s    Expected result: %s" % (test_result, expected_result))
         self.assertEqual(test_result, expected_result)
 
     def test_vid_evaluation_valid_2(self):
@@ -197,7 +198,6 @@ class TestMP3DownloaderAPI(unittest.TestCase):
                 "URL": "https://www.youtube.com/watch?v=ABFz2Qag6Dw"
             },
 
-
             {
                 "Title": "Get Right",
                 "Artist": "Jimmy Eat World",
@@ -307,6 +307,7 @@ class TestMP3DownloaderAPI(unittest.TestCase):
         ]
 
         return songs
+
 
 if __name__ == '__main__':
     unittest.main()
