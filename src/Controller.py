@@ -6,7 +6,6 @@ from .MP3Downloader import MP3Downloader
 
 class Controller:
     def download_playlists(self):
-        # Gareht's code
         # TODO: make handle multiple playlists at a time
         # TODO: put playlists in own folder in downloads
         url_correct = "n"
