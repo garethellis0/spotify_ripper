@@ -1,3 +1,6 @@
+# custom additions - don't include hidden txt files
+.*.txt
+
 *.save
 music/
 .cookie
