@@ -1,4 +1,5 @@
 from src.Controller import Controller
+from src.YouTubeDownloader import YouTubeDownloader
 
 print("=== Welcome to Spotify Ripper ===\n")
 

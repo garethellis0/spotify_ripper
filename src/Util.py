@@ -46,7 +46,7 @@ class Util:
         :param title:  The title of the song. Must not be None or empty
         :return: A String representing the filename of the song
         """
-        return artist + " - " + title
+        return Util.remove_invalid_filename_chars(artist + " - " + title)
 
     @staticmethod
     def get_best_song_url(song, song_search_info):
@@ -102,9 +102,12 @@ class Util:
         return ""
 
     # TODO: implement this
-    def rename_song_file(self, filepath):
+    @staticmethod
+    def rename_song_file(filepath):
         return
 
     # TODO: implement this
-    def write_metadata(self):
+    @staticmethod
+    def write_metadata():
         return
+

@@ -1,7 +1,7 @@
 import os
 
 from legacy.SpotifyScraperAPI import SpotifyScraperAPI, InvalidCookieException
-from .MP3Downloader import MP3Downloader
+
 
 
 class Controller:
