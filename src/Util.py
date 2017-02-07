@@ -61,7 +61,7 @@ class Util:
         """
         # TODO: fix this - clean up? and check that name exists in title. remove remix, mix
         for search_result in song_search_info:
-            song_title_and_artist = song['Title'] + " " + song['Artist']
+            song_title_and_artist = song["title"] + " " + song["artist"]
             vid_title = search_result["title"]
             url = search_result["url"]
 
@@ -97,6 +97,7 @@ class Util:
                            re.IGNORECASE) is not None:
                 continue
             else:
+                print("best url=   " + url)
                 return url
 
         return ""

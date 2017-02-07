@@ -8,6 +8,7 @@ import re
 class YouTubeDownloader(Downloader):
     SEARCH_URL_ROOT = "https://www.youtube.com/results?search_query="
     SONG_URL_RESULT_ROOT = "https://www.youtube.com/watch?v="
+    MAX_NUM_SEARCH_RESULTS = 10
 
     def _construct_search_url(self, song):
         """
@@ -19,14 +20,14 @@ class YouTubeDownloader(Downloader):
         """
         print("Retrieving search urls...")
 
-        search = song["artist"] + "+" + song["title"] + "+" + "lyrics"
-        # encodes special chars to "url form"
+        search = song["artist"] + " " + song["title"] + " " + "lyrics"
         search_url = self.SEARCH_URL_ROOT + urllib.parse.quote_plus(search)
         search_url = search_url.lower()
+        print("search url:    " + search_url)
         return search_url
 
 
-    def _get_search_info(self, song_search_url, max_num_searches):
+    def _get_search_info(self, song_search_url):
         """
         Downloads the page source of the song_search_url, and returns a list of dictionaries containing
         the information for each search result. The dictionaries contain 'title' and 'url' fields.
@@ -34,7 +35,7 @@ class YouTubeDownloader(Downloader):
         :param song_search_url: The url of a search for a song
         :return: A list of dictionaries, each containing the 'title' and 'url' info of each search result
         """
-        print("Retrieving song urls...")
+        print("Retrieving search info...")
 
         with urllib.request.urlopen(song_search_url) as response:
             html = response.read()
@@ -54,7 +55,7 @@ class YouTubeDownloader(Downloader):
         results_source = re.split(r"<li><div class=\"yt-lockup yt-lockup-tile yt-lockup-(.*?) vve-check clearfix.*?\"",
                                   results_source)
 
-        while len(search_info) < self.SONG_URL_RESULT_ROOT and index < len(results_source) - 1:
+        while len(search_info) < self.MAX_NUM_SEARCH_RESULTS and index < len(results_source) - 1:
             source_type = results_source[index]
             source = results_source[index + 1]
 
