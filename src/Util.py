@@ -1,4 +1,6 @@
+from pytag import Audio
 import re
+import os
 
 class Util:
     @staticmethod
@@ -107,8 +109,25 @@ class Util:
     def rename_song_file(filepath):
         return
 
-    # TODO: implement this
     @staticmethod
-    def write_metadata():
-        return
+    def write_metadata(song, filepath):
+        """
+        Takes a dictionary of song info and the full filepath to the song, and writes the metadata
+        for Title, Artist, and Album to the song
 
+        :param song: a dictionary of song info (must include fields for 'title', 'artist', 'album', and 'time')
+        :param filepath: the full filepath to the song file
+        :return: void
+        """
+        print("Writing metadata...")
+        path_to_song = filepath + Util.get_song_filename(song["artist"], song["title"])
+        audio = Audio(path_to_song)
+        audio.write_tags({
+            "title": song["title"],
+            "artist": song["artist"],
+            "album": song["album"]
+        })
+
+        # access code preceded by 0o to represent octal number
+        # Gives full read/write access to the song file, but not execute
+        os.chmod(path_to_song, 0o666)
