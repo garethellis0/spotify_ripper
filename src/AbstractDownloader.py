@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from abc import ABCMeta, abstractmethod
 import youtube_dl
 import mmap
@@ -140,9 +141,10 @@ class Downloader(metaclass=ABCMeta):
         """
         return {
             "format": "bestaudio/best",
+            "quiet": "true",
             "postprocessors": [{
                 "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3",
-                "preferredquality": "320",
+                "preferredquality": "192",
             }],
         }
