@@ -104,7 +104,6 @@ class Util:
 
         return ""
 
-    # TODO: implement this
     @staticmethod
     def rename_song_file(filepath, song, url):
         """
@@ -116,12 +115,12 @@ class Util:
         :param url: The url used to download the song
         :return: void
         """
-        print("Renaming songs...")
-
         new_name = Util.get_song_filename(song['artist'], song['title']) + ".mp3"
-        song_regex = r".*?-(" + re.escape(url[-11:]) + r").*"
 
-        # find the downloaded file in the dowload folder and rename it to the proper name
+        # since youtube-dl downloads songs with the unique ID of the url in the filname
+        # we can regex for that value to find the song
+        song_regex = r".*?-(" + re.escape(url[-11:]) + r").*"
+        # find the downloaded file in the download folder and rename it to the proper name
         for file in os.listdir(filepath):
             if re.match(song_regex, file):
                 os.rename(filepath + file, filepath + new_name)
@@ -137,7 +136,6 @@ class Util:
         :param filepath: the full filepath to the song file
         :return: void
         """
-        print("Writing metadata...")
         path_to_song = filepath + Util.get_song_filename(song["artist"], song["title"])
         audio = Audio(path_to_song)
         audio.write_tags({

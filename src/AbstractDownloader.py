@@ -9,11 +9,10 @@ from src.Util import Util
 class Downloader(metaclass=ABCMeta):
     """
     An abstract base class for Downloader objects.
-    Classes that extend this class must only override ...
-
+    Classes that extend this class must only override construct_search_url
+    and get_search_info
     """
 
-    # TODO: finish comment
     DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_songs.txt"
     DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_playlists.txt"
     DOWNLOADED_MUSIC_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../downloaded_music/"
@@ -27,7 +26,6 @@ class Downloader(metaclass=ABCMeta):
                                 'artist', 'album' and 'time' fields.
         :param folder_name: The name of the folder for songs to be downloaded into
         """
-        print("init")
         self.requested_songs = requested_songs
         self.folder_name = folder_name
         self.download_path = self.DOWNLOADED_MUSIC_FILE_PATH + folder_name + "/"
@@ -46,8 +44,7 @@ class Downloader(metaclass=ABCMeta):
         :return: A list of dictionaries representing any songs that failed to download, with each dictionary
                  containing the information of a song (like songs).
         """
-        print("downloading songs")
-        # Create folder for downloads
+        # make subfolder for this set of downloads
         try:
             os.mkdir(self.download_path)
             print("Creating download directory for " + self.folder_name + "...")
@@ -57,6 +54,7 @@ class Downloader(metaclass=ABCMeta):
         os.chdir(self.download_path)
         self._remove_existing_songs_from_list()
 
+        # TODO: multithread song operations from here
         for song in self.requested_songs:
             search_url = self._construct_search_url(song)
             search_info = self._get_search_info(search_url)
@@ -70,10 +68,6 @@ class Downloader(metaclass=ABCMeta):
             Util.rename_song_file(self.download_path, song, best_url)
             Util.write_metadata(song, self.download_path)
 
-
-
-        # download songs
-        # TODO: multithread song operations from here
 
     @abstractmethod
     def _construct_search_url(self, song):
@@ -102,11 +96,8 @@ class Downloader(metaclass=ABCMeta):
         :param song_url: the url of the song
         :return: true if the song downloaded successfully, and false otherwise
         """
-        print("downloading song")
         with youtube_dl.YoutubeDL(Downloader.get_ydl_opts()) as ydl:
             try:
-                # TODO: name song with ydl opts?\
-                print("song url to download:   " + song_url)
                 ydl.download([song_url])
                 return True
             except Exception:
@@ -120,18 +111,16 @@ class Downloader(metaclass=ABCMeta):
 
         :return: void
         """
-        print("removing existing songs")
+        print("Removing existing songs...")
         print(self.DOWNLOADED_SONGS_FILE_PATH)
         with open(self.DOWNLOADED_SONGS_FILE_PATH, 'rb', 0) as file, \
                 mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as s:
-            print("READING FILE")
             for song in self.requested_songs:
                 name = Util.get_song_filename(song['artist'], song['title'])
                 if s.find(name.encode(encoding='UTF-8')) != -1:
                     # TODO: create constant for encoding?
                     # TODO: add song to summary report? Keep track of removed song?
                     self.requested_songs.remove(song)
-                    print("removing " + name)
 
 
     # TODO: add Summary function / dataype?
