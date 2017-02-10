@@ -9,7 +9,7 @@ class YouTubeDownloaderTest(unittest.TestCase):
             {
                 "title": "Bang Bang",
                 "artist": "Green Day",
-                "album": "Bang Bang",
+                "album": "Test Album",
                 "time": "03:25",
             }
         ]

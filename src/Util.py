@@ -48,7 +48,7 @@ class Util:
         :param title:  The title of the song. Must not be None or empty
         :return: A String representing the filename of the song
         """
-        return Util.remove_invalid_filename_chars(artist + " - " + title)
+        return Util.remove_invalid_filename_chars(Util.html_to_ascii(artist + " - " + title))
 
     @staticmethod
     def get_best_song_url(song, song_search_info):
@@ -106,8 +106,26 @@ class Util:
 
     # TODO: implement this
     @staticmethod
-    def rename_song_file(filepath):
-        return
+    def rename_song_file(filepath, song, url):
+        """
+        Takes a filepath pointing to where the file exists, the song to be renamed, and the url used to download the song,
+        and renames the file to the name returned by get_song_filename
+
+        :param filepath: The filepath to the song file
+        :param song: The song of the file to be renamed
+        :param url: The url used to download the song
+        :return: void
+        """
+        print("Renaming songs...")
+
+        new_name = Util.get_song_filename(song['artist'], song['title']) + ".mp3"
+        song_regex = r".*?-(" + re.escape(url[-11:]) + r").*"
+
+        # find the downloaded file in the dowload folder and rename it to the proper name
+        for file in os.listdir(filepath):
+            if re.match(song_regex, file):
+                os.rename(filepath + file, filepath + new_name)
+                break
 
     @staticmethod
     def write_metadata(song, filepath):

@@ -67,6 +67,9 @@ class Downloader(metaclass=ABCMeta):
                 # TODO: handle song that can't be found
 
             self._download_song(best_url)
+            Util.rename_song_file(self.download_path, song, best_url)
+            Util.write_metadata(song, self.download_path)
+
 
 
         # download songs
