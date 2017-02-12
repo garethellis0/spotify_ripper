@@ -48,7 +48,7 @@ class Util:
         :param title:  The title of the song. Must not be None or empty
         :return: A String representing the filename of the song
         """
-        return Util.remove_invalid_filename_chars(Util.html_to_ascii(artist + " - " + title))
+        return Util.remove_invalid_filename_chars(Util.html_to_ascii(artist + " - " + title + ".mp3"))
 
     @staticmethod
     def get_best_song_url(song, song_search_info):
@@ -61,7 +61,7 @@ class Util:
                                  Must contain 'title' and 'url' fields.
         :return:
         """
-        # TODO: fix this - clean up? and check that name exists in title. remove remix, mix
+        # TODO: fix this - clean up? and check that name exists in title. remove remix, mix, perform
         for search_result in song_search_info:
             song_title_and_artist = song["title"] + " " + song["artist"]
             vid_title = search_result["title"]
@@ -91,12 +91,26 @@ class Util:
                     and re.search("(?<![a-z])acoustic(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
                 continue
             # If the video is a reaction video
-            elif re.search(r"(?<![a-z])reaction(?![a-z])", vid_title, re.IGNORECASE) is not None \
-                    and re.search(r"(?<![a-z])reaction(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
+            elif re.search(r"(?<![a-z])react(ion)?(?![a-z])", vid_title, re.IGNORECASE) is not None \
+                    and re.search(r"(?<![a-z])react(ion)?(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
                 continue
             # If the video is a behind the scenes video
             elif re.search(r"(?<![a-z])Behind(?![a-z]).(?<![a-z])The(?![a-z]).(?<![a-z])Scenes(?![a-z])", vid_title,
-                           re.IGNORECASE) is not None:
+                           re.IGNORECASE) is not None\
+                    or (re.search(r"(?<![a-z])bts(?![a-z])", vid_title, re.IGNORECASE) is not None
+                      and re.search(r"(?<![a-z])bts(?![a-z])", song_title_and_artist, re.IGNORECASE) is None):
+                continue
+            # If the video is a mix or remix
+            elif re.search(r"(?<![a-z])(re)?mix(?![a-z])", vid_title, re.IGNORECASE) is not None \
+                    and re.search(r"(?<![a-z])(re)?mix(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
+                continue
+            # If the video is a performance
+            elif re.search(r"(?<![a-z])perform(s)?(ance)?(?![a-z])", vid_title, re.IGNORECASE) is not None \
+                    and re.search(r"(?<![a-z])perform(s)?(ance)?(?![a-z])", song_title_and_artist, re.IGNORECASE) is None:
+                continue
+            # If the video does not have the title/artist of the song
+            elif re.search(r".*" + re.escape(song["title"]) + r".*", vid_title, re.IGNORECASE) is None\
+                    or re.search(r".*" + re.escape(song["artist"]) + r".*", vid_title, re.IGNORECASE) is None:
                 continue
             else:
                 print("best url=   " + url)
@@ -115,7 +129,7 @@ class Util:
         :param url: The url used to download the song
         :return: void
         """
-        new_name = Util.get_song_filename(song['artist'], song['title']) + ".mp3"
+        new_name = Util.get_song_filename(song['artist'], song['title'])
 
         # since youtube-dl downloads songs with the unique ID of the url in the filname
         # we can regex for that value to find the song

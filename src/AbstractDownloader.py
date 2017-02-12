@@ -13,9 +13,14 @@ class Downloader(metaclass=ABCMeta):
     and get_search_info
     """
 
-    DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_songs.txt"
-    DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_playlists.txt"
-    DOWNLOADED_MUSIC_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../downloaded_music/"
+    #DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_songs.txt"
+    #DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_playlists.txt"
+    #DOWNLOADED_MUSIC_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../downloaded_music/"
+
+    # FOR TESTING
+    DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_songs.txt"
+    DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.txt"
+    DOWNLOADED_MUSIC_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_music/"
 
     def __init__(self, requested_songs, folder_name):
         """
@@ -111,8 +116,6 @@ class Downloader(metaclass=ABCMeta):
 
         :return: void
         """
-        print("Removing existing songs...")
-        print(self.DOWNLOADED_SONGS_FILE_PATH)
         with open(self.DOWNLOADED_SONGS_FILE_PATH, 'rb', 0) as file, \
                 mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as s:
             for song in self.requested_songs:
