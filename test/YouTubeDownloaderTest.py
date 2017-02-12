@@ -14,126 +14,126 @@ class YouTubeDownloaderTest(unittest.TestCase):
                 "title": "Life Itself",
                 "artist": "Glass Animals",
                 "album": "Life Itself",
-                "time": "04:40",
+                "time": 280
             },
 
             {
                 "title": "Disarm",
                 "artist": "The Smashing Pumpkins",
                 "album": "Siamese Dream",
-                "time": "4:58"
+                "time": 197
             },
 
             {
                 "title": "American Money",
                 "artist": "BØRNS",
                 "album": "Test",
-                "time": "4:20",
+                "time": 260
             },
 
             {
                 "title": "Get Right",
                 "artist": "Jimmy Eat World",
                 "album": "Get Right",
-                "time": "02:49",
+                "time": 169
             },
 
             {
                 "title": "Bang Bang",
                 "artist": "Green Day",
                 "album": "Bang Bang",
-                "time": "03:25",
+                "time": 205
             },
 
             {
                 "title": "Hardwired",
                 "artist": "Metallica",
                 "album": "Hardwired",
-                "time": "03:11",
+                "time": 191
             },
 
             {
                 "title": "Wake Up Call",
                 "artist": "Nothing but Thieves",
                 "album": "Nothing But Thieves (Deluxe)",
-                "time": "02:45",
+                "time": 165
             },
 
             {
                 "title": "Rock Lobster",
                 "artist": "The B-52's",
                 "album": "The B-52's",
-                "time": "6:49",
+                "time": 409
             },
 
             {
                 "title": "Just Can't Get Enough",
                 "artist": "Depeche Mode",
                 "album": "Catching Up With Depeche Mode",
-                "time": "3:25",
+                "time": 205
             },
 
             {
                 "title": "Red Flag",
                 "artist": "The Moth & The Flame",
                 "album": "test",
-                "time": "4:20",
+                "time": 260
             },
 
             {
                 "title": "Women",
                 "artist": "Def Leppard",
                 "album": "Hysteria",
-                "time": "6:11",
+                "time": 371
             },
 
             {
                 "title": "Camilla",
                 "artist": "Basshunter",
                 "album": "Bass Generation",
-                "time": "3:23",
+                "time": 203
             },
 
             {
                 "title": "Goodbye Forever",
                 "artist": "Volbeat",
                 "album": "Seal The Deal & Let's Boogie",
-                "time": "4:31",
+                "time": 271
             },
 
             {
                 "title": "Coffee Girl",
                 "artist": "The Tragically Hip",
                 "album": "We Are The Same",
-                "time": "3:46",
+                "time": 226
             },
 
             {
                 "title": "You & I",
                 "artist": "Colony House",
                 "album": "Only The Lonely",
-                "time": "3:27"
+                "time": 207
             },
 
             {
                 "title": "Curse the Weather",
                 "artist": "Royal Tusk",
                 "album": "Curse the Weather",
-                "time": "3:44"
+                "time": 224
             },
 
             {
                 "title": "Blow",
                 "artist": "Theory of a Deadman",
                 "album": "Savages",
-                "time": "3:36"
+                "time": 216
             },
 
             {
                 "title": "Who Made Who",
                 "artist": "AC/DC",
                 "album": "Who Made Who",
-                "time": "3:36"
+                "time": 206
             }
         ]
 

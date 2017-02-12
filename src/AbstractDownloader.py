@@ -77,10 +77,11 @@ class Downloader(metaclass=ABCMeta):
     @abstractmethod
     def _construct_search_url(self, song):
         """
-        Takes a dictionary containing song information (must have 'title', 'artist', 'album' and 'time' fields)
+        Takes a dictionary containing song information (must have 'title', 'artist', 'album' and 'time' (in seconds) fields)
         and returns the url corresponding to a search for this song
 
-        :param song: A dictionary containing song information. Must have 'title', 'artist', 'album' and 'time' fields.
+        :param song: A dictionary containing song information. Must have 'title', 'artist', 'album' and 'time' (in seconds) fields.
+                    All fields are strings except time, which is an int
         :return: A String representation of a url corresponding to a search for this song
         """
 

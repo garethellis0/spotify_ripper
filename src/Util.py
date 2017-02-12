@@ -3,6 +3,9 @@ import re
 import os
 
 class Util:
+    TIME_DIFFERENCE_LOWER_BOUND = -15 # At most how many seconds less a video can be to be valid
+    TIME_DIFFERENCE_UPPER_BOUND = 45 # At most how many seconds longer a video can be to be valid
+
     @staticmethod
     def html_to_ascii(s):
         """
@@ -53,19 +56,20 @@ class Util:
     @staticmethod
     def get_best_song_url(song, song_search_info):
         """
-        Takes a list of dictionaries, containing song serach 'title' and 'url', and return the url
+        Takes a list of dictionaries, containing song search 'title', 'url', and 'time' (in seconds), and return the url
         for the best song
 
         :param song: A dictionary containing the song info. Must include 'title', 'artist', album', and 'time' fields.
         :param song_search_info: A list of dictionaries containing the info for a search for that song.
-                                 Must contain 'title' and 'url' fields.
+                                 Must contain 'title', 'url', and 'time' (in seconds) fields.
         :return:
         """
-        # TODO: fix this - clean up? and check that name exists in title. remove remix, mix, perform
         for search_result in song_search_info:
             song_title_and_artist = song["title"] + " " + song["artist"]
+            song_time = song["time"]
             vid_title = search_result["title"]
-            url = search_result["url"]
+            vid_url = search_result["url"]
+            vid_time = search_result["time"]
 
             # If the video a cover (not by the artist)
             if re.search(r"(?<![a-z])cover(?![a-z])", vid_title, re.IGNORECASE) is not None \
@@ -80,7 +84,9 @@ class Util:
                   and re.search(r"music([^a-z])video", song_title_and_artist, re.IGNORECASE) is None) \
                     or (re.search(r"(?<![a-z])official(?![a-z])", vid_title, re.IGNORECASE) is not None
                         and re.search(r"(?<![a-z])official(?![a-z])", song_title_and_artist, re.IGNORECASE) is None
-                        and re.search(r"(?<![a-z])lyric(s)?(?![a-z])", vid_title, re.IGNORECASE) is None):
+                        and re.search(r"(?<![a-z])lyric(s)?(?![a-z])", vid_title, re.IGNORECASE) is None
+                        and re.search(r"(?<![a-z])audio(?![a-z])", vid_title, re.IGNORECASE) is None
+                        and re.search(r"(?<![a-z])audio(?![a-z])", song_title_and_artist, re.IGNORECASE) is None):
                 continue
             # If the video is an instrumental
             elif re.search(r"(?<![a-z])instrumental(?![a-z])", vid_title, re.IGNORECASE) is not None \
@@ -112,9 +118,11 @@ class Util:
             elif re.search(r".*" + re.escape(song["title"]) + r".*", vid_title, re.IGNORECASE) is None\
                     or re.search(r".*" + re.escape(song["artist"]) + r".*", vid_title, re.IGNORECASE) is None:
                 continue
+            # If the video's time does not fall withing a range of the song's time
+            elif vid_time - song_time > Util.TIME_DIFFERENCE_UPPER_BOUND or vid_time - song_time < Util.TIME_DIFFERENCE_LOWER_BOUND:
+                continue
             else:
-                print("best url=   " + url)
-                return url
+                return vid_url
 
         return ""
 
