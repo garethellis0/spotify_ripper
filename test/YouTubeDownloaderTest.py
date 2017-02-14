@@ -137,6 +137,7 @@ class YouTubeDownloaderTest(unittest.TestCase):
             }
         ]
 
+        print(len(test_request))
         ytdl = YouTubeDownloader(test_request, "test_playlist")
         ytdl.download_songs()
 

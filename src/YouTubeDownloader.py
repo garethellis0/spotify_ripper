@@ -41,7 +41,7 @@ class YouTubeDownloader(Downloader):
             html = response.read()
 
         # decodes html source from binary bytes to string
-        search_source = html.decode("utf-8", "ignore")
+        search_source = html.decode("UTF-8", "ignore")
 
         # parse source for vid info
         search_info = []

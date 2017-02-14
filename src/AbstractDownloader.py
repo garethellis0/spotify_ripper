@@ -3,7 +3,11 @@ from abc import ABCMeta, abstractmethod
 import youtube_dl
 import mmap
 import os
+import workerpool # TODO: include in setup script
 from src.Util import Util
+
+
+
 
 
 class Downloader(metaclass=ABCMeta):
@@ -41,6 +45,7 @@ class Downloader(metaclass=ABCMeta):
         except FileExistsError:
             print("Download directory already exists...")
 
+
     def download_songs(self):
         """
         Downloads the songs passed upon object creation into a folder.
@@ -59,23 +64,54 @@ class Downloader(metaclass=ABCMeta):
         os.chdir(self.download_path)
         self._remove_existing_songs_from_list()
 
-        # TODO: multithread song operations from here
+        pool = workerpool.WorkerPool(size=10)
+
+        print("starting pool")
         for song in self.requested_songs:
-            search_url = self._construct_search_url(song)
-            search_info = self._get_search_info(search_url)
-            best_url = Util.get_best_song_url(song, search_info)
-            if best_url == "":
-                print("no good url found")
-                continue
-                # TODO: handle song that can't be found
+            job = DownloadJob(self, song)
+            pool.put(job)
 
-            self._download_song(best_url)
-            Util.rename_song_file(self.download_path, song, best_url)
-            Util.write_metadata(song, self.download_path)
+        pool.shutdown()
+        pool.wait()
 
+        # for song in self.requested_songs:
+        #     search_url = self._construct_search_url(song)
+        #     search_info = self._get_search_info(search_url)
+        #     best_url = Util.get_best_song_url(song, search_info)
+        #     if best_url == "":
+        #         print("no good url found")
+        #         # TODO: handle song that can't be found
+        #     song["url"] = best_url
+        #
+        # pool = workerpool.WorkerPool(size=10)
+        #
+        # print(self.requested_songs)
+        # print("starting pool")
+        # for song in self.requested_songs:
+        #     if song["url"] is not "":
+        #         job = DownloadJob(song["url"])
+        #         pool.put(job)
+        #
+        # pool.shutdown()
+        # pool.wait()
+        #
+        #
+        # # TODO: multithread song operations from here
+        # for song in self.requested_songs:
+        #     search_url = self._construct_search_url(song)
+        #     search_info = self._get_search_info(search_url)
+        #     best_url = Util.get_best_song_url(song, search_info)
+        #     if best_url == "":
+        #         print("no good url found")
+        #         continue
+        #         # TODO: handle song that can't be found
+        #
+        #     self._download_song(best_url)
+        #     Util.rename_song_file(self.download_path, song, best_url)
+        #     Util.write_metadata(song, self.download_path)
 
     @abstractmethod
-    def _construct_search_url(self, song):
+    def _construct_search_url(song):
         """
         Takes a dictionary containing song information (must have 'title', 'artist', 'album' and 'time' (in seconds) fields)
         and returns the url corresponding to a search for this song
@@ -102,7 +138,7 @@ class Downloader(metaclass=ABCMeta):
         :param song_url: the url of the song
         :return: true if the song downloaded successfully, and false otherwise
         """
-        with youtube_dl.YoutubeDL(Downloader.get_ydl_opts()) as ydl:
+        with youtube_dl.YoutubeDL(self.get_ydl_opts()) as ydl:
             try:
                 ydl.download([song_url])
                 return True
@@ -110,6 +146,7 @@ class Downloader(metaclass=ABCMeta):
                 return False
                 # TODO: track failed song stats?
                 # TODO: may need to make access to marking file as failed threadsafe
+
 
     def _remove_existing_songs_from_list(self):
         """
@@ -144,3 +181,23 @@ class Downloader(metaclass=ABCMeta):
                 "preferredquality": "192",
             }],
         }
+
+class DownloadJob(workerpool.Job):
+    """
+    Defines a job for downloading a song
+    """
+    def __init__(self, dl, song):
+        self.song = song
+        self.dl = dl
+    def run(self):
+        search_url = self.dl._construct_search_url(self.song)
+        search_info = self.dl._get_search_info(search_url)
+        best_url = Util.get_best_song_url(self.song, search_info)
+        if best_url == "":
+            print("no good url found")
+            # TODO: handle song that can't be found
+        else:
+            self.dl._download_song(best_url)
+            Util.rename_song_file(self.dl.download_path, self.song, best_url)
+            Util.write_metadata(self.song, self.dl.download_path)
+
