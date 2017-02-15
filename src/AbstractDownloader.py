@@ -7,7 +7,26 @@ import workerpool # TODO: include in setup script
 from src.Util import Util
 
 
+class DownloadJob(workerpool.Job):
+    """
+    Defines a job for downloading a song
+    """
+    def __init__(self, dl, song):
+        self.song = song
+        self.dl = dl
 
+    def run(self):
+        search_url = self.dl._construct_search_url(self.song)
+        search_info = self.dl._get_search_info(search_url)
+        best_url = Util.get_best_song_url(self.song, search_info)
+
+        if best_url == "":
+            print("no good url found")
+            # TODO: handle song that can't be found
+        else:
+            self.dl._download_song(best_url)
+            Util.rename_song_file(self.dl.download_path, self.song, best_url)
+            Util.write_metadata(self.song, self.dl.download_path)
 
 
 class Downloader(metaclass=ABCMeta):
@@ -64,9 +83,9 @@ class Downloader(metaclass=ABCMeta):
         os.chdir(self.download_path)
         self._remove_existing_songs_from_list()
 
+        # no real benefit after ~10 threads since limited by download speeds
         pool = workerpool.WorkerPool(size=10)
 
-        print("starting pool")
         for song in self.requested_songs:
             job = DownloadJob(self, song)
             pool.put(job)
@@ -74,41 +93,6 @@ class Downloader(metaclass=ABCMeta):
         pool.shutdown()
         pool.wait()
 
-        # for song in self.requested_songs:
-        #     search_url = self._construct_search_url(song)
-        #     search_info = self._get_search_info(search_url)
-        #     best_url = Util.get_best_song_url(song, search_info)
-        #     if best_url == "":
-        #         print("no good url found")
-        #         # TODO: handle song that can't be found
-        #     song["url"] = best_url
-        #
-        # pool = workerpool.WorkerPool(size=10)
-        #
-        # print(self.requested_songs)
-        # print("starting pool")
-        # for song in self.requested_songs:
-        #     if song["url"] is not "":
-        #         job = DownloadJob(song["url"])
-        #         pool.put(job)
-        #
-        # pool.shutdown()
-        # pool.wait()
-        #
-        #
-        # # TODO: multithread song operations from here
-        # for song in self.requested_songs:
-        #     search_url = self._construct_search_url(song)
-        #     search_info = self._get_search_info(search_url)
-        #     best_url = Util.get_best_song_url(song, search_info)
-        #     if best_url == "":
-        #         print("no good url found")
-        #         continue
-        #         # TODO: handle song that can't be found
-        #
-        #     self._download_song(best_url)
-        #     Util.rename_song_file(self.download_path, song, best_url)
-        #     Util.write_metadata(song, self.download_path)
 
     @abstractmethod
     def _construct_search_url(song):
@@ -181,23 +165,3 @@ class Downloader(metaclass=ABCMeta):
                 "preferredquality": "192",
             }],
         }
-
-class DownloadJob(workerpool.Job):
-    """
-    Defines a job for downloading a song
-    """
-    def __init__(self, dl, song):
-        self.song = song
-        self.dl = dl
-    def run(self):
-        search_url = self.dl._construct_search_url(self.song)
-        search_info = self.dl._get_search_info(search_url)
-        best_url = Util.get_best_song_url(self.song, search_info)
-        if best_url == "":
-            print("no good url found")
-            # TODO: handle song that can't be found
-        else:
-            self.dl._download_song(best_url)
-            Util.rename_song_file(self.dl.download_path, self.song, best_url)
-            Util.write_metadata(self.song, self.dl.download_path)
-
