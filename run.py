@@ -1,18 +1,18 @@
 from src.Controller import Controller
 from src.YouTubeDownloader import YouTubeDownloader
 
-print("=== Welcome to Spotify Ripper ===\n")
+print("=== Welcome to Spotify Ripper ===")
 
 while True:
-    print("What would you like to do?")
+    print("\nWhat would you like to do?")
     user_input = str(input("d - Download playlists from Spotify (by URL)\n" +
-                           "u - Update previously downloaded playlists,\n" +
+                           "u - Update previously downloaded playlists\n" +
                            "c - Enter individual songs to download\n" +
                            "r - Try to re-download failed songs\n" +
-                           "q - Quit the program\n"))
+                           "q - Quit the program\n\n"))
 
     if user_input == "d":
-        print("download playlists")
+        Controller.download_playlists()
     elif user_input == "u":
         print("update previously downloaded playlists")
     elif user_input == "c":

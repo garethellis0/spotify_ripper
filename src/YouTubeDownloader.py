@@ -18,12 +18,10 @@ class YouTubeDownloader(Downloader):
         :param song: A dictionary containing song information. Must have 'title', 'artist', 'album' and 'time' fields.
         :return: A String representation of a url corresponding to a search for this song
         """
-        print("Retrieving search urls...")
-
         search = song["artist"] + " " + song["title"] + " " + "lyrics"
         search_url = self.SEARCH_URL_ROOT + urllib.parse.quote_plus(search)
         search_url = search_url.lower()
-        print("search url:    " + search_url)
+
         return search_url
 
 
@@ -35,8 +33,6 @@ class YouTubeDownloader(Downloader):
         :param song_search_url: The url of a search for a song
         :return: A list of dictionaries, each containing the 'title', 'url', and 'time' (in seconds) info of each search result
         """
-        print("Retrieving search info...")
-
         with urllib.request.urlopen(song_search_url) as response:
             html = response.read()
 

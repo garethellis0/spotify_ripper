@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
 from abc import ABCMeta, abstractmethod
 import youtube_dl
-import mmap
 import os
+import re
 import workerpool # TODO: include in setup script
+import threading
 from src.Util import Util
 
 
@@ -14,6 +15,8 @@ class DownloadJob(workerpool.Job):
     def __init__(self, dl, song):
         self.song = song
         self.dl = dl
+        self.lock = dl.lock
+        self.folder_name = dl.folder_name
 
     def run(self):
         search_url = self.dl._construct_search_url(self.song)
@@ -21,12 +24,15 @@ class DownloadJob(workerpool.Job):
         best_url = Util.get_best_song_url(self.song, search_info)
 
         if best_url == "":
-            print("no good url found")
-            # TODO: handle song that can't be found
+            with self.lock:
+                self.dl.failed_downloaded_songs.append(self.song)
         else:
-            self.dl._download_song(best_url)
-            Util.rename_song_file(self.dl.download_path, self.song, best_url)
-            Util.write_metadata(self.song, self.dl.download_path)
+            if self.dl._download_song(best_url) is True:
+                Util.rename_song_file(self.dl.download_path, self.song, best_url)
+                Util.write_metadata(self.song, self.dl.download_path)
+            else:
+                with self.lock:
+                    self.dl.failed_downloaded_songs.append(self.song)
 
 
 class Downloader(metaclass=ABCMeta):
@@ -36,13 +42,11 @@ class Downloader(metaclass=ABCMeta):
     and get_search_info
     """
 
-    #DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_songs.txt"
+    #FAILED_DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.failed_song_downloads.txt"
     #DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_playlists.txt"
     #DOWNLOADED_MUSIC_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../downloaded_music/"
 
     # FOR TESTING
-    DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_songs.txt"
-    DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.txt"
     DOWNLOADED_MUSIC_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_music/"
 
     def __init__(self, requested_songs, folder_name):
@@ -54,9 +58,15 @@ class Downloader(metaclass=ABCMeta):
                                 'artist', 'album' and 'time' fields.
         :param folder_name: The name of the folder for songs to be downloaded into
         """
-        self.requested_songs = requested_songs
+        self.requested_songs = list(requested_songs)
         self.folder_name = folder_name
         self.download_path = self.DOWNLOADED_MUSIC_FILE_PATH + folder_name + "/"
+
+        # variables for statistics
+        self.num_existing_songs = 0
+        self.failed_downloaded_songs = []
+
+        self.lock = threading.Lock()
 
         try:
             os.mkdir(self.DOWNLOADED_MUSIC_FILE_PATH)
@@ -93,9 +103,11 @@ class Downloader(metaclass=ABCMeta):
         pool.shutdown()
         pool.wait()
 
+        return [self.num_existing_songs, self.failed_downloaded_songs]
+
 
     @abstractmethod
-    def _construct_search_url(song):
+    def _construct_search_url(self, song):
         """
         Takes a dictionary containing song information (must have 'title', 'artist', 'album' and 'time' (in seconds) fields)
         and returns the url corresponding to a search for this song
@@ -117,7 +129,8 @@ class Downloader(metaclass=ABCMeta):
 
     def _download_song(self, song_url):
         """
-        Downloads the song at the given url as an mp3 file
+        Downloads the song at the given url as an mp3 file. Returns true if the download was
+        successful and false otherwise
 
         :param song_url: the url of the song
         :return: true if the song downloaded successfully, and false otherwise
@@ -125,11 +138,9 @@ class Downloader(metaclass=ABCMeta):
         with youtube_dl.YoutubeDL(self.get_ydl_opts()) as ydl:
             try:
                 ydl.download([song_url])
-                return True
+                return True;
             except Exception:
-                return False
-                # TODO: track failed song stats?
-                # TODO: may need to make access to marking file as failed threadsafe
+                return False;
 
 
     def _remove_existing_songs_from_list(self):
@@ -138,17 +149,21 @@ class Downloader(metaclass=ABCMeta):
 
         :return: void
         """
-        with open(self.DOWNLOADED_SONGS_FILE_PATH, 'rb', 0) as file, \
-                mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as s:
-            for song in self.requested_songs:
-                name = Util.get_song_filename(song['artist'], song['title'])
-                if s.find(name.encode(encoding='UTF-8')) != -1:
-                    # TODO: create constant for encoding?
-                    # TODO: add song to summary report? Keep track of removed song?
-                    self.requested_songs.remove(song)
+        songs_to_remove = []
 
+        for song in self.requested_songs:
+            filename = Util.get_song_filename(song)
+            song_name_regex = re.escape(filename)
 
-    # TODO: add Summary function / dataype?
+            for file in os.listdir(self.download_path):
+                if re.match(song_name_regex, file):
+                    songs_to_remove.append(song)
+                    self.num_existing_songs += 1
+                    break
+
+        for song in songs_to_remove:
+            self.requested_songs.remove(song)
+
 
     @staticmethod
     def get_ydl_opts():

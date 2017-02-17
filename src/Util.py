@@ -43,15 +43,25 @@ class Util:
         return s
 
     @staticmethod
-    def get_song_filename(artist, title):
+    def get_song_filename(song):
         """
-        Returns a String representing the file name of a song with artist and title
+        Returns a String representing the file name of a song
 
-        :param artist: The artist of the song. Must not be None or empty
-        :param title:  The title of the song. Must not be None or empty
+        :param song: a dictionary of song info. Must contain fields for 'title', 'artist', 'album' and 'time'
         :return: A String representing the filename of the song
         """
-        return Util.remove_invalid_filename_chars(Util.html_to_ascii(artist + " - " + title + ".mp3"))
+        return Util.remove_invalid_filename_chars(Util.html_to_ascii(song["artist"] + " - " + song["title"] + ".mp3"))
+
+    @staticmethod
+    def get_song_filename_and_folder(song, folder):
+        """
+        Returns a String representation of a song and the folder it belongs to
+
+        :param song: a dictionary of song info. Must contain fields for 'title', 'artist', 'album' and 'time'
+        :param folder: the folder the song belongs to
+        :return: A string representing the song and it's folder
+        """
+        return Util.get_song_filename(song) + "\t\t" + folder
 
     @staticmethod
     def get_best_song_url(song, song_search_info):
@@ -137,7 +147,7 @@ class Util:
         :param url: The url used to download the song
         :return: void
         """
-        new_name = Util.get_song_filename(song['artist'], song['title'])
+        new_name = Util.get_song_filename(song)
 
         # since youtube-dl downloads songs with the unique ID of the url in the filname
         # we can regex for that value to find the song
@@ -158,7 +168,7 @@ class Util:
         :param filepath: the full filepath to the song file
         :return: void
         """
-        path_to_song = filepath + Util.get_song_filename(song["artist"], song["title"])
+        path_to_song = filepath + Util.get_song_filename(song)
         audio = Audio(path_to_song)
         audio.write_tags({
             "title": song["title"],
@@ -169,3 +179,27 @@ class Util:
         # access code preceded by 0o to represent octal number
         # Gives full read/write access to the song file, but not execute
         os.chmod(path_to_song, 0o666)
+
+    @staticmethod
+    def time_in_seconds(time):
+        mins = int(re.split(r":", time)[0])
+        seconds = int(re.split(r":", time)[1])
+        return mins * 60 + seconds
+
+
+    @staticmethod
+    def print_summary(stats, playlist_name):
+        """
+        Takes a list of ints representing download statistics and prints them to the console
+
+        :param stats: a list of ints, where stats[0] is the number of requested songs, stats[1] is the number of songs
+        that already existed, stats[2] is the number of songs that downloaded successfully, and
+        stats[3] is a list of songs that failed to download
+        :param playlist_name: the name of the playlist
+        :return: void
+        """
+        print("===== Download Summary for \"{}\" =====".format(playlist_name))
+        print("{} songs requested".format(stats[0]))
+        print("{} songs already existed and were skipped".format(stats[1]))
+        print("{} songs failed to download or were not found".format(stats[2]))
+        print("{} songs were downloaded successfully\n".format(stats[3]))
