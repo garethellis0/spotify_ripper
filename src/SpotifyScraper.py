@@ -28,13 +28,13 @@ class SpotifyScraper:
             'path': '/'
         }
         driver.get(self.playlist_url)
-        time.sleep(5)
+        time.sleep(6)
         playlist_id = self.playlist_url.split('/')[-1]
         driver.refresh()
         driver.add_cookie(cookie)
         driver.refresh()
         driver.set_window_size(500, 2000)
-        time.sleep(5)
+        time.sleep(6)
         driver.set_window_size(500, 2000)
 
         try:
@@ -65,10 +65,15 @@ class SpotifyScraper:
         else:
             source = self.html_src
 
+        #split to find the playlist name
+        name_source = source.split("<h1 class=\"main\">")[1]
+        name_source = name_source.split("</span>")[0]
+        playlist_name = re.findall(r'\">(.*)</a>', name_source)[0]
+
         # Remove everything before the playlist section
-        source = source.split("<tbody data-bind=\"foreach: tracks\"")[1]
+        songs_source = source.split("<tbody data-bind=\"foreach: tracks\"")[1]
         # Divide up into songs
-        songs = source.split("</tr>")
+        songs = songs_source.split("</tr>")
 
         # Create a array of dictionaries of all the songs
         songs_dict = []
@@ -84,7 +89,7 @@ class SpotifyScraper:
             except IndexError:
                 pass
 
-        return songs_dict
+        return [playlist_name, songs_dict]
 
     @staticmethod
     def get_cookie():

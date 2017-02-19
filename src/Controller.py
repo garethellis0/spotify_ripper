@@ -44,8 +44,10 @@ class Controller:
             try:
                 # download the playlist
                 spotify_scraper_api = SpotifyScraper(playlist_url, cookie)
-                songs = spotify_scraper_api.get_playlist()
-                playlist_name = "diggin now" # TODO: change this to actual playlist name
+                songs_and_name = spotify_scraper_api.get_playlist()
+                playlist_name = songs_and_name[0]
+                songs = songs_and_name[1]
+                print(playlist_name)
                 print("Successfully retrieved playlist \"{}\", downloading songs...".format(playlist_name))
                 yt_dl = YouTubeDownloader(songs, playlist_name)
                 results = yt_dl.download_songs()  # TODO: later add more downloaders here
