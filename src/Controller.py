@@ -49,7 +49,32 @@ class Controller:
 
     @staticmethod
     def download_custom_songs():
-        return
+        custom_songs = []
+        print("Enter a blank line at any time when you are done entering data...")
+        while True:
+            print("Enter the info for the song you want to download:")
+            title = str(input("Enter the title of the song: "))
+            if title is "":
+                break
+            artist = str(input("Enter the artist of the song: "))
+            if artist is "":
+                break
+            album = str(input("Enter the album the song is from: "))
+            if album is "":
+                break
+            time = str(input("Enter the time of the song (eg. 3:18): "))
+            if time is "":
+                break
+
+            custom_songs.append({
+                "title": title,
+                "artist": artist,
+                "album": album,
+                "time": Util.time_in_seconds(time)
+            })
+
+        Controller._download(custom_songs, "Custom")
+
 
     @staticmethod
     def download_failed_songs():

@@ -8,6 +8,8 @@ class YouTubeDownloaderTest(unittest.TestCase):
 
     # Before running tests, DOWNLOADED_PLAYLISTS_FILE_PATH in AbstractDownloader should be pointed
     # to test/test_downloaded_songs.txt
+    # and FAILED_DOWNLOADED_SONGS_FILE_PATH and DOWNLOADED_PLAYLISTS_FILE_PATH in Controller.py should
+    # be changed to the test versions
     def test_downloader(self):
         test_request = [
             {
