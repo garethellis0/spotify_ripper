@@ -2,6 +2,7 @@ from src.SpotifyScraper import SpotifyScraper, InvalidCookieException
 from src.YouTubeDownloader import YouTubeDownloader
 from src.Util import Util
 import os
+import re
 
 
 class Controller:
@@ -73,7 +74,7 @@ class Controller:
                 for song in downloaded_songs:
                     text = Util.get_song_filename_and_folder(song, playlist_name)
                     for line in lines:
-                        if line is text:
+                        if re.search(re.escape(text), line):
                             lines_to_remove.append(line)
 
                 for line in lines_to_remove:
@@ -91,12 +92,15 @@ class Controller:
                 while True:
                     # Ask the user to double check the url
                     print("Exception thrown with url: {}".format(playlist_url))
-                    url_correct = str(input("Was that url correct? (Will ask for new cookie if yes) (y/n): "))
+                    url_correct = str(input("Was that url correct? (Will ask for new cookie if yes). If the url was "
+                                            "correct but the webpage just didn't load properly, press r to try again (y/n/r): "))
                     if url_correct is "y":
                         os.remove(".cookie")
                         break
                     elif url_correct is "n":
                         playlist_url = str(input("Please enter the correct url: "))
+                        break
+                    elif url_correct is "r":
                         break
                     else:
                         print("Invalid input!")
