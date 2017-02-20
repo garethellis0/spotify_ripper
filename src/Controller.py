@@ -6,11 +6,13 @@ import json
 
 
 class Controller:
-    FAILED_DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(
-        os.path.realpath(__file__)) + "/../test/test_failed_song_downloads.json"
-    DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(
-        os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.json"
 
+    # For testing
+    FAILED_DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_failed_song_downloads.json"
+    DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.json"
+
+    # FAILED_DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.failed_song_downloads.json"
+    # DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../.downloaded_playlists.json"
 
     @staticmethod
     def download_playlists(playlists=None):
