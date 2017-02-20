@@ -1,6 +1,6 @@
-# custom additions - don't include hidden txt or json files
-.*.txt
-.*.json
+# custom additions - don't include txt or json files
+*.txt
+*.json
 
 *.save
 music/
