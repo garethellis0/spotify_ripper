@@ -51,7 +51,17 @@ class Controller:
 
     @staticmethod
     def download_failed_songs():
-        return
+        Util.check_file(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH)
+        with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "r") as file:
+            try:
+                failed_songs = json.load(file)
+            except Exception:
+                print("Error loading failed songs")
+                return
+
+        for key in failed_songs.keys():
+            Controller._download(failed_songs[key], key)
+
 
     @staticmethod
     def _download_single_playlist(playlist_url):
@@ -65,57 +75,7 @@ class Controller:
                 songs = songs_and_name[1]
 
                 print("Successfully retrieved playlist \"{}\", downloading songs...".format(playlist_name))
-                yt_dl = YouTubeDownloader(songs, playlist_name)
-                results = yt_dl.download_songs()  # TODO: later add more downloaders here
-                num_existing_songs = results[0]
-                failed_downloads = results[1]
-                num_failed_downloads = len(failed_downloads)
-
-                summary_info = [len(songs), num_existing_songs, num_failed_downloads, len(songs) - num_existing_songs - num_failed_downloads]
-                Util.print_summary(summary_info, playlist_name)
-
-                # add the playlist to the list of downloaded playlists
-                Util.check_file(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH)
-                with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "r") as file:
-                    try:
-                        downloaded_playlists = json.load(file)
-                    except Exception:
-                        downloaded_playlists = []
-
-                if playlist_url not in downloaded_playlists:
-                    downloaded_playlists.append(playlist_url)
-
-                with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "w") as file:
-                    json.dump(downloaded_playlists, file, indent=4)
-
-                # Check if any downloaded songs were in the list of failed downloads and remove them
-                # also add the failed songs to the list
-                Util.check_file(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH)
-                with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "r") as file:
-                    try:
-                        playlist_dict = json.load(file)
-                    except Exception:
-                        playlist_dict = {}
-
-                downloaded_songs = [x for x in songs if x not in failed_downloads]
-                songs_to_remove = []
-
-                if playlist_name in playlist_dict.keys():
-                    for song in downloaded_songs:
-                        if song in playlist_dict[playlist_name]:
-                            songs_to_remove.append(song)
-
-                    for song in songs_to_remove:
-                        playlist_dict[playlist_name].remove(song)
-                else:
-                    playlist_dict[playlist_name] = []
-
-                for song in failed_downloads:
-                    if song not in playlist_dict[playlist_name]:
-                        playlist_dict[playlist_name].append(song)
-
-                with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "w") as file:
-                    json.dump(playlist_dict, file, indent=4)
+                Controller._download(songs, playlist_name, playlist_url)
 
                 break
             except InvalidCookieException:
@@ -134,3 +94,68 @@ class Controller:
                         break
                     else:
                         print("Invalid input!")
+
+    @staticmethod
+    def _download(songs, playlist_name, playlist_url=None):
+        """
+        Uses the downloaders to download the songs from a given playlist, and updates the tracking files
+
+        :param songs: a list of dictionaries containing song info. Dictionaries must contain 'title', 'artist', 'album',
+                      and 'time' fields
+        :param playlist_name: the name of the playlist
+        :param playlist_url: the url of the playlist
+        :return: void
+        """
+        yt_dl = YouTubeDownloader(songs, playlist_name)
+        results = yt_dl.download_songs()  # TODO: later add more downloaders here
+
+        num_existing_songs = results[0]
+        failed_downloads = results[1]
+        num_failed_downloads = len(failed_downloads)
+
+        summary_info = [len(songs), num_existing_songs, num_failed_downloads, len(songs) - num_existing_songs - num_failed_downloads]
+        Util.print_summary(summary_info, playlist_name)
+
+        if playlist_url is not None:
+            # add the playlist to the list of downloaded playlists
+            Util.check_file(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH)
+            with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "r") as file:
+                try:
+                    downloaded_playlists = json.load(file)
+                except Exception:
+                        downloaded_playlists = []
+
+            if playlist_url not in downloaded_playlists:
+                downloaded_playlists.append(playlist_url)
+
+            with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "w") as file:
+                json.dump(downloaded_playlists, file, indent=4)
+
+        # Check if any downloaded songs were in the list of failed downloads and remove them
+        # also add the failed songs to the list
+        Util.check_file(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH)
+        with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "r") as file:
+            try:
+                playlist_dict = json.load(file)
+            except Exception:
+                playlist_dict = {}
+
+        downloaded_songs = [x for x in songs if x not in failed_downloads]
+        songs_to_remove = []
+
+        if playlist_name in playlist_dict.keys():
+            for song in downloaded_songs:
+                if song in playlist_dict[playlist_name]:
+                    songs_to_remove.append(song)
+
+            for song in songs_to_remove:
+                playlist_dict[playlist_name].remove(song)
+        else:
+            playlist_dict[playlist_name] = []
+
+        for song in failed_downloads:
+            if song not in playlist_dict[playlist_name]:
+                playlist_dict[playlist_name].append(song)
+
+        with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "w") as file:
+            json.dump(playlist_dict, file, indent=4)
