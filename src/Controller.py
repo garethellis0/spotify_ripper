@@ -2,14 +2,14 @@ from src.SpotifyScraper import SpotifyScraper, InvalidCookieException
 from src.YouTubeDownloader import YouTubeDownloader
 from src.Util import Util
 import os
-import re
+import json
 
 
 class Controller:
     FAILED_DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(
-        os.path.realpath(__file__)) + "/../test/test_failed_song_downloads.txt"
+        os.path.realpath(__file__)) + "/../test/test_failed_song_downloads.json"
     DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(
-        os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.txt"
+        os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.json"
 
 
     @staticmethod
@@ -32,10 +32,12 @@ class Controller:
 
     @staticmethod
     def redownload_playlists():
-        playlists = []
+        Util.check_file(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH)
         with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "r") as file:
-            for line in file.readlines():
-                playlists.append(line[:-1])
+            try:
+                playlists = json.load(file)
+            except Exception:
+                playlists = []
 
         if len(playlists) is 0:
             print("No playlists on file to download")
@@ -72,33 +74,48 @@ class Controller:
                 summary_info = [len(songs), num_existing_songs, num_failed_downloads, len(songs) - num_existing_songs - num_failed_downloads]
                 Util.print_summary(summary_info, playlist_name)
 
-                # add the playlist url to the downloaded_playlists file if it doesn't already exist
-                if playlist_url not in open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH).read():
-                    with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "a") as file:
-                        file.write(playlist_url + "\n")
+                # add the playlist to the list of downloaded playlists
+                Util.check_file(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH)
+                with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "r") as file:
+                    try:
+                        downloaded_playlists = json.load(file)
+                    except Exception:
+                        downloaded_playlists = []
+
+                if playlist_url not in downloaded_playlists:
+                    downloaded_playlists.append(playlist_url)
+
+                with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "w") as file:
+                    json.dump(downloaded_playlists, file, indent=4)
 
                 # Check if any downloaded songs were in the list of failed downloads and remove them
                 # also add the failed songs to the list
+                Util.check_file(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH)
                 with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "r") as file:
-                    lines = file.readlines()
+                    try:
+                        playlist_dict = json.load(file)
+                    except Exception:
+                        playlist_dict = {}
 
                 downloaded_songs = [x for x in songs if x not in failed_downloads]
-                lines_to_remove = []
-                for song in downloaded_songs:
-                    text = Util.get_song_filename_and_folder(song, playlist_name)
-                    for line in lines:
-                        if re.search(re.escape(text), line):
-                            lines_to_remove.append(line)
+                songs_to_remove = []
 
-                for line in lines_to_remove:
-                    lines.remove(line)
+                if playlist_name in playlist_dict.keys():
+                    for song in downloaded_songs:
+                        if song in playlist_dict[playlist_name]:
+                            songs_to_remove.append(song)
+
+                    for song in songs_to_remove:
+                        playlist_dict[playlist_name].remove(song)
+                else:
+                    playlist_dict[playlist_name] = []
+
+                for song in failed_downloads:
+                    if song not in playlist_dict[playlist_name]:
+                        playlist_dict[playlist_name].append(song)
 
                 with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "w") as file:
-                    for line in lines:
-                        file.write(line) # existing lines already have newline character
-                    for song in failed_downloads:
-                        if Util.get_song_filename_and_folder(song, playlist_name) + "\n" not in lines:
-                            file.write(Util.get_song_filename_and_folder(song, playlist_name) + "\n")
+                    json.dump(playlist_dict, file, indent=4)
 
                 break
             except InvalidCookieException:

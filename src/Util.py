@@ -210,3 +210,16 @@ class Util:
         print("{} songs already existed and were skipped".format(stats[1]))
         print("{} songs failed to download or were not found".format(stats[2]))
         print("{} songs were downloaded successfully\n".format(stats[3]))
+
+
+    @staticmethod
+    def check_file(filepath):
+        """
+        Checks if a file exists at filepath, and if not creates an empty file
+
+        :param filepath: The path to a file
+        :return: void
+        """
+        if not os.path.isfile(filepath):
+            with open(filepath, "w") as file:
+                file.write('\0')
