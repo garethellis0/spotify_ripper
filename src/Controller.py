@@ -11,6 +11,7 @@ class Controller:
     DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(
         os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.txt"
 
+
     @staticmethod
     def download_playlists(playlists=None):
         requested_playlists = []
@@ -22,20 +23,32 @@ class Controller:
                     break
                 else:
                     requested_playlists.append(playlist_url)
+        else:
+            requested_playlists = playlists
 
         for playlist in requested_playlists:
             Controller._download_single_playlist(playlist)
 
+
     @staticmethod
-    def redownload_playlists(self):
+    def redownload_playlists():
+        playlists = []
+        with open(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH, "r") as file:
+            for line in file.readlines():
+                playlists.append(line[:-1])
+
+        if len(playlists) is 0:
+            print("No playlists on file to download")
+        else:
+            Controller.download_playlists(playlists)
+
+
+    @staticmethod
+    def download_custom_songs():
         return
 
     @staticmethod
-    def download_custom_songs(self):
-        return
-
-    @staticmethod
-    def download_failed_songs(self):
+    def download_failed_songs():
         return
 
     @staticmethod

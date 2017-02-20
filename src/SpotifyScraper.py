@@ -94,11 +94,13 @@ class SpotifyScraper:
     @staticmethod
     def get_cookie():
         try:
-            cookie_val = str(open(".cookie").read())
+            with open(".cookie", "r") as file:
+                cookie_val = file.read()
+
             return cookie_val
         except FileNotFoundError:
             cookie_val = str(input("Please enter your cookie: "))
-            cookie_cache = open(".cookie", 'w+')
-            cookie_cache.write(cookie_val)
+            with open(".cookie", "w") as file:
+                file.write(cookie_val)
 
 

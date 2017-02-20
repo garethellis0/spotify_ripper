@@ -14,11 +14,11 @@ while True:
     if user_input == "d":
         Controller.download_playlists()
     elif user_input == "u":
-        print("update previously downloaded playlists")
+        Controller.redownload_playlists()
     elif user_input == "c":
-        print("enter individual songs")
+        Controller.download_custom_songs()
     elif user_input == "r":
-        print("redownload failed songs")
+        Controller.download_failed_songs()
     elif user_input == "q":
         print("quit program")
         break

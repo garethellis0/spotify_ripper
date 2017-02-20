@@ -182,6 +182,13 @@ class Util:
 
     @staticmethod
     def time_in_seconds(time):
+        """
+        Takes a String of the form xx:xx representing a time in minutes and seconds, and returns
+        an int representing the time in seconds
+
+        :param time: a String of the form xx:xx where the x's are ints
+        :return: an int representing the time in seconds
+        """
         mins = int(re.split(r":", time)[0])
         seconds = int(re.split(r":", time)[1])
         return mins * 60 + seconds
