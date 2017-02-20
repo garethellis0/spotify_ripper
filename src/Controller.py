@@ -43,15 +43,19 @@ class Controller:
             cookie = SpotifyScraper.get_cookie()
             try:
                 # download the playlist
-                spotify_scraper_api = SpotifyScraper(playlist_url, cookie)
-                songs_and_name = spotify_scraper_api.get_playlist()
+                spotify_scraper = SpotifyScraper(playlist_url, cookie)
+                songs_and_name = spotify_scraper.get_playlist()
                 playlist_name = songs_and_name[0]
                 songs = songs_and_name[1]
-                print(playlist_name)
+
                 print("Successfully retrieved playlist \"{}\", downloading songs...".format(playlist_name))
                 yt_dl = YouTubeDownloader(songs, playlist_name)
                 results = yt_dl.download_songs()  # TODO: later add more downloaders here
-                summary_info = [len(songs), results[0], len(results[1]), len(songs) - results[0] - len(results[1])]
+                num_existing_songs = results[0]
+                failed_downloads = results[1]
+                num_failed_downloads = len(failed_downloads)
+
+                summary_info = [len(songs), num_existing_songs, num_failed_downloads, len(songs) - num_existing_songs - num_failed_downloads]
                 Util.print_summary(summary_info, playlist_name)
 
                 # add the playlist url to the downloaded_playlists file if it doesn't already exist
@@ -64,13 +68,12 @@ class Controller:
                 with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "r") as file:
                     lines = file.readlines()
 
-                downloaded_songs = [x for x in songs if x not in results[1]]
+                downloaded_songs = [x for x in songs if x not in failed_downloads]
                 lines_to_remove = []
                 for song in downloaded_songs:
                     text = Util.get_song_filename_and_folder(song, playlist_name)
                     for line in lines:
-                        # the [:-1] removes the newline character
-                        if line[:-1] is text:
+                        if line is text:
                             lines_to_remove.append(line)
 
                 for line in lines_to_remove:
@@ -79,8 +82,9 @@ class Controller:
                 with open(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH, "w") as file:
                     for line in lines:
                         file.write(line) # existing lines already have newline character
-                    for song in results[1]:
-                        file.write(Util.get_song_filename_and_folder(song, playlist_name) + "\n")
+                    for song in failed_downloads:
+                        if Util.get_song_filename_and_folder(song, playlist_name) + "\n" not in lines:
+                            file.write(Util.get_song_filename_and_folder(song, playlist_name) + "\n")
 
                 break
             except InvalidCookieException:
