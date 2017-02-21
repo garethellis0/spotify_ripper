@@ -13,6 +13,6 @@ Uses Youtube to download Spotify-inspired playlists as mp3 files. The songs are 
 The user will end up with the mp3 files corresponding to each song in the spotify playlist in a /music folder in the project directory.
 
 ## Note:
-    - Requires the user to have a Spotify account
-    - Currently does not work with versions of Firefox newer than 48
+    - Requires the user to have a Spotify account (must not be Premium)
+    - Currently requires version 47.0.2 of Firefox or lower
     - May not handle playlists over 400 songs in length
