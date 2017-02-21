@@ -79,16 +79,28 @@ class SpotifyScraper:
         songs_dict = []
         for song in songs:
             try:
+                title = re.findall(r'<td.*>(.*)<\/div>', song, re.S)[0]
+                artist = re.findall(r'spotify:artist:.*>(.*)<\/a>', song)[0]
+                album = re.findall(r'spotify:album.*>(.*)<\/a>', song)[0]
+                song_time = re.findall(r'tl-time\">([\w|:]*)<\/td>', song, re.S)[0]
+
+                title = re.sub(r" - Radio Edit", "", title, re.IGNORECASE)
+                title = re.sub(r" - Alt Edit", "", title, re.IGNORECASE)
+                title = re.sub(r" -.*Version.*", "", title, re.IGNORECASE)
+                title = re.sub(r" -.*Remaster(ed)?.*", "", title, re.IGNORECASE)
+                title = re.sub(r" \(Remaster(ed)?\) *", "", title, re.IGNORECASE)
+                title = re.sub(r" -.*Anniversary Mix.*", "", title, re.IGNORECASE)
+
                 song_dict = {
-                    'title': re.findall(r'<td.*>(.*)<\/div>', song, re.S)[0],
-                    'artist': re.findall(r'spotify:artist:.*>(.*)<\/a>', song)[0],
-                    'album': re.findall(r'spotify:album.*>(.*)<\/a>', song)[0],
-                    'time': Util.time_in_seconds(re.findall(r'tl-time\">([\w|:]*)<\/td>', song, re.S)[0]),
+                    'title': title,
+                    'artist': artist,
+                    'album': album,
+                    'time': Util.time_in_seconds(song_time),
                 }
                 songs_dict.append(song_dict)
             except IndexError:
                 pass
-
+        print(songs_dict)
         return [playlist_name, songs_dict]
 
     @staticmethod

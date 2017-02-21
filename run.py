@@ -20,7 +20,6 @@ while True:
     elif user_input == "r":
         Controller.download_failed_songs()
     elif user_input == "q":
-        print("quit program")
         break
     else:
         print("ERROR: INVALID INPUT")
