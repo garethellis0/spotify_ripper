@@ -100,7 +100,6 @@ class SpotifyScraper:
                 songs_dict.append(song_dict)
             except IndexError:
                 pass
-        print(songs_dict)
         return [playlist_name, songs_dict]
 
     @staticmethod
