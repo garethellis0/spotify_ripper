@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 import youtube_dl
 import os
 import re
-import workerpool # TODO: include in setup script
+import workerpool
 import threading
 from src.Util import Util
 
@@ -135,9 +135,9 @@ class Downloader(metaclass=ABCMeta):
         with youtube_dl.YoutubeDL(self.get_ydl_opts()) as ydl:
             try:
                 ydl.download([song_url])
-                return True;
+                return True
             except Exception:
-                return False;
+                return False
 
 
     def _remove_existing_songs_from_list(self):

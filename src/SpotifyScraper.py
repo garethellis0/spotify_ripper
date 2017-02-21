@@ -102,5 +102,3 @@ class SpotifyScraper:
             cookie_val = str(input("Please enter your cookie: "))
             with open(".cookie", "w") as file:
                 file.write(cookie_val)
-
-

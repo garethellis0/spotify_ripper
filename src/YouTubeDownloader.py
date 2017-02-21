@@ -24,7 +24,6 @@ class YouTubeDownloader(Downloader):
 
         return search_url
 
-
     def _get_search_info(self, song_search_url):
         """
         Downloads the page source of the song_search_url, and returns a list of dictionaries containing

@@ -1,5 +1,5 @@
 from src.Controller import Controller
-from src.YouTubeDownloader import YouTubeDownloader
+
 
 print("=== Welcome to Spotify Ripper ===")
 
@@ -9,7 +9,7 @@ while True:
                            "u - Update previously downloaded playlists\n" +
                            "c - Enter individual songs to download\n" +
                            "r - Try to re-download failed songs\n" +
-                           "q - Quit the program\n\n"))
+                           "q - Quit the program\n"))
 
     if user_input == "d":
         Controller.download_playlists()
@@ -23,7 +23,6 @@ while True:
         print("quit program")
         break
     else:
-        # invalid input
-        print("ERROR: INVALID INPUT\n")
+        print("ERROR: INVALID INPUT")
 
-print("Quitting Spotify Ripper.....\n")
+print("\nQuitting Spotify Ripper.....\n")

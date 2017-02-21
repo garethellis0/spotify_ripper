@@ -2,6 +2,7 @@ from pytag import Audio
 import re
 import os
 
+
 class Util:
     TIME_DIFFERENCE_LOWER_BOUND = -15 # At most how many seconds less a video can be to be valid
     TIME_DIFFERENCE_UPPER_BOUND = 45 # At most how many seconds longer a video can be to be valid
@@ -193,7 +194,6 @@ class Util:
         seconds = int(re.split(r":", time)[1])
         return mins * 60 + seconds
 
-
     @staticmethod
     def print_summary(stats, playlist_name):
         """
@@ -205,12 +205,11 @@ class Util:
         :param playlist_name: the name of the playlist
         :return: void
         """
-        print("===== Download Summary for \"{}\" =====".format(playlist_name))
+        print("\n===== Download Summary for \"{}\" =====".format(playlist_name))
         print("{} songs requested".format(stats[0]))
         print("{} songs already existed and were skipped".format(stats[1]))
         print("{} songs failed to download or were not found".format(stats[2]))
-        print("{} songs were downloaded successfully\n".format(stats[3]))
-
+        print("{} songs were downloaded successfully".format(stats[3]))
 
     @staticmethod
     def check_file(filepath):

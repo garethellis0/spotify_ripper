@@ -6,7 +6,6 @@ import json
 
 
 class Controller:
-
     # For testing
     FAILED_DOWNLOADED_SONGS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_failed_song_downloads.json"
     DOWNLOADED_PLAYLISTS_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/../test/test_downloaded_playlists.json"
@@ -31,7 +30,6 @@ class Controller:
         for playlist in requested_playlists:
             Controller._download_single_playlist(playlist)
 
-
     @staticmethod
     def redownload_playlists():
         Util.check_file(Controller.DOWNLOADED_PLAYLISTS_FILE_PATH)
@@ -46,13 +44,12 @@ class Controller:
         else:
             Controller.download_playlists(playlists)
 
-
     @staticmethod
     def download_custom_songs():
         custom_songs = []
         print("Enter a blank line at any time when you are done entering data...")
         while True:
-            print("Enter the info for the song you want to download:")
+            print("\nEnter the info for the song you want to download:")
             title = str(input("Enter the title of the song: "))
             if title is "":
                 break
@@ -75,7 +72,6 @@ class Controller:
 
         Controller._download(custom_songs, "Custom")
 
-
     @staticmethod
     def download_failed_songs():
         Util.check_file(Controller.FAILED_DOWNLOADED_SONGS_FILE_PATH)
@@ -89,7 +85,6 @@ class Controller:
         for key in failed_songs.keys():
             Controller._download(failed_songs[key], key)
 
-
     @staticmethod
     def _download_single_playlist(playlist_url):
         while True:
@@ -101,7 +96,7 @@ class Controller:
                 playlist_name = songs_and_name[0]
                 songs = songs_and_name[1]
 
-                print("Successfully retrieved playlist \"{}\", downloading songs...".format(playlist_name))
+                print("\nSuccessfully retrieved playlist \"{}\", downloading songs...".format(playlist_name))
                 Controller._download(songs, playlist_name, playlist_url)
 
                 break
