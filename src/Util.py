@@ -30,8 +30,6 @@ class Util:
 
         return s
 
-    # Removes character that cannot be included in a filename, replaces them with spaces
-    # and returns the new String
     @staticmethod
     def remove_invalid_filename_chars(s):
         """

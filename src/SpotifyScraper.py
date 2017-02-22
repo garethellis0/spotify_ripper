@@ -66,8 +66,8 @@ class SpotifyScraper:
             source = self.html_src
 
         #split to find the playlist name
-        name_source = source.split("<h1 class=\"main\">")[1]
-        name_source = name_source.split("</span>")[0]
+        name_source = source.split(r'<h1 class="main">')[1]
+        name_source = name_source.split('</span>')[0]
         playlist_name = re.findall(r'\">(.*)</a>', name_source)[0]
 
         # Remove everything before the playlist section
