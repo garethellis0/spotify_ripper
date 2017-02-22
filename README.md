@@ -1,18 +1,32 @@
 # Spotify Ripper
-Uses Youtube to download Spotify-inspired playlists as mp3 files. The songs are saved in a /music folder in the project directory. All songs are renamed in the form "Artist - Title", and have their metadata updated accordingly.
+A python script that uses YouTube and other alternative sources to imitate and download Spotify's playlists
 
-##How It Works
-1. Takes in the url of a spotify playlist, for example <https://play.spotify.com/user/spotify_canada/playlist/7AbqmyXn8eDLIJ4Hi9033A>, and the browser cookie representing the user's spotify credentials.
-2. Using the web source of the given playlist, creates a list of dictionaries. Each dictionary contains the information for one song, and includes their Title, Artist, Album, and Time. A Firefox window will open and close during this operation. Closing it preemptively will prevent the information from being gathered.
-3. The program then creates URLs representing the youtube search results for each song in the dictionary. URLs are created as if the search was in the form "Artist Title lyrics". These search URLs are appended to the dictionary for that song.
-4. Using the web source for each of these search URLs, the search results are evaluated and the URL of the best video is appended to the dictionary. In this case, the best video means it is not a music video, a cover, a live performance, an instrumental, a behind the scences video, or a rection video. Songs without a suitable video are skipped.
-5. These song URLs are then used to download the mp3 files from each of the songs.
-6. The downloaded files are renamed to the format "Artist - Title"
-7. Finally, the Title, Artist, and Album metadata for each song is written as well.
+## Requires
+* Firefox version 47.0.2 or older
+* A Spotify account (does not need to be premium)
+* Python 3
+* ffmpeg (<https://ffmpeg.org/>)
+* Everything else from the setup script (setup.py)
 
-The user will end up with the mp3 files corresponding to each song in the spotify playlist in a /music folder in the project directory.
+## Usage
+1. Make sure you have run setup.py (sudo python3 setup.py install)
+2. Running run.py will present you with a list of options
+    1. Download Spotify playlists by URL
+        * The user will be promted for the URLs of Spotify playlists. More than 1 may be entered
+        * Each playlist will be downloaded into a seperate folder
+    2. Update previously downloaded playlists
+        * All playlists that are downloaded are remembered, and this option will re-run all those playlists and update the songs in their directories
+    3. Enter individual songs to download
+        * The user will be promted to enter the information for individual songs, which will then be downloaded. Multiple songs may be entered. __If the information entered is incorrect it will not work. Beware of typos__
+    4. Re-download failed songs
+        * Sometimes Spotify-ripper can't find a song to download. It remembers these songs, and this option will attempt to find and download these songs again. They will be places in the original playlist directory they were intended for
+    5. Quit the program
+        * Quits the program (obviously)
+        
+* The songs are downloaded in the highest qualitymp3 format available
+* Songs that are downloaded are renamed to the format "artist - title".mp3, have their audio normalized, and have their metadata written
+* __Firefox windows will open and close while Spotify-ripper gets information from Spotify. Do not close or resize these windows while the script is running. They should close automatically__
 
-## Note:
-    - Requires the user to have a Spotify account (must not be Premium)
-    - Currently requires version 47.0.2 of Firefox or lower
-    - May not handle playlists over 400 songs in length
+### Notes
+* May not handle playlists over 400 songs in length
+* Sometimes websites will not load properly on their first try, and need to be re-run
