@@ -80,7 +80,12 @@ class Util:
             song_time = song["time"]
             vid_title = search_result["title"]
             vid_url = search_result["url"]
-            vid_time = search_result["time"]
+
+            # Can't find soundcloud song times, so if one isn't provided assume it's the same
+            if search_result["time"] is None:
+                vid_time = song_time
+            else:
+                vid_time = search_result["time"]
 
             # If the video a cover (not by the artist)
             if re.search(r"(?<![a-z])cover(?![a-z])", vid_title, re.IGNORECASE) is not None \
