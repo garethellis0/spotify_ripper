@@ -21,19 +21,24 @@ class DownloadJob(workerpool.Job):
     def run(self):
         search_url = self.dl._construct_search_url(self.song)
         search_info = self.dl._get_search_info(search_url)
-        best_url = Util.get_best_song_url(self.song, search_info)
+        best_song_info = Util.get_best_song_from_search(self.song, search_info)
 
-        if best_url == "":
-            with self.lock:
-                self.dl.failed_downloaded_songs.append(self.song)
-        else:
-            if self.dl._download_song(best_url) is True:
-                Util.rename_song_file(self.dl.download_path, self.song, best_url)
-                Util.write_metadata(self.song, self.dl.download_path)
+        if best_song_info is not None:
+            if self.dl._download_song(best_song_info["url"]) is True:
+                song_filepath = Util.get_song_in_filepath(self.dl.download_path, best_song_info["title"])
+                if song_filepath is not None:
+                    Util.normalize_audio(self.dl.download_path + song_filepath)
+                    song_filepath = Util.get_song_in_filepath(self.dl.download_path, best_song_info["title"])
+                    Util.rename_song_file(self.dl.download_path, song_filepath, self.song)
+                    Util.write_metadata(self.song, self.dl.download_path)
+                else:
+                    print("ERROR: {} was supposedly downloaded but could not be found".format(best_song_info["title"]))
             else:
                 with self.lock:
                     self.dl.failed_downloaded_songs.append(self.song)
-
+        else:
+            with self.lock:
+                self.dl.failed_downloaded_songs.append(self.song)
 
 class Downloader(metaclass=ABCMeta):
     """
@@ -169,11 +174,14 @@ class Downloader(metaclass=ABCMeta):
         :return: A dictionary containing the parameters/specifications for youtube-dl
         """
         return {
-            "format": "bestaudio/best",
-            "quiet": "true",
+            "format": "bestaudio/best",     # choice of quality
+            "extractaudio": True,           # only keep the audio
+            "audioformat": "mp3",           # convert to mp3
+            "noplaylist": True,             # only download single songs, not playlist
+            "quiet": "true",                # Suppress output
             "postprocessors": [{
                 "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3",
-                "preferredquality": "192",
+                "preferredquality": "320",
             }],
         }
