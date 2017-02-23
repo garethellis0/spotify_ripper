@@ -84,8 +84,7 @@ class SpotifyScraper:
                 album = re.findall(r'spotify:album.*>(.*)<\/a>', song)[0]
                 song_time = re.findall(r'tl-time\">([\w|:]*)<\/td>', song, re.S)[0]
 
-                title = re.sub(r" - Radio Edit", "", title, re.IGNORECASE)
-                title = re.sub(r" - Alt Edit", "", title, re.IGNORECASE)
+                title = re.sub(r" - \w* Edit", "", title, re.IGNORECASE)
                 title = re.sub(r" -.*Version.*", "", title, re.IGNORECASE)
                 title = re.sub(r" -.*Remaster(ed)?.*", "", title, re.IGNORECASE)
                 title = re.sub(r" \(Remaster(ed)?\) *", "", title, re.IGNORECASE)
