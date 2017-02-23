@@ -25,10 +25,10 @@ class DownloadJob(workerpool.Job):
 
         if best_song_info is not None:
             if self.dl._download_song(best_song_info["url"]) is True:
-                song_filepath = Util.get_song_in_filepath(self.dl.download_path, best_song_info["title"])
+                song_filepath = Util.get_song_in_filepath(self.dl.download_path, best_song_info["title"], best_song_info["url"])
                 if song_filepath is not None:
                     Util.normalize_audio(self.dl.download_path + song_filepath)
-                    song_filepath = Util.get_song_in_filepath(self.dl.download_path, best_song_info["title"])
+                    song_filepath = Util.get_song_in_filepath(self.dl.download_path, best_song_info["title"], best_song_info["url"])
                     Util.rename_song_file(self.dl.download_path, song_filepath, self.song)
                     Util.write_metadata(self.song, self.dl.download_path)
                 else:

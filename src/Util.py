@@ -6,7 +6,7 @@ import os
 
 class Util:
     TIME_DIFFERENCE_LOWER_BOUND = -15 # At most how many seconds less a video can be to be valid
-    TIME_DIFFERENCE_UPPER_BOUND = 45 # At most how many seconds longer a video can be to be valid
+    TIME_DIFFERENCE_UPPER_BOUND = 60 # At most how many seconds longer a video can be to be valid
     NORMALIZED_RMS_DECIBELS = -18 # ffmpeg-normalize defaults to -26
     NORMALIZED_SONG_PREFIX = "normalized" # a dash is automatically added after the prefix
 
@@ -157,7 +157,7 @@ class Util:
         os.rename(filepath + song_filename, filepath + new_name)
 
     @staticmethod
-    def get_song_in_filepath(filepath, title):
+    def get_song_in_filepath(filepath, title, url=None):
         """
         Given the filepath to the folder containing the song, the song, and the url of the song and returns
         the filename of the song
@@ -172,12 +172,16 @@ class Util:
         # Eg. Green Day - Bang Bang (Official Lyric Video)-mg5Bp_Gzs0s.mp3
         # soundcloud downloads are named after the title of the song, followed by a dash and a random 9 digit unique ID
         # Eg. Curse the Weather-297150404.mp3
-        song_regex = r".*" + re.escape(title) + r"-\S{9}(\S{2})?\.mp3"
+        song_title_regex = r".*" + re.escape(title) + r"-\S{9}(\S{2})?\.mp3"
+        if url is not None:
+            song_url_regex = r".*?-(" + re.escape(url[-11:]) + r").*"
+
         # find the downloaded file in the download folder and rename it to the proper name
         for file in os.listdir(filepath):
-            if re.match(song_regex, file):
+            if url is not None and re.match(song_url_regex, file):
                 return file
-
+            if re.match(song_title_regex, file):
+                return file
         return None
 
     @staticmethod

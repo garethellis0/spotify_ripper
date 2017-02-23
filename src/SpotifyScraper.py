@@ -92,9 +92,9 @@ class SpotifyScraper:
                 title = re.sub(r" -.*Anniversary Mix.*", "", title, re.IGNORECASE)
 
                 song_dict = {
-                    'title': title,
-                    'artist': artist,
-                    'album': album,
+                    'title': Util.html_to_ascii(title),
+                    'artist': Util.html_to_ascii(artist),
+                    'album': Util.html_to_ascii(album),
                     'time': Util.time_in_seconds(song_time),
                 }
                 songs_dict.append(song_dict)
