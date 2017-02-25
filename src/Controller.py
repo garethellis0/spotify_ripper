@@ -64,10 +64,10 @@ class Controller:
                 break
 
             custom_songs.append({
-                "title": title,
-                "artist": artist,
-                "album": album,
-                "time": Util.time_in_seconds(time)
+                "title": title.strip(),
+                "artist": artist.strip(),
+                "album": album.strip(),
+                "time": Util.time_in_seconds(time.strip())
             })
 
         Controller._download(custom_songs, "Custom")

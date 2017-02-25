@@ -28,13 +28,13 @@ class SpotifyScraper:
             'path': '/'
         }
         driver.get(self.playlist_url)
-        time.sleep(6)
+        time.sleep(7)
         playlist_id = self.playlist_url.split('/')[-1]
         driver.refresh()
         driver.add_cookie(cookie)
         driver.refresh()
         driver.set_window_size(500, 2000)
-        time.sleep(6)
+        time.sleep(9)
         driver.set_window_size(500, 2000)
 
         try:
